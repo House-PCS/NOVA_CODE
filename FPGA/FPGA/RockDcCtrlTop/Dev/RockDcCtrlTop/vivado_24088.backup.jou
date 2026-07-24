@@ -1,0 +1,16 @@
+#-----------------------------------------------------------
+# Vivado v2019.1 (64-bit)
+# SW Build 2552052 on Fri May 24 14:49:42 MDT 2019
+# IP Build 2548770 on Fri May 24 18:01:18 MDT 2019
+# Start of session at: Thu Jun 25 16:07:12 2026
+# Process ID: 24088
+# Current directory: E:/FPGA/RockDcCtrlTop/Dev/RockDcCtrlTop
+# Command line: vivado.exe -gui_launcher_event rodinguilauncherevent28232 E:\FPGA\RockDcCtrlTop\Dev\RockDcCtrlTop\RockDcCtrlTop.xpr
+# Log file: E:/FPGA/RockDcCtrlTop/Dev/RockDcCtrlTop/vivado.log
+# Journal file: E:/FPGA/RockDcCtrlTop/Dev/RockDcCtrlTop\vivado.jou
+#-----------------------------------------------------------
+start_gui
+open_project E:/FPGA/RockDcCtrlTop/Dev/RockDcCtrlTop/RockDcCtrlTop.xpr
+generate_target Simulation [get_files E:/FPGA/RockDcCtrlTop/Src/Core/MigCore/MigCore.xci]
+export_ip_user_files -of_objects [get_files E:/FPGA/RockDcCtrlTop/Src/Core/MigCore/MigCore.xci] -no_script -sync -force -quiet
+export_simulation -of_objects [get_files E:/FPGA/RockDcCtrlTop/Src/Core/MigCore/MigCore.xci] -directory E:/FPGA/RockDcCtrlTop/Dev/RockDcCtrlTop/RockDcCtrlTop.ip_user_files/sim_scripts -ip_user_files_dir E:/FPGA/RockDcCtrlTop/Dev/RockDcCtrlTop/RockDcCtrlTop.ip_user_files -ipstatic_source_dir E:/FPGA/RockDcCtrlTop/Dev/RockDcCtrlTop/RockDcCtrlTop.ip_user_files/ipstatic -lib_map_path [list {modelsim=E:/FPGA/RockDcCtrlTop/Dev/RockDcCtrlTop/RockDcCtrlTop.cache/compile_simlib/modelsim} {questa=E:/FPGA/RockDcCtrlTop/Dev/RockDcCtrlTop/RockDcCtrlTop.cache/compile_simlib/questa} {riviera=E:/FPGA/RockDcCtrlTop/Dev/RockDcCtrlTop/RockDcCtrlTop.cache/compile_simlib/riviera} {activehdl=E:/FPGA/RockDcCtrlTop/Dev/RockDcCtrlTop/RockDcCtrlTop.cache/compile_simlib/activehdl}] -use_ip_compiled_libs -force -quiet

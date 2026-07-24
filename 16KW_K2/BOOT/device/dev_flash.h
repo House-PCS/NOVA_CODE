@@ -1,0 +1,129 @@
+/**
+  ******************************************************************************
+  * @copyright (C) COPYRIGHT  Nova
+  * @file        dev_flash.h
+  * @author      Xi'an NovaStar Tech Co.,LTD.
+  * @version     V1.0.0
+  * @date        2024-2-4
+  * @brief    
+  ******************************************************************************
+  * @attention
+  * @relation
+  
+  * @par :
+  * <table>
+  * <tr><th>Date          <th>Version   <th>Author      <th>Description
+  * <tr><td>2024-2-4    <td>V1.0.0    <td>xingxiao    <td>InitialVersion
+  * </table>
+  ******************************************************************************
+  */
+
+
+#ifndef __DEV_FLASH_H__
+#define __DEV_FLASH_H__
+
+#include "spi.h"
+#include "string.h"
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+#define CS_SPI_FLASH_GPIO    61
+/* 片选口线置低选中  */
+#define SF_CS_LOW()		GPIO_WritePin(CS_SPI_FLASH_GPIO, 0);
+/* 片选口线置高不选中 */
+#define SF_CS_HIGH()	GPIO_WritePin(CS_SPI_FLASH_GPIO, 1);
+/* spi flash control cmd */
+#define  FLASH_LOW_READ                 0x03
+#define  FLASH_LOW_READ_4BYTE           0x13
+
+#define  FLASH_HIGH_READ                0x0B
+#define  FLASH_HIGH_READ_4BYTE          0x0C
+
+#define  FLASH_SECTOR_ERASE             0x20
+#define  FLASH_SECTOR_ERASE_4BYTE       0x21
+
+#define  FLASH_BLOCK_ERASE_32K          0x52
+#define  FLASH_CHIP_ERASE               0xC7
+
+#define  FLASH_BLOCK_ERASE_64K          0xD8
+#define  FLASH_BLOCK_ERASE_64K_4BYTE    0xDC
+
+#define  FLASH_PAGE_PROGRAM             0x02
+#define  FLASH_PAGE_PROGRAM_4BYTE       0x12
+
+#define  FLASH_READ_STATUS_REG          0x05
+#define  FLASH_WRITE_STATUS_REG         0x01
+#define  FLASH_WRITE_STATUS_REG2        0x31
+#define  FLASH_WRITE_ENABLE             0x06
+#define  FLASH_WRITE_DISABLE            0x04
+#define  FLASH_POWER_DOWN               0xB9
+#define  FLASH_RELEASE_PD               0xAB
+#define  FLASH_JEDEC_ID                 0x9F
+#define  DUMMY_BYTE                     0xFF
+
+#define  FLASH_PROJECT                  0xBC    //0xFC
+#define  FLASH_UNPROJECT                0x00    //0x40
+
+#define  FLASH_PAGE_SIZE            (256)
+#define  FLASH_ERASE_SECTOR_SIZE    (0x1000)
+#define  FLASH_ERASE_BLOCK_SIZE     (0x10000)
+#define  FLASH_TEST_ADDR            (0x3FF000)
+
+typedef struct spi_flash_updata_stru_t
+{
+    uint16_t        pcs_firmware_type[4];       //升级固件类型
+    uint16_t        pcs_firmware_version[3];    //升级的版本号
+    uint32_t        pcs_firmware_len;           //固件长度
+    uint32_t        pcs_firmware_len_temp;      //固件长度临时值
+    uint32_t        checksum;                   //32位校验加和
+    uint32_t        checksumtemp;               //32位校验加和临时值
+    uint16_t        check_succeed;              //校验成功
+    uint16_t        finish;                     //监控升级完成标志位
+} SpiFlash_UpData_t;
+
+typedef struct _spi_flash_handle_stru_t
+{
+    uint16_t             arr_id[4];
+    uint16_t            n_capacity_MB;  /*兆比特*/
+    uint8_t             c_protect_state;
+
+    uint32_t            n_start_addr;
+    uint16_t            n_length;
+    uint8_t             *pdata;
+
+    SpiFlash_UpData_t   updata; //升级相关标志位
+}SpiFlash_HandleType;
+
+void SetFlash_Updata_Type(uint16_t num,uint16_t value);
+void SetFlash_Updata_Version(uint16_t num,uint16_t value);
+void SetFlash_Updata_Length(uint32_t value);
+void SetFlash_Updata_CheckSum(uint32_t value);
+void SetFlash_Updata_CheckSumTemp(uint32_t value);
+uint32_t GetFlash_Updata_Length(void);
+uint32_t GetFlash_Updata_CheckSumTemp(void);
+uint32_t GetFlash_Updata_Len_Temp(void);
+uint16_t GetFlash_Soft_Version_X(void);
+uint16_t GetFlash_Soft_Version_Y(void);
+uint16_t GetFlash_Soft_Version_Z(void);
+void SetFlash_Updata_pcs_Len_Temp(uint32_t value);
+void SetFlash_Updata_finish(uint16_t value);
+
+int32_t SpiFlashReadBytes(uint32_t start_addr, uint16_t *idata, uint16_t length);
+int32_t SpiFlashEraseChip(void);
+int32_t SpiFflashWriteBytesWithoutErase(uint32_t start_addr, uint16_t *idata, uint16_t length);
+int32_t SpiFlashWriteBytesWithErase(uint32_t start_addr, uint16_t *idata, uint16_t length);
+int32_t SpiFlashAutoEraseSector(uint32_t start_addr, uint16_t length);
+
+void FlashInit(void);
+void Flash_1s(void);
+
+#ifdef __cplusplus
+}
+#endif                                  /* extern "C" */
+
+#endif
+
+//===========================================================================
+// End of file.
+//===========================================================================

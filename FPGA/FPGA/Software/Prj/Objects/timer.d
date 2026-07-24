@@ -1,0 +1,13 @@
+.\objects\timer.o: ..\Src\Peripheral\src\Timer.c
+.\objects\timer.o: ..\Src\Peripheral\inc\Gpio.h
+.\objects\timer.o: ..\Src\System\inc\system_CMSDK_CM0.h
+.\objects\timer.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+.\objects\timer.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+.\objects\timer.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdbool.h
+.\objects\timer.o: ..\Src\Core\CMSDK_CM0.h
+.\objects\timer.o: ..\Src\Core\core_cm0.h
+.\objects\timer.o: ..\Src\Core\core_cmInstr.h
+.\objects\timer.o: ..\Src\Core\core_cmFunc.h
+.\objects\timer.o: ..\Src\System\inc\system_CMSDK_CM0.h
+.\objects\timer.o: ..\Src\Peripheral\inc\Uart.h
+.\objects\timer.o: ..\Src\Peripheral\inc\Timer.h

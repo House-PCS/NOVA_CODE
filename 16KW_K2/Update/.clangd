@@ -1,0 +1,6 @@
+CompileFlags:
+  Add:
+    - -D__TMS320F2837x__   # 同上面的芯片型号
+    - -D__TI_C2000__
+    - -DCLA
+    - -xc++                 # 强制把 .cla 当作 C++ 索引

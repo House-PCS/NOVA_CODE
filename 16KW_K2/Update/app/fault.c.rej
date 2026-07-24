@@ -1,0 +1,21 @@
+diff a/app/fault.c b/app/fault.c	(rejected hunks)
+@@ -305,16 +305,16 @@
+ //    gstAlgoInterface.grid_freq = grid_freq;
+ 
+     ERR_CHECK({ rst = (gstAlgoInterface.inv_state != INV_STATE_STANDBY) && (gstAlgoInterface.bus_vol < ERROR_THRESHOLD_BUS_VOLT_LOW);}, EN_ERR_BUS_VOL_LOW);//bus��ѹ�͹����ж�
+-    ERR_CHECK({ rst = (gstAlgoInterface.bus_vol > ERROR_THRESHOLD_BUS_VOLT_OVER);}, EN_ERR_BUS_VOL_OVER);//bus��ѹ�߹����ж�
++//    ERR_CHECK({ rst = (gstAlgoInterface.bus_vol > ERROR_THRESHOLD_BUS_VOLT_OVER);}, EN_ERR_BUS_VOL_OVER);//bus��ѹ�߹����ж�
+     ERR_CHECK({ rst = (gstAlgoInterface.inv_vol > ERROR_THRESHOLD_INV_VOLT_OVER);},EN_ERR_INV_VOLT_OVER);//����ѹ�����ж� //todo:����ʵ������жϺ����Ƿ���벢����״̬�ж�
+     ERR_CHECK({ rst = (fabsf(gstAlgoInterface.inv_cur) > ERROR_THRESHOLD_INV_CURR_OVER); }, EN_ERR_INV_CUR_OVER);//�����������ж�
+     ERR_CHECK({ rst = (EPwm1Regs.TZFLG.bit.OST == 1);}, EN_ERR_HARDWARE_CMPSS_OVER_CUR);//cmpss����
++    ERRDLY_CHECK({ rst = (gstAlgoInterface.bus_vol > ERROR_THRESHOLD_BUS_VOLT_OVER);}, 20, EN_ERR_BUS_VOL_OVER);//BUS��ѹ������� 50*20 = 100us
+     FanFault();
+ 
+     //todo:��������·
+ 
+-    ERR_CHECK({rst = (gstAlgoInterface.load_apperant_power > ERROR_THRESHOLD_LOAD_OVER_L2) ||
+-        (gstAlgoInterface.grid_apperant_power > ERROR_THRESHOLD_GRID_PWR_OVER) ||
++    ERR_CHECK({rst = (gstAlgoInterface.grid_apperant_power > ERROR_THRESHOLD_GRID_PWR_OVER) ||
+         (gstAlgoInterface.inv_apperant_power > ERROR_THRESHOLD_INV_PWR_OVER);
+         },EN_ERR_OVERLOAD_2);//����2
+ 

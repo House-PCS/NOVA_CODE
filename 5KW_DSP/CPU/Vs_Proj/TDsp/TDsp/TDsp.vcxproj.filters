@@ -1,0 +1,628 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="app">
+      <UniqueIdentifier>{0438cf41-3ddf-498a-840a-209849a2b813}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="device">
+      <UniqueIdentifier>{01eba1e7-d9a1-4fdd-ad97-70c9d967806e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="drive">
+      <UniqueIdentifier>{b7d075fb-12fc-4950-aabb-0b39506df40b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="middleware">
+      <UniqueIdentifier>{b4a46c3d-ba4c-476b-b359-dd8a429c82c3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="mppt">
+      <UniqueIdentifier>{4b8382e4-aad4-40fc-be21-3e4206f07318}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source">
+      <UniqueIdentifier>{50eb0b86-a58f-4e6b-bf18-8e3e99221841}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="sys">
+      <UniqueIdentifier>{2d187413-6856-42ef-8de4-9fcebaae516b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include">
+      <UniqueIdentifier>{5d1d9509-91e2-441d-b33f-5a224b2f70a7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\FlashAPI">
+      <UniqueIdentifier>{243e75cd-41bd-4524-a5e6-f930c14e98f3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\FlashAPI\Constants">
+      <UniqueIdentifier>{f3782407-3f2c-4950-ae14-c66e25633f58}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="pll">
+      <UniqueIdentifier>{36a72c61-2cc9-47c1-8df0-1e8737e59b0a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cntl">
+      <UniqueIdentifier>{daabe3d7-c11a-4b3d-8272-7754572c7a42}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\app\comm_analysis.c">
+      <Filter>app</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\app\modbus_analysis.c">
+      <Filter>app</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\device\dev_flash.c">
+      <Filter>device</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\device\dev_sensor.c">
+      <Filter>device</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\drive\adc.c">
+      <Filter>drive</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\drive\adc_dma.c">
+      <Filter>drive</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\drive\cpu_timers.c">
+      <Filter>drive</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\drive\epwm.c">
+      <Filter>drive</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\drive\sci.c">
+      <Filter>drive</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\drive\spi.c">
+      <Filter>drive</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\middleware\mid_comservice.c">
+      <Filter>middleware</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\middleware\mppt_process.c">
+      <Filter>middleware</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\middleware\sineAnalyzerWithPowerMeas.c">
+      <Filter>middleware</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\middleware\voltagesourceinvlcfltr.c">
+      <Filter>middleware</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\mppt\mid_position_pid.c">
+      <Filter>mppt</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\mppt\mid_pv_data_conversion.c">
+      <Filter>mppt</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\mppt\mid_pv_fault.c">
+      <Filter>mppt</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\mppt\mid_pv_interrupt.c">
+      <Filter>mppt</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\mppt\mid_pv_logic_control.c">
+      <Filter>mppt</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\F2837xD_Adc.c">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\F2837xD_can.c">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\F2837xD_CpuTimers.c">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\F2837xD_DefaultISR.c">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\F2837xD_Dma.c">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\F2837xD_ECap.c">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\F2837xD_Emif.c">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\F2837xD_EPwm.c">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\F2837xD_EQep.c">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\F2837xD_GlobalVariableDefs.c">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\F2837xD_Gpio.c">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\F2837xD_I2C.c">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\F2837xD_Ipc.c">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\F2837xD_Ipc_Driver.c">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\F2837xD_Ipc_Driver_Lite.c">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\F2837xD_Ipc_Driver_Util.c">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\F2837xD_Mcbsp.c">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\F2837xD_PieCtrl.c">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\F2837xD_PieVect.c">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\F2837xD_Sci.c">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\F2837xD_sci_io.c">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\F2837xD_sdfm_drivers.c">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\F2837xD_Spi.c">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\F2837xD_struct.c">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\F2837xD_SysCtrl.c">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\F2837xD_TempSensorConv.c">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\F2837xD_Upp.c">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\sys\crc.c">
+      <Filter>sys</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\sys\main.c">
+      <Filter>sys</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\sys\queue.c">
+      <Filter>sys</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\middleware\pll.c">
+      <Filter>middleware</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\middleware\ztransfer.c">
+      <Filter>middleware</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\middleware\inverter_loop_cntl.c">
+      <Filter>middleware</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\cntl\CNTL_PI_F.c">
+      <Filter>cntl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\pll\SPLL_1ph_F.c">
+      <Filter>pll</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\pll\SPLL_1ph_SOGI_F.c">
+      <Filter>pll</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\pll\SPLL_3ph_DDSRF_F.c">
+      <Filter>pll</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\pll\SPLL_3PH_SRF_F.c">
+      <Filter>pll</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\middleware\llc_dcdc_cntl.c">
+      <Filter>middleware</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\pll\NOTCH_FLTR_F.c">
+      <Filter>pll</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\middleware\algorithm_interface.c">
+      <Filter>middleware</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\cntl\TimeTrigger.c">
+      <Filter>cntl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\cntl\rms.c">
+      <Filter>cntl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\cntl\CountTrigger.c">
+      <Filter>cntl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\cntl\FSM.c">
+      <Filter>cntl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\middleware\inverter_state_def.c">
+      <Filter>middleware</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\middleware\algo_err_check.c">
+      <Filter>middleware</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\middleware\algo_info.c">
+      <Filter>middleware</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\middleware\inverter_func_def.c">
+      <Filter>middleware</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\app\energy_management.c">
+      <Filter>app</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\middleware\pwm_cntl.c">
+      <Filter>middleware</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\app\fault_diagnosis.c">
+      <Filter>app</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\app\sys_info.c">
+      <Filter>app</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\middleware\fan.c">
+      <Filter>middleware</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\middleware\hard_cmpss.c">
+      <Filter>middleware</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\middleware\algo_debug_msg.c">
+      <Filter>middleware</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\middleware\activation.c" />
+    <ClCompile Include="..\..\..\middleware\cla_init.c">
+      <Filter>middleware</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\middleware\generator.c">
+      <Filter>middleware</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\app\comm_analysis.h">
+      <Filter>app</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\app\modbus_analysis.h">
+      <Filter>app</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\device\dev_flash.h">
+      <Filter>device</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\device\dev_sensor.h">
+      <Filter>device</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\drive\adc.h">
+      <Filter>drive</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\drive\cpu_timers.h">
+      <Filter>drive</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\drive\epwm.h">
+      <Filter>drive</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\drive\sci.h">
+      <Filter>drive</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\drive\spi.h">
+      <Filter>drive</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\middleware\mid_comservice.h">
+      <Filter>middleware</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\middleware\mppt_process.h">
+      <Filter>middleware</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\middleware\sineAnalyzerWithPowerMeas.h">
+      <Filter>middleware</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\middleware\voltagesourceinvlcfltr.h">
+      <Filter>middleware</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\mppt\mid_position_pid.h">
+      <Filter>mppt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\mppt\mid_pv_data_conversion.h">
+      <Filter>mppt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\mppt\mid_pv_fault.h">
+      <Filter>mppt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\mppt\mid_pv_interrupt.h">
+      <Filter>mppt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\mppt\mid_pv_logic_control.h">
+      <Filter>mppt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\sys\crc.h">
+      <Filter>sys</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\sys\queue.h">
+      <Filter>sys</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\F28x_Project.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\F2837xD_adc.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\F2837xD_Adc_defines.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\F2837xD_analogsubsys.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\F2837xD_can.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\F2837xD_Can_defines.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\F2837xD_cla.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\F2837xD_Cla_defines.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\F2837xD_Cla_typedefs.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\F2837xD_cmpss.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\F2837xD_cputimer.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\F2837xD_cputimervars.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\F2837xD_dac.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\F2837xD_dcsm.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\F2837xD_defaultisr.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\F2837xD_device.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\F2837xD_dma.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\F2837xD_Dma_defines.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\F2837xD_ecap.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\F2837xD_emif.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\F2837xD_Emif_defines.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\F2837xD_epwm.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\F2837xD_EPwm_defines.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\F2837xD_epwm_xbar.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\F2837xD_eqep.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\F2837xD_Examples.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\F2837xD_flash.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\F2837xD_GlobalPrototypes.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\F2837xD_gpio.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\F2837xD_Gpio_defines.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\F2837xD_i2c.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\F2837xD_I2c_defines.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\F2837xD_input_xbar.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\F2837xD_ipc.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\F2837xD_Ipc_defines.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\F2837xD_Ipc_drivers.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\F2837xD_mcbsp.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\F2837xD_memconfig.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\F2837xD_nmiintrupt.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\F2837xD_output_xbar.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\F2837xD_Pie_defines.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\F2837xD_piectrl.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\F2837xD_pievect.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\F2837xD_sci.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\F2837xD_sci_io.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\F2837xD_sdfm.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\F2837xD_sdfm_drivers.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\F2837xD_spi.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\F2837xD_struct.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\F2837xD_SWPrioritizedIsrLevels.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\F2837xD_sysctrl.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\F2837xD_SysCtrl_defines.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\F2837xD_Systick_defines.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\F2837xD_upp.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\F2837xD_Upp_defines.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\F2837xD_xbar.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\F2837xD_xint.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\SFO_V8.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\FlashAPI\F021.h">
+      <Filter>include\FlashAPI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\FlashAPI\F021_F2837xD_C28x.h">
+      <Filter>include\FlashAPI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\FlashAPI\Helpers.h">
+      <Filter>include\FlashAPI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\FlashAPI\Init.h">
+      <Filter>include\FlashAPI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\FlashAPI\Registers.h">
+      <Filter>include\FlashAPI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\FlashAPI\Registers_C28x.h">
+      <Filter>include\FlashAPI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\FlashAPI\Types.h">
+      <Filter>include\FlashAPI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\FlashAPI\Constants\Constants.h">
+      <Filter>include\FlashAPI\Constants</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\FlashAPI\Constants\F2837xD.h">
+      <Filter>include\FlashAPI\Constants</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\FlashAPI\Constants\FMC.h">
+      <Filter>include\FlashAPI\Constants</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\middleware\pll.h">
+      <Filter>middleware</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\middleware\ztransfer.h">
+      <Filter>middleware</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\middleware\inverter_loop_cntl.h">
+      <Filter>middleware</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\cntl\CNTL_PI_F.h">
+      <Filter>cntl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\middleware\llc_dcdc_cntl.h">
+      <Filter>middleware</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\middleware\algorithm_interface.h">
+      <Filter>middleware</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\cntl\TimeTrigger.h">
+      <Filter>cntl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\cntl\FSM.h">
+      <Filter>cntl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\cntl\rms.h">
+      <Filter>cntl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\cntl\CountTrigger.h">
+      <Filter>cntl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\middleware\algo_info.h">
+      <Filter>middleware</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\middleware\inverter_state_def.h">
+      <Filter>middleware</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\middleware\algo_err_check.h">
+      <Filter>middleware</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\middleware\inverter_func_def.h">
+      <Filter>middleware</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\app\energy_management.h">
+      <Filter>app</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\middleware\pwm_cntl.h">
+      <Filter>middleware</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\app\fault_diagnosis.h">
+      <Filter>app</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\app\sys_info.h">
+      <Filter>app</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\middleware\fan.h">
+      <Filter>middleware</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\middleware\hard_cmpss.h">
+      <Filter>middleware</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\middleware\algo_debug_msg.h">
+      <Filter>middleware</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\cntl\Filter.h">
+      <Filter>cntl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\middleware\activation.h" />
+    <ClInclude Include="..\..\..\middleware\cla_algo.h">
+      <Filter>middleware</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\middleware\generator.h">
+      <Filter>middleware</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\..\source\F2837xD_CodeStartBranch.asm">
+      <Filter>source</Filter>
+    </None>
+    <None Include="..\..\..\source\F2837xD_DBGIER.asm">
+      <Filter>source</Filter>
+    </None>
+    <None Include="..\..\..\source\F2837xD_usDelay.asm">
+      <Filter>source</Filter>
+    </None>
+    <None Include="..\..\..\middleware\cla_task.c">
+      <Filter>middleware</Filter>
+    </None>
+  </ItemGroup>
+</Project>

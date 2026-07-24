@@ -1,0 +1,11 @@
+.\objects\bmscache.o: ..\Src\Peripheral\src\BmsCache.c
+.\objects\bmscache.o: ..\Src\Peripheral\inc\BmsCache.h
+.\objects\bmscache.o: ..\Src\System\inc\system_CMSDK_CM0.h
+.\objects\bmscache.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+.\objects\bmscache.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+.\objects\bmscache.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdbool.h
+.\objects\bmscache.o: ..\Src\Core\CMSDK_CM0.h
+.\objects\bmscache.o: ..\Src\Core\core_cm0.h
+.\objects\bmscache.o: ..\Src\Core\core_cmInstr.h
+.\objects\bmscache.o: ..\Src\Core\core_cmFunc.h
+.\objects\bmscache.o: ..\Src\System\inc\system_CMSDK_CM0.h

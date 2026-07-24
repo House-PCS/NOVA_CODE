@@ -1,0 +1,11 @@
+.\objects\spi.o: ..\Src\Peripheral\src\Spi.c
+.\objects\spi.o: ..\Src\Peripheral\inc\Spi.h
+.\objects\spi.o: ..\Src\System\inc\system_CMSDK_CM0.h
+.\objects\spi.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+.\objects\spi.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+.\objects\spi.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdbool.h
+.\objects\spi.o: ..\Src\Core\CMSDK_CM0.h
+.\objects\spi.o: ..\Src\Core\core_cm0.h
+.\objects\spi.o: ..\Src\Core\core_cmInstr.h
+.\objects\spi.o: ..\Src\Core\core_cmFunc.h
+.\objects\spi.o: ..\Src\System\inc\system_CMSDK_CM0.h

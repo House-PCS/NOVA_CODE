@@ -1,0 +1,11 @@
+.\objects\ddrcache.o: ..\Src\Peripheral\src\DdrCache.c
+.\objects\ddrcache.o: ..\Src\Peripheral\inc\DdrCache.h
+.\objects\ddrcache.o: ..\Src\System\inc\system_CMSDK_CM0.h
+.\objects\ddrcache.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+.\objects\ddrcache.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+.\objects\ddrcache.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdbool.h
+.\objects\ddrcache.o: ..\Src\Core\CMSDK_CM0.h
+.\objects\ddrcache.o: ..\Src\Core\core_cm0.h
+.\objects\ddrcache.o: ..\Src\Core\core_cmInstr.h
+.\objects\ddrcache.o: ..\Src\Core\core_cmFunc.h
+.\objects\ddrcache.o: ..\Src\System\inc\system_CMSDK_CM0.h

@@ -1,0 +1,12 @@
+.\objects\dev_phy.o: ..\Src\Peripheral\src\dev_phy.c
+.\objects\dev_phy.o: ..\Src\Peripheral\inc\dev_phy.h
+.\objects\dev_phy.o: ..\Src\Peripheral\inc\mdio.h
+.\objects\dev_phy.o: ..\Src\System\inc\system_CMSDK_CM0.h
+.\objects\dev_phy.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+.\objects\dev_phy.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+.\objects\dev_phy.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdbool.h
+.\objects\dev_phy.o: ..\Src\Core\CMSDK_CM0.h
+.\objects\dev_phy.o: ..\Src\Core\core_cm0.h
+.\objects\dev_phy.o: ..\Src\Core\core_cmInstr.h
+.\objects\dev_phy.o: ..\Src\Core\core_cmFunc.h
+.\objects\dev_phy.o: ..\Src\System\inc\system_CMSDK_CM0.h

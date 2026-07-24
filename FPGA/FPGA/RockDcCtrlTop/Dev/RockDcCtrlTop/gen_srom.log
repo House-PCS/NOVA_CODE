@@ -1,0 +1,55 @@
+#-----------------------------------------------------------
+# Vivado v2019.1 (64-bit)
+# SW Build 2552052 on Fri May 24 14:49:42 MDT 2019
+# IP Build 2548770 on Fri May 24 18:01:18 MDT 2019
+# Start of session at: Fri Jun 26 18:40:22 2026
+# Process ID: 33616
+# Current directory: E:/FPGA
+# Command line: vivado.exe -mode batch -source e:\FPGA\RockDcCtrlTop\Dev\RockDcCtrlTop\gen_srom.tcl -log e:\FPGA\RockDcCtrlTop\Dev\RockDcCtrlTop\gen_srom.log
+# Log file: e:/FPGA/RockDcCtrlTop/Dev/RockDcCtrlTop/gen_srom.log
+# Journal file: E:/FPGA\vivado.jou
+#-----------------------------------------------------------
+source {e:\FPGA\RockDcCtrlTop\Dev\RockDcCtrlTop\gen_srom.tcl}
+# open_project E:/FPGA/RockDcCtrlTop/Dev/RockDcCtrlTop/RockDcCtrlTop.xpr
+CRITICAL WARNING: [Project 1-635] The core container source file 'E:/FPGA/RockDcCtrlTop/Src/Core/Srom_1024x10/Srom_1024x10.xcix' is sitting next to the IP directory 'E:/FPGA/RockDcCtrlTop/Src/Core/Srom_1024x10/Srom_1024x10'. This configuration is not supported and will lead to unexpected behavior. The project will be opened as read-only. To resolve the issue, please move aside the IP directory and reopen the project.
+Scanning sources...
+Finished scanning sources
+INFO: [IP_Flow 19-234] Refreshing IP repositories
+INFO: [IP_Flow 19-1704] No user IP repositories specified
+INFO: [IP_Flow 19-2313] Loaded Vivado IP repository 'E:/VIVADO/Vivado/2019.1/data/ip'.
+WARNING: [IP_Flow 19-2162] IP 'MigCore' is locked:
+* Project containing IP 'MigCore' is read-only.
+WARNING: [IP_Flow 19-2162] IP 'SysPllCore' is locked:
+* Project containing IP 'SysPllCore' is read-only.
+WARNING: [IP_Flow 19-2162] IP 'XadcCore' is locked:
+* Project containing IP 'XadcCore' is read-only.
+WARNING: [IP_Flow 19-2162] IP 'Fifo48x16_48x16' is locked:
+* Project containing IP 'Fifo48x16_48x16' is read-only.
+WARNING: [IP_Flow 19-2162] IP 'Fifo16x32_16x32' is locked:
+* Project containing IP 'Fifo16x32_16x32' is read-only.
+WARNING: [IP_Flow 19-2162] IP 'SDPRam_512x32_2048x8' is locked:
+* Project containing IP 'SDPRam_512x32_2048x8' is read-only.
+WARNING: [IP_Flow 19-2162] IP 'SDPRam_2048x8_512x32' is locked:
+* Project containing IP 'SDPRam_2048x8_512x32' is read-only.
+WARNING: [IP_Flow 19-2162] IP 'Sram_8192x8_2' is locked:
+* Project containing IP 'Sram_8192x8_2' is read-only.
+WARNING: [IP_Flow 19-2162] IP 'Sram_8192x8_1' is locked:
+* Project containing IP 'Sram_8192x8_1' is read-only.
+WARNING: [IP_Flow 19-2162] IP 'UnsigMult10x16' is locked:
+* Project containing IP 'UnsigMult10x16' is read-only.
+WARNING: [IP_Flow 19-2162] IP 'Sram_8192x8_0' is locked:
+* Project containing IP 'Sram_8192x8_0' is read-only.
+WARNING: [IP_Flow 19-2162] IP 'Sram_8192x8_3' is locked:
+* Project containing IP 'Sram_8192x8_3' is read-only.
+WARNING: [IP_Flow 19-3664] IP 'Srom_1024x10' generated file not found 'e:/FPGA/RockDcCtrlTop/Src/Core/Srom_1024x10/Srom_1024x10/hdl/blk_mem_gen_v8_4_vhsyn_rfs.vhd'. Please regenerate to continue.
+WARNING: [IP_Flow 19-3664] IP 'Srom_1024x10' generated file not found 'e:/FPGA/RockDcCtrlTop/Src/Core/Srom_1024x10/Srom_1024x10/Srom_1024x10.dcp'. Please regenerate to continue.
+WARNING: [IP_Flow 19-3664] IP 'Srom_1024x10' generated file not found 'e:/FPGA/RockDcCtrlTop/Src/Core/Srom_1024x10/Srom_1024x10/Srom_1024x10_stub.v'. Please regenerate to continue.
+WARNING: [IP_Flow 19-3664] IP 'Srom_1024x10' generated file not found 'e:/FPGA/RockDcCtrlTop/Src/Core/Srom_1024x10/Srom_1024x10/Srom_1024x10_stub.vhdl'. Please regenerate to continue.
+WARNING: [IP_Flow 19-3664] IP 'Srom_1024x10' generated file not found 'e:/FPGA/RockDcCtrlTop/Src/Core/Srom_1024x10/Srom_1024x10/Srom_1024x10_sim_netlist.v'. Please regenerate to continue.
+WARNING: [IP_Flow 19-3664] IP 'Srom_1024x10' generated file not found 'e:/FPGA/RockDcCtrlTop/Src/Core/Srom_1024x10/Srom_1024x10/Srom_1024x10_sim_netlist.vhdl'. Please regenerate to continue.
+# set xci [get_files E:/FPGA/RockDcCtrlTop/Src/Core/Srom_1024x10/Srom_1024x10/Srom_1024x10.xci]
+# puts "XCI: $xci"
+XCI: E:/FPGA/RockDcCtrlTop/Src/Core/Srom_1024x10/Srom_1024x10/Srom_1024x10.xci
+# generate_target all $xci
+ERROR: [Project 1-228] Project 'RockDcCtrlTop' is read-only. To save your work, please use the 'File | Save Project As...' command first.
+INFO: [Common 17-206] Exiting Vivado at Fri Jun 26 18:40:27 2026...

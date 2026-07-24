@@ -1,0 +1,23 @@
+#-----------------------------------------------------------
+# Vivado v2019.1 (64-bit)
+# SW Build 2552052 on Fri May 24 14:49:42 MDT 2019
+# IP Build 2548770 on Fri May 24 18:01:18 MDT 2019
+# Start of session at: Fri Jun 26 18:42:11 2026
+# Process ID: 27796
+# Current directory: E:/FPGA
+# Command line: vivado.exe -mode batch -source e:\FPGA\RockDcCtrlTop\Dev\RockDcCtrlTop\open_check.tcl -log e:\FPGA\RockDcCtrlTop\Dev\RockDcCtrlTop\open_check.log
+# Log file: e:/FPGA/RockDcCtrlTop/Dev/RockDcCtrlTop/open_check.log
+# Journal file: E:/FPGA\vivado.jou
+#-----------------------------------------------------------
+source {e:\FPGA\RockDcCtrlTop\Dev\RockDcCtrlTop\open_check.tcl}
+# open_project E:/FPGA/RockDcCtrlTop/Dev/RockDcCtrlTop/RockDcCtrlTop.xpr
+Scanning sources...
+Finished scanning sources
+INFO: [IP_Flow 19-234] Refreshing IP repositories
+INFO: [IP_Flow 19-1704] No user IP repositories specified
+INFO: [IP_Flow 19-2313] Loaded Vivado IP repository 'E:/VIVADO/Vivado/2019.1/data/ip'.
+open_project: Time (s): cpu = 00:00:05 ; elapsed = 00:00:06 . Memory (MB): peak = 375.969 ; gain = 68.570
+# puts "OPEN_PROJECT_OK"
+OPEN_PROJECT_OK
+# exit 0
+INFO: [Common 17-206] Exiting Vivado at Fri Jun 26 18:42:20 2026...

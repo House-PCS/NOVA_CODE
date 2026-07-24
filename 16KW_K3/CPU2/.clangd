@@ -1,0 +1,13 @@
+CompileFlags:
+  Add:
+    - "-DCPU2"
+    - "-DALGOFW_CHIP_TYPE=3"
+    - "-Id:/DSP/ROCA_3_15KW_Cpu2"
+    - "-Id:/DSP/ROCA_3_15KW_Cpu2/app"
+    - "-Id:/DSP/ROCA_3_15KW_Cpu2/algo"
+    - "-Id:/DSP/ROCA_3_15KW_Cpu2/algo/ph3_calc"
+    - "-Id:/DSP/ROCA_3_15KW_Cpu2/include"
+    - "-Id:/DSP/ROCA_3_15KW_Cpu2/middleware"
+    - "-Id:/DSP/ROCA_3_15KW_Cpu2/driver"
+    - "-Id:/DSP/ROCA_3_15KW_Cpu2/device"
+    - "-IZ:/home/win/wsl-proj/Algorithm_Framework"

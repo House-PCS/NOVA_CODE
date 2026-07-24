@@ -1,0 +1,10 @@
+.\objects\system_cmsdk_cm0.o: ..\Src\System\src\system_CMSDK_CM0.c
+.\objects\system_cmsdk_cm0.o: ..\Src\System\inc\system_CMSDK_CM0.h
+.\objects\system_cmsdk_cm0.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+.\objects\system_cmsdk_cm0.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+.\objects\system_cmsdk_cm0.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdbool.h
+.\objects\system_cmsdk_cm0.o: ..\Src\Core\CMSDK_CM0.h
+.\objects\system_cmsdk_cm0.o: ..\Src\Core\core_cm0.h
+.\objects\system_cmsdk_cm0.o: ..\Src\Core\core_cmInstr.h
+.\objects\system_cmsdk_cm0.o: ..\Src\Core\core_cmFunc.h
+.\objects\system_cmsdk_cm0.o: ..\Src\System\inc\system_CMSDK_CM0.h

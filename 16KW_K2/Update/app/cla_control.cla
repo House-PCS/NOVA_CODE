@@ -1,0 +1,1713 @@
+/**
+  ******************************************************************************
+  * @copyright (C) COPYRIGHT  Nova
+  * @file        cla_task.cla
+  * @author      Xi'an NovaStar Tech Co.,LTD.
+  * @version     V1.0.0
+  * @date        2024-8-30
+  * @brief
+  ******************************************************************************
+  * @attention
+  * @relation
+
+  * @par :
+  * <table>
+  * <tr><th>Date          <th>Version   <th>Author
+  * <tr><td>2024-8-30     <td>V1.0.0    <td>jindongze
+  * </table>
+  ******************************************************************************
+  */
+#include "cla_control.h"
+#include "controler.h"
+#include "product_specification.h"
+#include "F2837xD_Cla_defines.h"
+#include "stdint.h"
+#include "CLAMath.h"
+#include "system.h"
+#include <algo_interface.h>
+#include "pwr_compute.h"
+#include "cla_cpu_share.h"
+#include "energy_management.h"
+#include "inv_state.h"
+
+EN_INV_STATE geInvControlStateCla;    //逆变运行状态 CLA实际状态
+//枚举变量区间
+//结构体定义变量区间
+InvLoop_t gstInvLoop;           //逆变环路
+ForWardPi_t gstVoltageLoop;     //逆变电压环
+ForWardPi_t gstCurrentLoop;     //逆变电流环
+ClaSinCosType_t gstSinCosSignal; //相位信号
+
+ClaAlternatingType_t gstGrid;   //市电
+// #pragma DATA_SECTION(gstGrid,"Cla1DataRam");
+ClaAlternatingType_t gstInv;    //逆变
+// #pragma DATA_SECTION(gstInv,"Cla1DataRam");
+ClaAlternatingType_t gstGenerator;   //油机电
+// #pragma DATA_SECTION(gstGenerator,"Cla1DataRam");
+ClaAlternatingType_t gstBackUp;   //本地负载
+// #pragma DATA_SECTION(gstBackUp,"Cla1DataRam");
+ClaAlternatingType_t gstCT;   //CT
+// #pragma DATA_SECTION(gstCT,"Cla1DataRam");
+ClaAlternatingType_t gstNormalLoad;   //远端负载
+// #pragma DATA_SECTION(gstNormalLoad,"Cla1DataRam");
+//功率计算
+PwrClaCompute_t gstInvData;  //逆变器计算
+PwrClaCompute_t gstBackUpData; //负载计算
+PwrClaCompute_t gstGeneratorData; //油机计算
+PwrClaCompute_t gstGridData;      //电网计算
+PwrClaCompute_t gstCTData; //CT功率计算
+PwrClaCompute_t gstNormalLoadData; //CT功率计算
+/* gstMidRelay、gstBusData 有效值计算已迁至 CPU（pwr_compute_cpu.c + PwrCpuRelayBusStep） */
+#pragma DATA_SECTION(gstInvData, "Cla1DataRam");
+#pragma DATA_SECTION(gstBackUpData, "Cla1DataRam");
+#pragma DATA_SECTION(gstGeneratorData, "Cla1DataRam");
+#pragma DATA_SECTION(gstGridData, "Cla1DataRam");
+#pragma DATA_SECTION(gstNormalLoadData, "Cla1DataRam");
+#pragma DATA_SECTION(gstCTData, "Cla1DataRam");
+
+
+
+//整型定义区间
+//uint16_t gClaInitFinish;
+float32 gAddCur;
+
+float32 gClaInitFinish;        //cla初始化完成标志位
+//float32 gClaRunTime;
+//功率、有效值、平均值计算结构体定义区间
+//
+float32 gInvCurrentRefAmp;    //并网下给定电流幅值
+float32 gInvCurrentPhase;    //并网下给定电流相位
+float32 gInvCurrAmpPI;
+float32 gInvCurrThetaPI;
+float32 gInvIdPI;
+float32 gInvIqPI;
+float32 gDuty_err;
+float32 gInvDisconnectCount;
+#define DISCONNECTCOUNTTRIGG 400.0f //一个周期
+
+float32 gInvIdRef;
+float32 gInvIqRef;
+/***********************************/
+#define DELTA_VOLTAGE_STEP 0.05f //给定电压变化步长
+#define LOW_VOL_TEST                (1)
+#define TS                          INV_CONTROL_TS  // 控制周期
+#define DELTA_FREQ_MAX     5.0f       //锁相最大频率变化率
+#define SIN_USER(n)        CLAsin(n)  //正弦函数宏定义，方便后续移植
+#define COS_USER(n)        CLAcos(n)  //正弦函数宏定义，方便后续移植
+//交流量计算宏定义
+#define PWR_COMPUTE_FREQ 1/TS //pwr计算运行频率
+#define PWR_LOWEST_AC_FREQ INV_LOWEST_AC_FREQ  //pwr计算最低交流频率
+#define PWR_HIGHEST_AC_FREQ INV_HIGHEST_AC_FREQ //pwr计算最高交流频率
+#define PWR_COMPUTE_AC_PERIOD 5.0f//pwr计算所用交流周期数，默认5个交流周期计算一次
+//并网状态下逆变器有功无功跟随速度
+#define GRID_DELTA_ACTIVE 0.01f //单位pu
+#define GRID_DELTA_REACTIVE 0.01f // 单位pu
+//并油机状态下逆变器有功无功跟随速度
+#define GEN_DELTA_ACTIVE 0.1f //单位pu
+#define GEN_DELTA_REACTIVE 0.1f // 单位pu
+//功率控制宏
+#define GRID_PWR_CNTL 1
+// #define INV_PWR_CNTL 2
+#define PWR_CNTL_METHOD_PI 1  //积分控制
+// #define PWR_CNTL_METHOD_IND 2 //直接给定
+#define Y_CAP 0.011f
+#define PHASE_DELAY 0.28f
+
+#define INV_PWR_REF_RAMP_SPEED 0.5f //逆变器功率参考缓起速度 
+/***********************************/
+
+
+
+float32 grid_amp;
+float32 grid_phase;
+
+/***********************************/
+/**
+ * @brief 调试发送Buff
+ * @param data
+ */
+void SetClaDebugData(uint16_t buff_num,float value)
+{
+    garrDebugDataCla[buff_num] = (float)value;
+}
+/**
+* @brief: ClearCpuInterrupt
+* @param: void
+* @return:Nothing
+* @note:清除CPU中断标志位
+*/
+void ClearClaInterrupt(void)
+{
+    /*清除中断标志,且对下次中断发出请求*/
+    EPwm11Regs.ETCLR.bit.INT = 1;
+    PieCtrlRegs.PIEACK.all = PIEACK_GROUP3;
+}
+/**
+* @brief: RMS_Compute
+* @param: static inline void
+* @return:Nothing
+* @note:交流 RMS/均值由 RmsPwrClaCalcStep + gst*Data 提供，旧版逐点 RMS 已移除
+*/
+/**
+* @brief: PI_Control
+* @param: static inline void
+* @return:Nothing
+* @note:PI控制
+*/
+// static inline void SinglePhase_PI_Control(ClaPiLoop_t* loop,float32 ref,float32 feedback)
+// {
+//     loop->err = ref - feedback;
+//     loop->out = -1 * loop->a1 * loop->out1 + loop->b0 * loop->err + loop->b1 * loop->err1;
+//     //迭代
+//     loop->out1 = loop->out;
+//     loop->err1 = loop->err;
+// }
+/**
+* @brief: PR_Control
+* @param: static inline void
+* @return:Nothing
+* @note:PR控制
+*/
+static inline void SinglePhase_PR_Control(ClaPrLoop_t* loop,float32 ref,float32 feedback)
+{
+    loop->err = ref - feedback;
+    loop->out = loop->a0 * loop->err + loop->a1 * loop->err1 + loop->a2 * loop->err2 - loop->b1 * loop->out1 -loop->b2 * loop->out2;
+    if(loop->out > loop->Umax)
+    {
+        loop->out = loop->Umax;
+    }
+    if(loop->out < loop->Umin)
+    {
+        loop->out = loop->Umin;
+    }
+    //迭代
+    loop->out2 = loop->out1;
+    loop->out1 = loop->out;
+    loop->err2 = loop->err1;
+    loop->err1 = loop->err;
+}
+/**
+  * @brief  SinglePhasePLLInit
+  * @param  None
+  * @return None
+  * @note   锁相环初始化
+*/
+static void SinglePhasePLLInit(ClaType_t* value)
+{
+        value->pll.k1 = 1.0f;
+        value->pll.k2 = 0.00001f;
+        value->pll.kp = 1.43f;
+        value->pll.ki = 200.0f;
+        value->pll.cos0 = 1.0f;
+        value->pll.sin0 = 0.0f;
+        value->pll.cos1 = 1.0f;
+        value->pll.sin1 = 0.0f;
+        value->pll.theta = 0.0f;
+        value->pll.theta1 = 0.0f;
+}
+/**
+* @brief: SinglePhasePLL
+* @param: static inline void
+* @return:Nothing
+* @note:锁相环
+*/
+static void SinglePhasePLL(ClaType_t* value)
+{
+    float32 pll_out_temp;
+    //过零判断,计数及计数限幅
+    if(((value->pll.input01 <= 0) && (value->value.instant > 0) && (value->pll.temp_cnt > 250.0f)) || (value->pll.temp_cnt > 666.0f))
+    {
+        value->pll.temp_cnt = VALUE_LIMIT(value->pll.temp_cnt, CLAdiv(1.0f,PLL_FREQ_MIN * TS) ,CLAdiv(1.0f,PLL_FREQ_MAX * TS));
+        value->pll.cycle_time = value->pll.temp_cnt * TS;
+        value->pll.temp_cnt = 0.0f;
+    }
+    else
+    {
+        value->pll.temp_cnt++;
+    }
+    //迭代
+    value->pll.input01 = value->value.instant;
+    //计算出频率,陷波角频率,目标角频率
+    value->pll.freq = CLAdiv(1.0f, value->pll.cycle_time);
+    value->pll.freq = VALUE_LIMIT(value->pll.freq, PLL_FREQ_MAX, PLL_FREQ_MIN);
+    //TAG:频率自适应锁相环稳定性是个问号？TODO:更改为固定频率或者多周期平均值
+    value->pll.wn = 2.0f * DOUBLE_PI * value->pll.freq;
+    value->pll.w0 = DOUBLE_PI * value->pll.freq;
+
+    //陷波器部分
+    value->pll.a1 = value->pll.wn *value->pll.wn *TS *TS + 4.0f *TS *value->pll.k1 *value->pll.wn + 4.0f;
+    value->pll.a2 = 2.0f *value->pll.wn *value->pll.wn *TS *TS - 8.0f;
+    value->pll.a3 = value->pll.wn *value->pll.wn *TS *TS - 4.0f *TS *value->pll.k1 *value->pll.wn + 4.0f;
+    value->pll.b1 = value->pll.wn *value->pll.wn *TS *TS + 4.0f *TS *value->pll.k2 *value->pll.wn + 4.0f;
+    value->pll.b2 = 2.0f *value->pll.wn *value->pll.wn *TS *TS - 8.0f;
+    value->pll.b3 = value->pll.wn *value->pll.wn *TS *TS - 4.0f *TS *value->pll.k2 *value->pll.wn + 4.0f;
+
+    value->pll.upd0 = value->value.instant * value->pll.cos0;
+    value->pll.y_notch0 = CLAdiv(value->pll.b1,value->pll.a1) *value->pll.upd0 + CLAdiv(value->pll.b2,value->pll.a1) *value->pll.upd1 + CLAdiv(value->pll.b3,value->pll.a1) *value->pll.upd2 - CLAdiv(value->pll.a2,value->pll.a1) *value->pll.y_notch1 - CLAdiv(value->pll.a3,value->pll.a1) *value->pll.y_notch2;
+    //陷波器迭代
+    value->pll.upd2 = value->pll.upd1;
+    value->pll.upd1 = value->pll.upd0;
+    //PI控制部分
+    value->pll.a1 = -1.0f;
+    value->pll.b0 =  (2.0f *value->pll.kp + value->pll.ki *TS) *0.5f;
+    value->pll.b1 = -(2.0f *value->pll.kp - value->pll.ki *TS) *0.5f;
+    value->pll.lpf0 = -1 *value->pll.a1 *value->pll.lpf1 + value->pll.b0 *value->pll.y_notch0 + value->pll.b1 *value->pll.y_notch1;
+    pll_out_temp = 0.5f * value->pll.w0;
+    if(value->pll.lpf0 > pll_out_temp)
+    {
+        value->pll.lpf0 = pll_out_temp;
+    }
+    else if(value->pll.lpf0 < -pll_out_temp)
+    {
+        value->pll.lpf0 = -pll_out_temp;
+    }
+    //PI迭代
+    value->pll.lpf1 = value->pll.lpf0;
+    value->pll.y_notch2 = value->pll.y_notch1;
+    value->pll.y_notch1 = value->pll.y_notch0;
+    //VCO部分
+    value->pll.wo = value->pll.w0 + value->pll.lpf0;
+    value->pll.sin0 = value->pll.sin1 + TS * value->pll.wo *value->pll.cos1;
+    value->pll.cos0 = value->pll.cos1 - TS * value->pll.wo *value->pll.sin1;
+    value->pll.sin0 = VALUE_LIMIT(value->pll.sin0, 0.9999f ,-0.9999f);
+    value->pll.cos0 = VALUE_LIMIT(value->pll.cos0, 0.9999f ,-0.9999f);
+    value->pll.theta = value->pll.theta1 + value->pll.wo * TS;
+    if(value->pll.theta > DOUBLE_PI)
+    {
+        value->pll.theta = value->pll.theta - DOUBLE_PI;
+    }
+    else if(value->pll.theta < 0.0f)
+    {
+        value->pll.theta = value->pll.theta + DOUBLE_PI;
+    }
+    if((value->pll.sin0 > 0) && (value->pll.sin1 <= 0))
+    {
+        value->pll.theta = 0;
+    }
+    //迭代
+    value->pll.theta1 = value->pll.theta;
+    value->pll.sin1 = value->pll.sin0;
+    value->pll.cos1 = value->pll.cos0;
+    //输出sin值
+    value->pll.output = value->pll.sin0;
+}
+/**
+  * @brief  Phase_updata
+  * @param  None
+  * @retval None
+  * @note   相位更新函数
+*/
+static void Phase_updata(void)
+{
+    // float32 delta_theta_ext;
+    float32 delta_theta_eff;
+    float32 theta_temp;
+    float32 theta_sin;
+    float32 delta_wn_temp;
+    
+    // delta_theta_ext = TS * INV_RADIAN_FREQ;
+    /***********************************/
+    //delta_wn计算
+    if(gstSinCosSignal.theta_aim > DOUBLE_PI)
+    {
+        gstSinCosSignal.theta_aim = gstSinCosSignal.theta_aim - DOUBLE_PI;
+    }
+    if(gstSinCosSignal.theta_aim < 0.0f)
+    {
+        gstSinCosSignal.theta_aim = gstSinCosSignal.theta_aim + DOUBLE_PI;
+    }
+    delta_wn_temp = gstSinCosSignal.theta_aim - gstSinCosSignal.theta_eff;
+    if(delta_wn_temp > PI)
+    {
+        delta_wn_temp = delta_wn_temp - DOUBLE_PI;
+    }
+    else if(delta_wn_temp < -PI)
+    {
+        delta_wn_temp = delta_wn_temp + DOUBLE_PI;
+    }
+    delta_wn_temp = delta_wn_temp * 10.0f;
+    if(delta_wn_temp > DELTA_FREQ_MAX)
+    {
+        delta_wn_temp = DELTA_FREQ_MAX;
+    }
+    if(delta_wn_temp < -DELTA_FREQ_MAX)
+    {
+        delta_wn_temp = -DELTA_FREQ_MAX;
+    }
+    gstSinCosSignal.delta_wn = delta_wn_temp;
+    /***********************************/
+
+    /***********************************/
+    //内部正弦信号更新
+    //TAG:暂时无用屏蔽
+    // theta_temp = gstSinCosSignal.theta_ext + delta_theta_ext;
+    // if(theta_temp > DOUBLE_PI)
+    // {
+    //     theta_temp = theta_temp - DOUBLE_PI;
+    // }
+    // else if(theta_temp < 0.0f)
+    // {
+    //     theta_temp = theta_temp + DOUBLE_PI;
+    // }
+    // gstSinCosSignal.theta_ext = theta_temp; 
+    //使用正弦函数更新
+    // gstSinCosSignal.sin_ext[0] = SIN_USER(gstSinCosSignal.theta_ext);
+    // gstSinCosSignal.cos_ext[0] = COS_USER(gstSinCosSignal.theta_ext);
+    // gstSinCosSignal.sin_ext[1] = gstSinCosSignal.sin_ext[0]; 
+    // gstSinCosSignal.cos_ext[1] = gstSinCosSignal.cos_ext[0]; 
+
+    /***********************************/
+
+    /***********************************/
+    //生效参考信号更新
+    gstSinCosSignal.wn_eff = gstSinCosSignal.wn_aim;
+    delta_theta_eff = TS * (gstSinCosSignal.wn_eff + gstSinCosSignal.delta_wn);
+    theta_temp = gstSinCosSignal.theta_eff + delta_theta_eff;
+    if(theta_temp > DOUBLE_PI)
+    {
+        theta_temp = theta_temp - DOUBLE_PI;
+    }
+    else if(theta_temp < 0.0f)
+    {
+        theta_temp = theta_temp + DOUBLE_PI;
+    }
+    gstSinCosSignal.theta_eff = theta_temp; 
+    theta_sin = gstSinCosSignal.theta_eff + gInvCurrentPhase;
+    if(theta_sin > DOUBLE_PI)
+    {
+        theta_sin = theta_sin - DOUBLE_PI;
+    }
+    else if(theta_sin < 0.0f)
+    {
+        theta_sin = theta_sin + DOUBLE_PI;
+    }
+    gstSinCosSignal.sin_eff[0] = SIN_USER(theta_sin); //生效正弦信号为生效相角加上无功控制角的正弦值
+    gstSinCosSignal.cos_eff[0] = COS_USER(theta_sin); //生效正弦信号为生效相角加上无功控制角的余弦值
+    /***********************************/
+
+    /***********************************/
+    //离网参考信号更新
+    gstSinCosSignal.sin_disconnect = gstSinCosSignal.sin_eff[0]; 
+    gstSinCosSignal.cos_disconnect = gstSinCosSignal.cos_eff[0]; 
+    gstSinCosSignal.theta_disconnect = gstSinCosSignal.theta_eff;
+    gstSinCosSignal.wn_disconnect = INV_RADIAN_FREQ;
+    /***********************************/
+
+    /***********************************/
+    //电网参考信号更新
+    gstSinCosSignal.sin_grid = gstGrid.volt.pll.sin0;
+    gstSinCosSignal.cos_grid = gstGrid.volt.pll.cos0;
+    gstSinCosSignal.theta_grid = gstGrid.volt.pll.theta;
+    gstSinCosSignal.wn_grid = gstGrid.volt.pll.wo;         
+    //油机参考信号更新
+    gstSinCosSignal.sin_generator = gstGenerator.volt.pll.sin0;
+    gstSinCosSignal.cos_generator = gstGenerator.volt.pll.cos0;
+    gstSinCosSignal.theta_generator = gstGenerator.volt.pll.theta;
+    gstSinCosSignal.wn_generator = gstGenerator.volt.pll.wo; 
+    /***********************************/
+    
+
+}
+/**
+* @brief: ADC_Instant
+* @param: inline void
+* @return:Nothing
+* @note:赋值当本周期的瞬时值进入本周期计算
+*/
+inline void ADC_Instant_Update(void)
+{
+
+    gstGrid.volt.value.instant = gstAdcResult.grid_vol;       //市电电压
+    gstGrid.curr.value.instant = gstAdcResult.Grid_curr;       //市电电流
+    gstInv.volt.value.instant  = gstAdcResult.inv_volt;        //逆变电压
+    gstInv.curr.value.instant  = -1.0f * gstAdcResult.inv_L_curr;        //逆变电感电流
+    gstBackUp.volt.value.instant  = gstAdcResult.load_volt;        //负载电压
+    gstBackUp.curr.value.instant  = gstAdcResult.load_current;        //负载电流
+    gstCT.volt.value.instant  = gstAdcResult.grid_vol;        //
+    gstCT.curr.value.instant  = gstAdcResult.ct_curr;        //
+    gstNormalLoad.volt.value.instant  = gstAdcResult.grid_vol;        //
+    gstNormalLoad.curr.value.instant  = gstCT.curr.value.instant - gstGrid.curr.value.instant;        //
+
+    gstGenerator.volt.value.instant  = gstAdcResult.gen_volt;        //油机电压
+    gstGenerator.curr.value.instant  = gstAdcResult.gen_curr;        //油机电流
+    gstBusPos.volt.instant     = gstAdcResult.bus_volt_all;            //正负母线电压
+    gstBusPos.curr.instant     = gstAdcResult.bus_curr;                 //母线电流
+    gstBusNeg.volt.instant     = gstAdcResult.bus_volt_pn;            //PN母线电压
+    gAddCur = gstAdcResult.inv_curr_tol - gstAdcResult.inv_L_curr; // 参考方向以流出为正
+
+    /***********************************/
+    //虚拟单相市电电压
+    //50hz  一个开关周期为50us，一个工频周期20ms，对应2*pi 一共400个周期 每周期增加的角度为2*pi/400 = 0.015707963267
+    //TODO:测试用，用完删除
+    // grid_amp = 311.0f;
+    
+    /***********************************/
+}
+/**
+  * @brief  RmsCompute
+  * @param  None
+  * @return None
+  * @note   None
+*/
+static void RmsCompute(void)
+{
+
+    // SetClaDebugData(0, gstPvData[0].pv_vol_ave);
+    // SetClaDebugData(1, gstPvData[1].pv_vol_ave);
+    // SetClaDebugData(2, gstPvData[2].pv_vol_ave);
+    // SetClaDebugData(3, gstPvData[3].pv_vol_ave);
+    // SetClaDebugData(4, gstPvData[0].pv_cur_ave);
+    // SetClaDebugData(5, gstPvData[1].pv_cur_ave);
+    // SetClaDebugData(6, gstPvData[2].pv_cur_ave);
+    // SetClaDebugData(7, gstPvData[3].pv_cur_ave);
+    // SetClaDebugData(8, gstAlgoInterface.bus_vol);
+    // SetClaDebugData(9,gstAlgoInterface.load_cur_rms);
+    // SetClaDebugData(10,gstAlgoInterface.generator_cur_rms);
+    // SetClaDebugData(11,gstAlgoInterface.grid_cur_rms);
+    // SetClaDebugData(12,gstAlgoInterface.inv_cur_rms);
+    // SetClaDebugData(13,gstAlgoInterface.ct_cur_rms);
+    // SetClaDebugData(14,gstAlgoInterface.load_vol_rms);
+    // SetClaDebugData(15, gstAlgoInterface.generator_vol_rms);
+
+   //百兆网数据外发
+    //SetClaDebugData(0, gInvCurrentRefAmp);
+    //SetClaDebugData(0,gstInvLoop.disconnect_volt.ref_real);
+    SetClaDebugData(0, gstInvLoop.duty);
+    SetClaDebugData(1, geInvControlStateCla);
+    SetClaDebugData(2, gstAlgoInterface.bus_vol);
+    SetClaDebugData(3, gstAlgoInterface.bus_cur);
+    SetClaDebugData(4, gstAlgoInterface.grid_vol);
+    SetClaDebugData(5, gstAlgoInterface.grid_cur);
+    SetClaDebugData(6, gstAlgoInterface.inv_cur);
+    SetClaDebugData(7, gstAlgoInterface.inv_vol);
+    SetClaDebugData(8, gstAlgoInterface.generator_vol);
+    SetClaDebugData(9, gstAlgoInterface.generator_cur);
+    SetClaDebugData(10,gstAlgoInterface.ct_active_power);
+    SetClaDebugData(11,gstInvInterface.active_pwr_ref);
+    SetClaDebugData(12,gstAlgoInterface.inv_cur_rms);
+    SetClaDebugData(13,gInvIdRef);
+    SetClaDebugData(14,gInvCurrentRefAmp);
+    SetClaDebugData(15,gstAlgoInterface.bus2batpower);
+
+
+    // SetClaDebugData(13,gstAlgoInterface.inv_active_power);
+    // SetClaDebugData(14,gstAlgoInterface.grid_active_power);
+    // SetClaDebugData(15,gstAlgoInterface.bus2batpower);
+    //SetClaDebugData(15,gClaRunTime);
+    //SetClaDebugData(15,GetErrorFlag());
+    //SetClaDebugData(15,gstInvLoop.disconnect_volt.ref_amplitude);
+
+    // SetClaDebugData(0, gstInvLoop.duty);
+    // SetClaDebugData(1, AdcdResultRegs.ADCRESULT7);
+    // SetClaDebugData(2, gstAlgoInterface.bus_vol);
+    // SetClaDebugData(3, gstAlgoInterface.grid_cur);
+    // SetClaDebugData(4, gstAlgoInterface.grid_vol);
+    // SetClaDebugData(5, gstAlgoInterface.grid_freq);
+    // SetClaDebugData(6, gstAlgoInterface.inv_cur);
+    // SetClaDebugData(7, gstAlgoInterface.inv_vol);
+    // SetClaDebugData(8, gstAlgoInterface.inv_freq);
+    // SetClaDebugData(9, gstAlgoInterface.grid_cur_rms);
+    // SetClaDebugData(10,gstAlgoInterface.load_cur_rms);
+    // SetClaDebugData(11,gstAlgoInterface.grid_cur_rms);
+    // SetClaDebugData(12,gstAlgoInterface.inv_cur_rms);
+    // SetClaDebugData(13,gstAlgoInterface.ct_cur_rms);
+    // SetClaDebugData(14,gstAlgoInterface.load_vol_rms);
+    // SetClaDebugData(15, gstAlgoInterface.generator_vol_rms);
+ 
+//    SetClaDebugData(10, gstPowerGiven.pv_pwr);
+    // SetClaDebugData(11, gstCurrentLoop.Out_pi);
+    // SetClaDebugData(11, -1.0f*gstAdcResult.inv_curr_tol);
+    // SetClaDebugData(12, gAddCur);
+    // SetClaDebugData(14,gstAdcZero.inv_curr_tol_zero);
+    // SetClaDebugData(15,gstAdcZero.inv_L_curr_zero);
+    //功角计算
+
+    SinglePhasePLL(&gstGrid.curr);
+    SinglePhasePLL(&gstInv.curr);
+    SinglePhasePLL(&gstGenerator.curr);
+    SinglePhasePLL(&gstCT.curr);
+    SinglePhasePLL(&gstNormalLoad.curr);
+    SinglePhasePLL(&gstBackUp.curr);
+    gstGrid.power.power_factor = gstGrid.curr.pll.cos0 * gstGrid.volt.pll.cos0 + gstGrid.curr.pll.sin0 * gstGrid.volt.pll.sin0;
+    gstGrid.power.power_refactor = - gstGrid.curr.pll.sin0 * gstGrid.volt.pll.cos0 + gstGrid.curr.pll.cos0 * gstGrid.volt.pll.sin0;
+    gstInv.power.power_factor = gstInv.curr.pll.cos0 * gstInv.volt.pll.cos0 + gstInv.curr.pll.sin0 * gstInv.volt.pll.sin0;
+    gstInv.power.power_refactor = - gstInv.curr.pll.sin0 * gstInv.volt.pll.cos0 + gstInv.curr.pll.cos0 * gstInv.volt.pll.sin0;
+    gstGenerator.power.power_factor = gstGenerator.curr.pll.cos0 * gstGenerator.volt.pll.cos0 + gstGenerator.curr.pll.sin0 * gstGenerator.volt.pll.sin0;
+    gstGenerator.power.power_refactor = - gstGenerator.curr.pll.sin0 * gstGenerator.volt.pll.cos0 + gstGenerator.curr.pll.cos0 * gstGenerator.volt.pll.sin0;
+    gstBackUp.power.power_factor = gstBackUp.curr.pll.cos0 * gstInv.volt.pll.cos0 + gstBackUp.curr.pll.sin0 * gstInv.volt.pll.sin0;
+    gstBackUp.power.power_refactor = - gstBackUp.curr.pll.sin0 * gstInv.volt.pll.cos0 + gstBackUp.curr.pll.cos0 * gstInv.volt.pll.sin0;
+    gstCT.power.power_factor = gstCT.curr.pll.cos0 * gstGrid.volt.pll.cos0 + gstCT.curr.pll.sin0 * gstGrid.volt.pll.sin0;
+    gstCT.power.power_refactor = - gstCT.curr.pll.sin0 * gstGrid.volt.pll.cos0 + gstCT.curr.pll.cos0 * gstGrid.volt.pll.sin0;
+    gstNormalLoad.power.power_factor = gstNormalLoad.curr.pll.cos0 * gstGrid.volt.pll.cos0 + gstNormalLoad.curr.pll.sin0 * gstGrid.volt.pll.sin0;
+    gstNormalLoad.power.power_refactor = - gstNormalLoad.curr.pll.sin0 * gstGrid.volt.pll.cos0 + gstNormalLoad.curr.pll.cos0 * gstGrid.volt.pll.sin0;
+
+    /*  有效值计算   */
+    RmsPwrClaCalcStep(&gstInvData, gstInv.volt.value.instant, gstInv.curr.value.instant, gstInv.power.power_refactor);
+    RmsPwrClaCalcStep(&gstGridData, gstGrid.volt.value.instant, gstGrid.curr.value.instant, gstGrid.power.power_refactor);
+    RmsPwrClaCalcStep(&gstGeneratorData, gstGenerator.volt.value.instant, gstGenerator.curr.value.instant, gstGenerator.power.power_refactor);
+    RmsPwrClaCalcStep(&gstBackUpData, gstBackUp.volt.value.instant, gstBackUp.curr.value.instant, gstBackUp.power.power_refactor);
+    RmsPwrClaCalcStep(&gstCTData, gstCT.volt.value.instant, gstCT.curr.value.instant, gstCT.power.power_refactor);
+    RmsPwrClaCalcStep(&gstNormalLoadData, gstNormalLoad.volt.value.instant, gstNormalLoad.curr.value.instant, gstNormalLoad.power.power_refactor);
+    gstInv.volt.value.rms = gstInvData.vol_rms;
+    gstInv.curr.value.rms = gstInvData.cur_rms;
+    gstInv.power.all = gstInvData.pwr_apperant_out;
+    gstInv.power.p = gstInvData.pwr_active_out;
+    gstInv.power.q = gstInvData.pwr_reactive_out;
+
+    gstGrid.volt.value.rms = gstGridData.vol_rms;
+    gstGrid.curr.value.rms = gstGridData.cur_rms;
+    gstGrid.power.all = gstGridData.pwr_apperant_out;
+    gstGrid.power.p = gstGridData.pwr_active_out;
+    gstGrid.power.q = gstGridData.pwr_reactive_out;
+
+    gstGenerator.volt.value.rms = gstGeneratorData.vol_rms;
+    gstGenerator.curr.value.rms = gstGeneratorData.cur_rms;
+    gstGenerator.power.all = gstGeneratorData.pwr_apperant_out;
+    gstGenerator.power.p = gstGeneratorData.pwr_active_out;
+    gstGenerator.power.q = gstGeneratorData.pwr_reactive_out;
+
+    gstInv.volt.value.average = gstInvData.vol_avg;
+    gstGrid.volt.value.average = gstGridData.vol_avg;
+    gstGenerator.volt.value.average = gstGeneratorData.vol_avg;
+
+    gstBackUp.volt.value.rms = gstBackUpData.vol_rms;
+    gstBackUp.curr.value.rms = gstBackUpData.cur_rms;
+    gstBackUp.power.all = gstBackUpData.pwr_apperant_out;
+    gstBackUp.power.p = gstBackUpData.pwr_active_out;
+    gstBackUp.power.q = gstBackUpData.pwr_reactive_out;
+    gstBackUp.power.q_filter = 0.00005f * gstBackUp.power.q + 0.99995f * gstBackUp.power.q_filter;
+
+    gstCT.volt.value.rms = gstCTData.vol_rms;
+    gstCT.curr.value.rms = gstCTData.cur_rms;
+    gstCT.power.all = gstCTData.pwr_apperant_out;
+    gstCT.power.p = gstCTData.pwr_active_out;
+    gstCT.power.q = gstCTData.pwr_reactive_out;
+    
+    gstNormalLoad.volt.value.rms = gstNormalLoadData.vol_rms;
+    gstNormalLoad.curr.value.rms = gstNormalLoadData.cur_rms;
+    gstNormalLoad.power.all = gstNormalLoadData.vol_rms * gstNormalLoadData.cur_rms;
+    gstNormalLoad.power.p = gstCT.power.p - gstGrid.power.p;
+    gstNormalLoad.power.q = gstCT.power.q - gstGrid.power.q;
+}
+/**
+* @brief: SinglePhasePwmUpDate
+* @param: static inline void
+* @return:Nothing
+* @note:
+*/
+static inline void SinglePhasePwmUpDate(float duty, uint16_t en_inv)
+{
+    Uint16  Duty_ticks_pos = 0;
+    float32 duty_temp;
+    float32 duty_eff;
+
+    duty_temp = VALUE_LIMIT(duty,0.95f,-0.95f);
+    /***********************************/
+    duty_temp = duty_temp + gDuty_err;
+    /***********************************/
+    if(duty_temp > -0.05f && duty_temp < 0.05f)
+    {
+        duty_eff = 0.0f;
+    }
+    else
+    {
+        duty_eff = duty_temp;
+    }
+    gDuty_err = (duty_temp - duty_eff);
+    if(en_inv == 0)
+    {
+        GpioDataRegs.GPBCLEAR.bit.GPIO45    = 1;//置低
+        EPwm2Regs.CMPA.bit.CMPA = EPwm2Regs.TBPRD; //占空比清零
+        EPwm1Regs.CMPA.bit.CMPA = EPwm2Regs.TBPRD; //占空比清零
+    }
+    else
+    {
+        GpioDataRegs.GPBSET.bit.GPIO45    = 1;//置高
+        Duty_ticks_pos  = (Uint16)((float)(EPwm2Regs.TBPRD) * (1.0f - fabsf(duty_eff)));
+        EPwm2Regs.CMPA.bit.CMPA = Duty_ticks_pos; 
+        EPwm1Regs.CMPA.bit.CMPA = Duty_ticks_pos; 
+
+        if(duty_eff > 0.0f)
+        {
+            EPwm2Regs.AQCSFRC.bit.CSFA = AQ_NO_ACTION;
+            EPwm1Regs.AQCSFRC.bit.CSFA = AQ_CLEAR;
+        }
+        else
+        {
+            EPwm2Regs.AQCSFRC.bit.CSFA = AQ_CLEAR;
+            EPwm1Regs.AQCSFRC.bit.CSFA = AQ_NO_ACTION;
+        }
+    }
+}
+/**
+* @brief: SinglePhaseOpen
+* @param: static inline void
+* @return:Nothing
+* @note:单相开环控制
+*/
+static inline void SinglePhaseOpen(ClaType_t* value)
+{
+    //开环软起
+    if(gstInvLoop.disconnect_volt.ref_amplitude > gstInvLoop.disconnect_volt.ref_amplitude_eff)
+    {
+        gstInvLoop.disconnect_volt.ref_amplitude_eff += DELTA_VOLTAGE_STEP;
+    }
+    else
+    {
+        gstInvLoop.disconnect_volt.ref_amplitude_eff = gstInvLoop.disconnect_volt.ref_amplitude;
+    }
+    gstInvLoop.disconnect_volt.ref_real = gstInvLoop.disconnect_volt.ref_amplitude_eff * gstSinCosSignal.sin_eff[0];
+
+    gstInvLoop.duty = CLAdiv(gstInvLoop.disconnect_volt.ref_real , 500); //TODO:后续更改为bus电压
+
+}
+/**
+* @brief: InvLoopClear
+* @param: void
+* @return:Nothing
+* @note:逆变环路清除
+*/
+static void InvLoopClear(void)
+{
+    //TODO:仅清除离网模式下环路，后续需清除并网下环路
+
+    /*      真实给定值清零      */
+    gstInvLoop.disconnect_volt.ref_amplitude_eff = 0.0f;
+    gstInvLoop.disconnect_volt.ref_real = 0.0f;
+    /*    环路的迭代值清零   */
+    gstInvLoop.disconnect_volt.err1 = 0.0f;
+    gstInvLoop.disconnect_volt.out1 = 0.0f;
+
+    gstCurrentLoop.delta = 0.0f;
+    gstCurrentLoop.erro = 0.0f;
+    gstCurrentLoop.erro_up = 0.0f;
+    gstCurrentLoop.Out = 0.0f;
+    gstCurrentLoop.Out_pi = 0.0f;
+
+    gstInvLoop.disconnect_volt.err1 = 0.0f;
+    gstInvLoop.disconnect_volt.err2 = 0.0f;
+    gstInvLoop.disconnect_volt.out1 = 0.0f;
+    gstInvLoop.disconnect_volt.out2 = 0.0f;
+    gstInvLoop.duty = 0.0f;
+    gstInvLoop.en_inv = 0;
+    gstInvLoop.inv_start_ok = 0;
+}
+static void VoltRefAmpUpdata(void)
+{
+    if((gstSinCosSignal.sin_eff[0] < 0.05f) && (gstSinCosSignal.sin_eff[0] > -0.05f))//TODO:过零点生效
+    {
+        if(fabs(gstInvLoop.disconnect_volt.ref_amplitude - gstInvLoop.disconnect_volt.ref_amplitude_eff) < DELTA_VOLTAGE_STEP)
+        {
+            gstInvLoop.disconnect_volt.ref_amplitude_eff = gstInvLoop.disconnect_volt.ref_amplitude;
+            if(gstInvLoop.disconnect_volt.ref_amplitude_eff == INV_VOL_NORMAL )
+            {
+                gstInvLoop.inv_start_ok = 1;
+            }
+        }
+        else if(gstInvLoop.disconnect_volt.ref_amplitude > gstInvLoop.disconnect_volt.ref_amplitude_eff)
+        {
+            gstInvLoop.disconnect_volt.ref_amplitude_eff += DELTA_VOLTAGE_STEP;
+        }
+        else
+        {
+            gstInvLoop.disconnect_volt.ref_amplitude_eff -= DELTA_VOLTAGE_STEP;
+        }
+    }
+    //电压给定
+    gstInvLoop.disconnect_volt.ref_real = gstInvLoop.disconnect_volt.ref_amplitude_eff * gstSinCosSignal.sin_eff[0];
+}
+/**
+* @brief: SinglePhaseClose
+* @param: static inline void
+* @return:Nothing
+* @note:单相离网闭环控制
+*/
+static inline void SinglePhaseClose(void)
+{
+    float32 vol_out = 0;
+    float32 bus_vol = 0;
+    float32 forward = 0.0f;
+    float32 ic_forward = 0.0f;
+    float32 feed_back = 0.0f;
+    // bus_vol = gstBusPos.volt.instant;
+    bus_vol = gstBusPos.volt.instant;//TODO:后续更改为bus电压
+    VoltRefAmpUpdata(); //电压给定更新
+    //电压环PR控制
+    if(gInvDisconnectCount >= DISCONNECTCOUNTTRIGG)
+    {
+        feed_back = gstInv.volt.value.instant;
+    }
+    else
+    {
+        feed_back = gstInvLoop.disconnect_volt.ref_real + (gstInvLoop.disconnect_volt.ref_real - gstInv.volt.value.instant) *(0.1f + 0.9f * gInvDisconnectCount / DISCONNECTCOUNTTRIGG);
+        gInvDisconnectCount += 1.0f;
+    }
+    SinglePhase_PR_Control(&gstInvLoop.disconnect_volt,gstInvLoop.disconnect_volt.ref_real,feed_back);
+    ic_forward = -4.5f * gAddCur;
+    if(ic_forward > 5.0f)
+    {
+        ic_forward = 5.0f;
+    }
+    if(ic_forward < -5.0f)
+    {
+        ic_forward = -5.0f;
+    }
+    forward = ic_forward + gstInvLoop.disconnect_volt.ref_real; 
+    // gstInvLoop.disconnect_curr.ref_real = AddPIControlerForward(&gstVoltageLoop,gstInvLoop.disconnect_volt.ref_real,gstInv.volt.value.instant, 0);
+    gstInvLoop.disconnect_curr.ref_real = gstInvLoop.disconnect_volt.out;
+    //电流环PR控制
+    vol_out = PIControlerForward(&gstCurrentLoop, gstInvLoop.disconnect_curr.ref_real, gstInv.curr.value.instant, forward);
+    //输出限幅
+    gstInvLoop.duty = CLAdiv(vol_out, bus_vol); 
+    //发波
+}
+
+// float32 RampFunction(float32 pwr_inv_active_ref, float32 gInvPwrRefRampSpeed, float32 pwr_inv_active_ref_ramp)
+// {
+//     float32 delta = fabsf(pwr_inv_active_ref) - fabsf(pwr_inv_active_ref_ramp);
+
+//     if(((pwr_inv_active_ref >= 0.0f) && (pwr_inv_active_ref_ramp >= 0.0f)) ||
+//        ((pwr_inv_active_ref <= 0.0f) && (pwr_inv_active_ref_ramp <= 0.0f)))
+//     {
+//         if(fabsf(delta) <= 50.0f)
+//         {
+//             pwr_inv_active_ref_ramp = pwr_inv_active_ref;
+//         }
+//         else if(fabsf(delta) <= gInvPwrRefRampSpeed)
+//         {
+//             pwr_inv_active_ref_ramp = pwr_inv_active_ref;
+//         }
+//         else if(delta > 0.0f)
+//         {
+//             pwr_inv_active_ref_ramp += (pwr_inv_active_ref > 0.0f) ? gInvPwrRefRampSpeed : -gInvPwrRefRampSpeed;
+//         }
+//         else
+//         {
+//             pwr_inv_active_ref_ramp = pwr_inv_active_ref;
+//         }
+//     }
+//     else
+//     {
+//         pwr_inv_active_ref_ramp = 0.0f;
+//     }
+
+//     return pwr_inv_active_ref_ramp;
+// }
+
+/**
+  * @brief  SinglePhasePwrInterface  (合并原 Grid / Gen 两个接口函数)
+  * @param  pwr_active_ref    有功参考 (W)
+  * @param  pwr_reactive_ref  无功参考 (Var)
+  * @param  cur_amp_max       电流幅值限幅 (A峰值)
+  * @param  is_gen            0 = 电网并网模式，1 = 油机并网模式
+  * @note   Grid 模式：含负载补偿、容性补偿、功率缓起，clamp ±20A
+  *         Gen  模式：无补偿/缓起，clamp ±cur_amp_max，有功参考不允许负值
+*/
+static void SinglePhasePwrInterface(float32 pwr_active_ref, float32 pwr_reactive_ref,
+                                     float cur_amp_max, uint16_t is_gen)
+{
+    /* 各模式独立的上一拍功率记忆，防止模式切换时串扰 */
+    static float32 pwr_active_up_grid;
+    static float32 pwr_active_up_gen;
+    /* Grid 模式的功率缓起状态 */
+//    static float32 pwr_inv_active_ref_ramp;
+//    static float32 pwr_inv_reactive_ref_ramp;
+
+    float32 pwr_active;
+    float32 pwr_reactive;
+    float32 act_pwr_diff;
+    float32 react_pwr_diff;
+    float32 id_diff;
+    float32 iq_diff;
+    float32 id_ref;
+    float32 iq_ref;
+    float32 amp_ref;
+    float32 theta_ref;
+    float32 vol_rms;
+    float32 pwr_inv_active_ref;
+    float32 pwr_inv_reactive_ref;
+
+    vol_rms = gstInv.volt.value.rms;
+
+    if(is_gen == 1)  /* ---- 油机并网模式 ---- */
+    {
+        if(pwr_active_ref < 0.0f) pwr_active_ref = 0.0f;
+    }
+
+    pwr_inv_active_ref   = -(pwr_active_ref  + gstBackUp.power.p);
+    pwr_inv_reactive_ref = -(pwr_reactive_ref + gstBackUp.power.q_filter
+                              + vol_rms * vol_rms * INV_Y_CAP
+                              + gstInvInterface.reactive_pwr_compute);
+    
+    //pwr_inv_reactive_ref = -(pwr_reactive_ref + vol_rms * vol_rms * INV_Y_CAP + gstInvInterface.reactive_pwr_compute);
+
+    if(is_gen == 0)  /* ---- 电网并网模式 ---- */
+    {
+        pwr_active   = gstGrid.power.p;
+        pwr_reactive = gstGrid.power.q;
+    }
+    if(is_gen == 1)
+    {
+        pwr_active   = gstGenerator.power.p;
+        pwr_reactive = gstGenerator.power.q;
+    }
+
+    act_pwr_diff   = -1.0f * (pwr_active_ref  - pwr_active);
+    react_pwr_diff = -1.0f * (pwr_reactive_ref - pwr_reactive);
+
+    // pwr_inv_active_ref_ramp   = RampFunction(pwr_inv_active_ref,   INV_PWR_REF_RAMP_SPEED, pwr_inv_active_ref_ramp);
+    // pwr_inv_reactive_ref_ramp = RampFunction(pwr_inv_reactive_ref, INV_PWR_REF_RAMP_SPEED, pwr_inv_reactive_ref_ramp);
+
+    if(((is_gen == 0) && (pwr_active_up_grid != pwr_active))
+        || ((is_gen == 1) && (pwr_active_up_gen != pwr_active)))
+    {
+        id_diff = act_pwr_diff   / vol_rms * GRID_DELTA_ACTIVE;
+        iq_diff = react_pwr_diff / vol_rms * GRID_DELTA_REACTIVE;
+    }
+    else
+    {
+        id_diff = 0.0f;
+        iq_diff = 0.0f;
+    }
+
+    if(is_gen == 0) pwr_active_up_grid = pwr_active;
+    if(is_gen == 1) pwr_active_up_gen  = pwr_active;
+
+    gInvIdPI += id_diff;
+    gInvIqPI += iq_diff;
+    if(gInvIdPI >  20.0f)      gInvIdPI =  20.0f;
+    else if(gInvIdPI < -20.0f) gInvIdPI = -20.0f;
+    if(gInvIqPI >  20.0f)      gInvIqPI =  20.0f;
+    else if(gInvIqPI < -20.0f) gInvIqPI = -20.0f;
+
+    // id_ref = pwr_inv_active_ref_ramp   / vol_rms * 1.414f + gInvIdPI;
+    // iq_ref = pwr_inv_reactive_ref_ramp / vol_rms * 1.414f + gInvIqPI;
+
+    id_ref = pwr_inv_active_ref   / vol_rms * 1.414f + gInvIdPI;
+    iq_ref = pwr_inv_reactive_ref / vol_rms * 1.414f + gInvIqPI;
+
+    /* ---- 公共尾段：dq → 幅值 / 相角 ---- */
+    amp_ref = CLAsqrt(id_ref * id_ref + iq_ref * iq_ref);
+    if(amp_ref > cur_amp_max) amp_ref = cur_amp_max;
+
+    if(fabs(iq_ref) >= amp_ref)
+    {
+        theta_ref = (iq_ref > 0.0f) ? HALF_PI : -HALF_PI;
+    }
+    else
+    {
+        theta_ref = CLAasin(iq_ref / amp_ref);
+    }
+    if(id_ref < 0.0f)
+    {
+        theta_ref = (iq_ref < 0.0f) ? (-PI - theta_ref) : (PI - theta_ref);
+    }
+
+    gInvCurrentPhase  = -theta_ref;
+    gInvCurrentRefAmp = amp_ref;
+    gInvIdRef = id_ref;
+    gInvIqRef = iq_ref;
+}
+/**
+  * @brief  SinglePhaseConnected
+  * @param  iref:给定电流
+  * @return None
+  * @note   单相逆变器离网控制
+*/
+static void SinglePhaseConnected(float iref_amp)
+{
+
+    float32 vol_out = 0;
+    float32 bus_vol = gstBusPos.volt.instant;
+    float32 forward = 0.0f;
+    float32 ic_forward = 0.0f;
+    VoltRefAmpUpdata(); //电压给定更新
+    gstInvLoop.disconnect_curr.ref_amplitude = iref_amp;
+    if((gstSinCosSignal.sin_eff[0] < 0.05f) && (gstSinCosSignal.sin_eff[0] > -0.05f))//TODO:过零点生效
+    {
+        gstInvLoop.disconnect_curr.ref_amplitude_eff =gstInvLoop.disconnect_curr.ref_amplitude;     
+    }
+    gstInvLoop.disconnect_curr.ref_real = gstInvLoop.disconnect_curr.ref_amplitude_eff * gstSinCosSignal.sin_eff[0];
+    ic_forward = -2.5f * gAddCur;
+    if(ic_forward > 5.0f)
+    {
+        ic_forward = 5.0f;
+    }
+    if(ic_forward < -5.0f)
+    {
+        ic_forward = -5.0f;
+    }
+    forward = ic_forward + gstGrid.volt.value.instant; 
+    vol_out = PIControlerForward(&gstCurrentLoop, gstInvLoop.disconnect_curr.ref_real, gstInv.curr.value.instant, forward);
+    gstInvLoop.duty = CLAdiv(vol_out, bus_vol); 
+}
+
+/**
+  * @brief  GEN_SinglePhaseConnected
+  * @param  iref:给定电流
+  * @return None
+  * @note   油机并网控制环路
+*/
+static void GEN_SinglePhaseConnected(float iref_amp)
+{
+
+    float32 vol_out = 0;
+    float32 bus_vol = gstBusPos.volt.instant;
+    float32 forward = 0.0f;
+    float32 ic_forward = 0.0f;
+    VoltRefAmpUpdata(); //电压给定更新
+    gstInvLoop.disconnect_curr.ref_amplitude = iref_amp;
+    if((gstSinCosSignal.sin_eff[0] < 0.05f) && (gstSinCosSignal.sin_eff[0] > -0.05f))//TODO:过零点生效
+    {
+        gstInvLoop.disconnect_curr.ref_amplitude_eff =gstInvLoop.disconnect_curr.ref_amplitude;     
+    }
+    gstInvLoop.disconnect_curr.ref_real = gstInvLoop.disconnect_curr.ref_amplitude_eff * gstSinCosSignal.sin_eff[0];
+    ic_forward = -2.5f * gAddCur;
+    if(ic_forward > 5.0f)
+    {
+        ic_forward = 5.0f;
+    }
+    if(ic_forward < -5.0f)
+    {
+        ic_forward = -5.0f;
+    }
+    forward = ic_forward + gstGenerator.volt.value.instant; 
+    vol_out = PIControlerForward(&gstCurrentLoop, gstInvLoop.disconnect_curr.ref_real, gstInv.curr.value.instant, forward);
+    gstInvLoop.duty = CLAdiv(vol_out, bus_vol); 
+}
+
+
+/**
+* @brief: InvWorkStateSwitch
+* @param: inline void
+* @return:Nothing
+* @note:逆变运行状态切换
+*/
+// static inline void InvWorkStateSwitch(void)
+// {
+//     switch (geInvControlState)
+//     {
+//         case INV_STATE_STANDBY://逆变待机状态
+//         {
+//             // if((gstInvInterface.en_inv_cmd) && (ReadErrState() == 0))
+//             if((gstInvInterface.en_inv_cmd))
+//             {
+//                 if(gstInvInterface.openloop_inv_cmd)
+//                 {
+//                     geInvControlState = INV_STATE_OPENING;
+//                     gstInvLoop.en_inv = 1;
+//                     RELAY_TOTAL_OPEN;
+//                     RELAY_BACKUP_OPEN;
+//                 }
+//                 else if(gstInvInterface.closeloop_inv_cmd)
+//                 {
+//                     geInvControlState = INV_STATE_DISCONNECTED;
+//                     gstInvLoop.en_inv = 1;
+//                     RELAY_TOTAL_OPEN;
+//                     RELAY_BACKUP_OPEN;
+//                 }
+//             }
+
+//             break;
+//         }
+//         case INV_STATE_SELFTEST://逆变自检状态
+//         {
+//             if(gstInvInterface.self_test_finish)
+//             {
+//                 geInvControlState = INV_STATE_STANDBY;
+//             }
+//             break;
+//         }
+//         case INV_STATE_OPENING://逆变开环状态
+//         {
+//             // TODO:测试用，用完需使下一行取消屏蔽
+//             if((gstInvInterface.en_inv_cmd == 0))
+//             // if((gstInvInterface.en_inv_cmd == 0))
+//             {
+//                 geInvControlState = INV_STATE_STANDBY;
+//                 gstInvLoop.en_inv = 0;
+//                 RELAY_TOTAL_CLOSE; //TODO:需优化继电器逻辑；//TAG:后续继电器放在中断里控制
+//                 RELAY_BACKUP_CLOSE;
+//                 RELAY_GRID_CLOSE;
+//             }
+//             break;
+//         }
+//         case INV_STATE_SOFTSTARTING://逆变软起状态
+//         {
+
+//             break;
+//         }
+//         case INV_STATE_DISCONNECTED://逆变闭环状态
+//         {
+//             // TODO:测试用，用完需使下一行取消屏蔽
+//             if((gstInvInterface.en_inv_cmd == 0))
+//             // if((gstInvInterface.en_inv_cmd == 0))
+//             {
+//                 geInvControlState = INV_STATE_STANDBY;
+//                 gstInvLoop.en_inv = 0;
+//                 RELAY_TOTAL_CLOSE;
+//                 RELAY_BACKUP_CLOSE;
+//                 RELAY_GRID_CLOSE;
+//             }
+//             else if(gstInvInterface.en_oning_grid_cmd == 1)
+//             {
+//                 geInvControlState = INV_STATE_GRID_CONNECTING;
+//             }
+//             break;
+//         }
+//         case INV_STATE_GRID_CONNECTING://逆变并网中状态
+//         {
+//             // TODO:测试用，用完需使下一行取消屏蔽
+//             if((gstInvInterface.en_inv_cmd == 0))
+//             // if((gstInvInterface.en_inv_cmd == 0))
+//             {
+//                 geInvControlState = INV_STATE_STANDBY;
+//                 gstInvLoop.en_inv = 0;
+//                 RELAY_TOTAL_CLOSE;
+//                 RELAY_BACKUP_CLOSE;
+//                 RELAY_GRID_CLOSE;
+//             }
+//             else if(gstInvInterface.en_on_grid_cmd == 1)
+//             {
+//                 gInvCurrentPhase = 0.0f; //相位清零
+//                 geInvControlState = INV_STATE_GRID_CONNECTED;
+//                 gstCurrentLoop.Kp = 5.0f;
+//                 gstCurrentLoop.Ki = 2.5f;
+//                 RELAY_GRID_OPEN;
+//             }
+//             break;
+//         }
+//         case INV_STATE_GRID_CONNECTED://逆变已并网状态
+//         {
+//             // TODO:测试用，用完需使下一行取消屏蔽
+//             if((gstInvInterface.en_inv_cmd == 0))
+//             // if((gstInvInterface.en_inv_cmd == 0))
+//             {
+//                 geInvControlState = INV_STATE_STANDBY;
+//                 gstInvLoop.en_inv = 0;
+//                 RELAY_TOTAL_CLOSE;
+//                 RELAY_BACKUP_CLOSE;
+//                 RELAY_GRID_CLOSE;
+//             }
+//             break;
+//         }
+//         case INV_STATE_GRID_DISCONNECTING://逆变离网中状态
+//         {
+
+//             break;
+//         }
+//         default:
+//         {
+
+//             break;
+//         }
+//     }
+// }
+/**
+* @brief: InvWorkStateSwitch2
+* @param: void
+* @return:Nothing
+* @note:逆变运行状态切换
+*/
+static void InvWorkStateSwitch2(void)
+{
+    switch(geInvControlStateCla)
+    {
+      case  INV_STATE_STANDBY:
+      {
+        if(geInvControlState == INV_STATE_SELFTEST)
+        {
+            geInvControlStateCla = INV_STATE_SELFTEST;
+        }
+        break;
+      }
+      case  INV_STATE_SELFTEST:
+      {
+        if(geInvControlState == INV_STATE_OPENING)
+        {
+            gstInvLoop.en_inv = 1;
+            geInvControlStateCla = INV_STATE_OPENING;
+        }
+        else if(geInvControlState == INV_STATE_DISCONNECTED)
+        {
+            gstInvLoop.en_inv = 1;
+            gInvDisconnectCount = DISCONNECTCOUNTTRIGG;
+            geInvControlStateCla = INV_STATE_DISCONNECTED;
+        }
+        else if(geInvControlState != INV_STATE_SELFTEST)
+        {
+            geInvControlStateCla = INV_STATE_STANDBY;
+        }
+        break;
+      }
+      case  INV_STATE_OPENING:
+      {
+        if(geInvControlState != INV_STATE_OPENING)
+        {
+            geInvControlStateCla = INV_STATE_STANDBY;
+        }
+        break;
+      }
+      case  INV_STATE_SOFTSTARTING:
+      {
+        break;
+      }
+      case  INV_STATE_DISCONNECTED:
+      {
+        if(geInvControlState == INV_STATE_GRID_CONNECTING)
+        {
+            geInvControlStateCla = INV_STATE_GRID_CONNECTING;
+        }
+        else if(geInvControlState == INV_STATE_GEN_CONNECTING)
+        {
+            geInvControlStateCla = INV_STATE_GEN_CONNECTING;
+        }
+        else if(geInvControlState != INV_STATE_DISCONNECTED)
+        {
+            geInvControlStateCla = INV_STATE_STANDBY;
+        }
+        break;
+      }
+      case  INV_STATE_GRID_CONNECTING:
+      {
+        if(geInvControlState == INV_STATE_GRID_CONNECTED)
+        {
+            gstCurrentLoop.Kp = 3.5f;//TODO:参数确认
+            // gstCurrentLoop.Ki = 0.0f;
+            geInvControlStateCla = INV_STATE_GRID_CONNECTED;
+        }
+        else if(geInvControlState == INV_STATE_DISCONNECTED)
+        {
+            gInvDisconnectCount = DISCONNECTCOUNTTRIGG;
+            geInvControlStateCla = INV_STATE_DISCONNECTED;
+        }
+        else if(geInvControlState != INV_STATE_GRID_CONNECTING)
+        {
+            geInvControlStateCla = INV_STATE_STANDBY;
+        }
+
+        break;
+      }
+      case  INV_STATE_GRID_CONNECTED:
+      {
+        if(geInvControlState == INV_STATE_GRID_DISCONNECTING)
+        {
+            gInvCurrentPhase = 0.0f; 
+            gInvCurrAmpPI = 0.0f;
+            gInvCurrThetaPI = 0.0f;
+            gInvIdPI = 0.0f;
+            gInvIqPI = 0.0f;
+            geInvControlStateCla = INV_STATE_GRID_DISCONNECTING;
+        }
+        else if(geInvControlState != INV_STATE_GRID_CONNECTED)
+        {
+            geInvControlStateCla = INV_STATE_STANDBY;
+        }
+        break;
+      }
+      case  INV_STATE_GRID_DISCONNECTING:
+      {
+        if(geInvControlState == INV_STATE_DISCONNECTED)
+        {
+            gstCurrentLoop.Kp = 0.5f;
+            // gstCurrentLoop.Ki = 0.0f;
+            gInvDisconnectCount = 0.0f;
+            geInvControlStateCla = INV_STATE_DISCONNECTED;
+        }
+        else if(geInvControlState != INV_STATE_GRID_DISCONNECTING)
+        {
+            geInvControlStateCla = INV_STATE_STANDBY;
+        }
+        break;
+      }
+      case  INV_STATE_GEN_CONNECTING:
+      {
+        if(geInvControlState == INV_STATE_GEN_CONNECTED)
+        {
+            gstCurrentLoop.Kp = 3.5f;//TODO:参数确认
+            // gstCurrentLoop.Ki = 0.0f;
+            geInvControlStateCla = INV_STATE_GEN_CONNECTED;
+        }
+        else if(geInvControlState == INV_STATE_DISCONNECTED)
+        {
+            gInvDisconnectCount = DISCONNECTCOUNTTRIGG;
+            geInvControlStateCla = INV_STATE_DISCONNECTED;
+        }
+        else if(geInvControlState != INV_STATE_GEN_CONNECTING)
+        {
+            geInvControlStateCla = INV_STATE_STANDBY;
+        }
+
+        break;
+      }
+      case  INV_STATE_GEN_CONNECTED:
+      {
+        if(geInvControlState == INV_STATE_GEN_DISCONNECTING)
+        {
+            gInvCurrentPhase = 0.0f; 
+            gInvCurrAmpPI = 0.0f;
+            gInvCurrThetaPI = 0.0f;
+            gInvIdPI = 0.0f;
+            gInvIqPI = 0.0f;
+            geInvControlStateCla = INV_STATE_GEN_DISCONNECTING;
+        }
+        else if(geInvControlState != INV_STATE_GEN_CONNECTED)
+        {
+            geInvControlStateCla = INV_STATE_STANDBY;
+        }
+        break;
+      }
+      case  INV_STATE_GEN_DISCONNECTING:
+      {
+        if(geInvControlState == INV_STATE_DISCONNECTED)
+        {
+            gstCurrentLoop.Kp = 0.5f;
+            // gstCurrentLoop.Ki = 0.0f;
+            gInvDisconnectCount = 0.0f;
+            geInvControlStateCla = INV_STATE_DISCONNECTED;
+        }
+        else if(geInvControlState != INV_STATE_GEN_DISCONNECTING)
+        {
+            geInvControlStateCla = INV_STATE_STANDBY;
+        }
+        break;
+      }
+        default:
+        {
+            geInvControlStateCla = INV_STATE_STANDBY;
+            break;
+        }
+    }
+}
+/**
+* @brief: InvControl
+* @param: void
+* @return:Nothing
+* @note:逆变控制
+*/
+static void InvControl(void)
+{
+    switch (geInvControlStateCla)
+    {
+        case INV_STATE_STANDBY://逆变待机状态
+        {
+            gInvCurrentPhase = 0.0f; //TODO: 参数确认
+            gInvCurrAmpPI = 0.0f;
+            gInvCurrThetaPI = 0.0f;
+            gInvIdPI = 0.0f;
+            gInvIqPI = 0.0f;
+            // SinglePhasePwmUpDate(0.0f,0);
+            InvLoopClear();
+            gDuty_err = 0.0f;
+            gstInvLoop.disconnect_volt.ref_amplitude = INV_VOL_NORMAL;
+            if(gstInvInterface.clear_fault_cmd == 1)
+            {
+                // ClearErrState();
+            }
+            break;
+        }
+        case INV_STATE_SELFTEST://逆变自检状态
+        {
+            break;
+        }
+        case INV_STATE_OPENING://逆变开环状态
+        {
+            gstInvLoop.disconnect_volt.ref_amplitude = INV_VOL_NORMAL;
+            gstSinCosSignal.theta_aim = gstSinCosSignal.theta_eff;
+            gstSinCosSignal.wn_aim = INV_RADIAN_FREQ;
+            SinglePhaseOpen(&gstGrid.volt);
+            break;
+        }
+        case INV_STATE_SOFTSTARTING://逆变软起状态
+        {
+
+            break;
+        }
+        case INV_STATE_DISCONNECTED://逆变闭环状态
+        {
+            if(gInvTemp > 80.0f)
+            {
+                gstInvLoop.disconnect_volt.ref_amplitude = (INV_VOL_NORMAL - ((INV_VOL_NORMAL- 247.5f)*((gInvTemp-80.0f)*0.1))) ; //离网降额策略，当温度超过80度时，按照每升高1度降额10%的策略进行降额，最低不低于175Vrms对应的峰值247.5V
+                if (gstInvLoop.disconnect_volt.ref_amplitude < 247.5f)
+                {
+                    gstInvLoop.disconnect_volt.ref_amplitude = 247.5f; //175Vrms对应247.5V峰值
+                }
+            }
+            else if ((gInvTemp > 75.0f)&& (gInvTemp < 80.0f))
+            {
+                gstInvLoop.disconnect_volt.ref_amplitude += 0.000025f;
+                if (gstInvLoop.disconnect_volt.ref_amplitude > INV_VOL_NORMAL)
+                {
+                    gstInvLoop.disconnect_volt.ref_amplitude = INV_VOL_NORMAL;
+                }
+            }
+            else
+            {
+                gstInvLoop.disconnect_volt.ref_amplitude = INV_VOL_NORMAL;
+            }
+            // if(gstInvLoop.disconnect_volt.ref_amplitude > INV_VOL_NORMAL)
+            // {
+            //     gstInvLoop.disconnect_volt.ref_amplitude = INV_VOL_NORMAL;
+            // }
+            // else if(gstInvLoop.disconnect_volt.ref_amplitude < 170.0f)
+            // {
+            //     gstInvLoop.disconnect_volt.ref_amplitude = 170.0f;
+            // }
+
+            // gstInvLoop.disconnect_volt.ref_amplitude = INV_VOL_NORMAL;
+            
+            gstSinCosSignal.theta_aim = gstSinCosSignal.theta_eff;
+            gstSinCosSignal.wn_aim = gstSinCosSignal.wn_disconnect;
+            SinglePhaseClose();
+            break;
+        }    
+        case INV_STATE_GRID_CONNECTING://逆变并网中状态
+        {
+            // gstInvLoop.disconnect_volt.ref_amplitude = gstGridData.vol_rms * 1.414f; 
+            gstInvLoop.disconnect_volt.ref_amplitude += (gstGridData.vol_rms - gstInvData.vol_rms) * 0.00005f; 
+            gstSinCosSignal.theta_aim = gstSinCosSignal.theta_grid;
+            gstSinCosSignal.wn_aim = gstSinCosSignal.wn_grid;
+            SinglePhaseClose();
+            break;
+        }
+        case INV_STATE_GRID_CONNECTED://逆变已并网状态
+        {
+            // gstInvLoop.disconnect_volt.ref_amplitude = gstGridData.vol_rms * 1.414f; 
+            gstSinCosSignal.theta_aim = gstSinCosSignal.theta_grid;
+            gstSinCosSignal.wn_aim = gstSinCosSignal.wn_grid;
+            SinglePhasePwrInterface(gstInvInterface.active_pwr_ref, gstInvInterface.reactive_pwr_ref, gstInvInterface.inv_cur_amp_max, 0U);
+            SinglePhaseConnected(gInvCurrentRefAmp);
+             
+            break;
+        }
+
+        case INV_STATE_GRID_DISCONNECTING://逆变离网中状态
+        {
+            gInvCurrentRefAmp = gstBackUp.curr.value.rms * 1.414;
+            gstSinCosSignal.theta_aim = gstSinCosSignal.theta_eff;
+            gstSinCosSignal.wn_aim = gstSinCosSignal.wn_disconnect;
+            SinglePhaseConnected(gInvCurrentRefAmp);
+            gstInvLoop.disconnect_volt.ref_amplitude = gstGridData.vol_rms * 1.414f; 
+            gstInvLoop.disconnect_volt.out1 = gstInvLoop.disconnect_curr.ref_real;
+            gstInvLoop.disconnect_volt.out2 = gstInvLoop.disconnect_curr.ref_real;
+            gstInvLoop.disconnect_volt.out = gstInvLoop.disconnect_curr.ref_real;
+            gstInvLoop.disconnect_volt.err1 = 0.0f;
+            gstInvLoop.disconnect_volt.err2 = 0.0f;
+            gstInvLoop.disconnect_volt.err = 0.0f;
+            break;
+        }
+        case INV_STATE_GEN_CONNECTING://油机并网中
+        {
+            gstInvLoop.disconnect_volt.ref_amplitude = gstGeneratorData.vol_rms * 1.414f; 
+            gstSinCosSignal.theta_aim = gstSinCosSignal.theta_generator;
+            gstSinCosSignal.wn_aim = gstSinCosSignal.wn_generator;
+            SinglePhaseClose();
+            break;
+        }
+        case INV_STATE_GEN_CONNECTED://油机并网
+        {
+            gstInvLoop.disconnect_volt.ref_amplitude = gstGeneratorData.vol_rms * 1.414f; 
+            gstSinCosSignal.theta_aim = gstSinCosSignal.theta_generator;
+            gstSinCosSignal.wn_aim = gstSinCosSignal.wn_generator;
+            SinglePhasePwrInterface(gstInvInterface.active_pwr_ref, gstInvInterface.reactive_pwr_ref, gstInvInterface.inv_cur_amp_max, 1U);
+            GEN_SinglePhaseConnected(gInvCurrentRefAmp);
+             
+            break;
+        }
+
+        case INV_STATE_GEN_DISCONNECTING://油机离网中状态
+        {
+            gInvCurrentRefAmp = gstBackUp.curr.value.rms * 1.414;
+            gstSinCosSignal.theta_aim = gstSinCosSignal.theta_generator; 
+            GEN_SinglePhaseConnected(gInvCurrentRefAmp);
+            gstInvLoop.disconnect_volt.ref_amplitude = gstGridData.vol_rms * 1.414f; 
+            gstInvLoop.disconnect_volt.out1 = gstInvLoop.disconnect_curr.ref_real;
+            gstInvLoop.disconnect_volt.out2 = gstInvLoop.disconnect_curr.ref_real;
+            gstInvLoop.disconnect_volt.out = gstInvLoop.disconnect_curr.ref_real;
+            gstInvLoop.disconnect_volt.err1 = 0.0f;
+            gstInvLoop.disconnect_volt.err2 = 0.0f;
+            gstInvLoop.disconnect_volt.err = 0.0f;
+            break;
+        }
+        default:
+        {
+            break;
+        }
+
+    }
+}
+/**
+* @brief: Control_Init
+* @param: void
+* @return:Nothing
+* @note:控制环路参数初始化
+*/
+static void Control_Init(void)
+{
+    if(gClaInitFinish == 0)
+    {
+        //TEST
+
+        gstInvLoop.disconnect_volt.ref_amplitude = INV_VOL_NORMAL;
+        //TODO:需增加并网环路初始化
+
+        //离网电压环环路参数
+        gstInvLoop.disconnect_curr.kp = 0.1f;
+        gstInvLoop.disconnect_curr.ki = 500.0f;
+        gstInvLoop.disconnect_curr.a1 = -1.0;
+        gstInvLoop.disconnect_curr.b0 =  (2.0f * gstInvLoop.disconnect_curr.kp + gstInvLoop.disconnect_curr.ki * TS) * 0.5f;
+        gstInvLoop.disconnect_curr.b1 = -(2.0f * gstInvLoop.disconnect_curr.kp - gstInvLoop.disconnect_curr.ki * TS) * 0.5f;
+        //离网电流环环路参数
+        gstInvLoop.disconnect_volt.kp = 0.10f;
+        gstInvLoop.disconnect_volt.kr = 40.0f;
+        gstInvLoop.disconnect_volt.wc = 3.14f;
+        gstInvLoop.disconnect_volt.w0 = DOUBLE_PI * 50.0f ;
+        gstInvLoop.disconnect_volt.a0 = CLAdiv(4.0f *gstInvLoop.disconnect_volt.kp,TS*TS) + CLAdiv(4.0f *gstInvLoop.disconnect_volt.wc *(gstInvLoop.disconnect_volt.kp + gstInvLoop.disconnect_volt.kr),TS) + gstInvLoop.disconnect_volt.kp *gstInvLoop.disconnect_volt.w0 *gstInvLoop.disconnect_volt.w0;
+        gstInvLoop.disconnect_volt.a1 = CLAdiv(-8.0f *gstInvLoop.disconnect_volt.kp,TS*TS) + 2.0f * gstInvLoop.disconnect_volt.kp *gstInvLoop.disconnect_volt.w0 *gstInvLoop.disconnect_volt.w0;
+        gstInvLoop.disconnect_volt.a2 = CLAdiv(4.0f *gstInvLoop.disconnect_volt.kp,TS*TS) - CLAdiv(4.0f *gstInvLoop.disconnect_volt.wc *(gstInvLoop.disconnect_volt.kp + gstInvLoop.disconnect_volt.kr),TS) + gstInvLoop.disconnect_volt.kp *gstInvLoop.disconnect_volt.w0 *gstInvLoop.disconnect_volt.w0;
+        gstInvLoop.disconnect_volt.b0 = CLAdiv(4.0f ,TS*TS) + CLAdiv(4.0f *gstInvLoop.disconnect_volt.wc ,TS) + gstInvLoop.disconnect_volt.w0 *gstInvLoop.disconnect_volt.w0;
+        gstInvLoop.disconnect_volt.b1 = CLAdiv(-8.0f ,TS*TS) + 2.0f *gstInvLoop.disconnect_volt.w0 *gstInvLoop.disconnect_volt.w0;
+        gstInvLoop.disconnect_volt.b2 = CLAdiv(4.0f ,TS*TS) - CLAdiv(4.0f *gstInvLoop.disconnect_volt.wc ,TS) + gstInvLoop.disconnect_volt.w0 *gstInvLoop.disconnect_volt.w0;
+        gstInvLoop.disconnect_volt.a0 = CLAdiv(gstInvLoop.disconnect_volt.a0,gstInvLoop.disconnect_volt.b0);
+        gstInvLoop.disconnect_volt.a1 = CLAdiv(gstInvLoop.disconnect_volt.a1,gstInvLoop.disconnect_volt.b0);
+        gstInvLoop.disconnect_volt.a2 = CLAdiv(gstInvLoop.disconnect_volt.a2,gstInvLoop.disconnect_volt.b0);
+        gstInvLoop.disconnect_volt.b1 = CLAdiv(gstInvLoop.disconnect_volt.b1,gstInvLoop.disconnect_volt.b0);
+        gstInvLoop.disconnect_volt.b2 = CLAdiv(gstInvLoop.disconnect_volt.b2,gstInvLoop.disconnect_volt.b0);
+        gstInvLoop.disconnect_volt.Umax = INV_CUR_MAX;
+        gstInvLoop.disconnect_volt.Umin = -1.0f*INV_CUR_MAX;
+        gstInvLoop.en_inv = 0;
+        //锁相环环路参数
+        SinglePhasePLLInit(&gstGrid.volt);
+        SinglePhasePLLInit(&gstGrid.curr);
+        SinglePhasePLLInit(&gstInv.volt);
+        SinglePhasePLLInit(&gstInv.curr);
+        SinglePhasePLLInit(&gstGenerator.volt);
+        SinglePhasePLLInit(&gstGenerator.curr);
+        SinglePhasePLLInit(&gstCT.curr);
+        SinglePhasePLLInit(&gstNormalLoad.curr);
+        SinglePhasePLLInit(&gstBackUp.curr);
+        AddPIControlerForwardInit(&gstVoltageLoop,0.02f,0.005f,20.0f,INV_CUR_MAX);
+        AddPIControlerForwardInit(&gstCurrentLoop,0.5f,0.5f,10.0f,INV_VOL_MAX);
+        geInvControlState = INV_STATE_SELFTEST;
+        gstInv.volt.value.instant = 0;
+        gstInv.curr.value.instant = 0;
+        EPwm1Regs.TZCLR.bit.OST = 1;
+        EPwm1Regs.TZOSTCLR.bit.OST1= 1;
+        //正弦参考信号初始化
+        gstSinCosSignal.sin_ext[0] = 0.0f;
+        gstSinCosSignal.sin_ext[1] = 0.0f;
+        gstSinCosSignal.cos_ext[0] = 1.0f;
+        gstSinCosSignal.cos_ext[1] = 1.0f;
+        gstSinCosSignal.theta_ext = 0.0f;
+
+        gstSinCosSignal.sin_eff[0] = 0.0f;
+        gstSinCosSignal.sin_eff[1] = 0.0f;
+        gstSinCosSignal.cos_eff[0] = 1.0f;
+        gstSinCosSignal.cos_eff[1] = 1.0f;
+        gstSinCosSignal.theta_eff = 0.0f;
+        gstSinCosSignal.wn_eff = INV_RADIAN_FREQ;
+
+        gstSinCosSignal.wn_disconnect = INV_RADIAN_FREQ;
+        //
+
+        gInvCurrentPhase = 0.0f; 
+        gInvCurrentRefAmp = 0.0f; 
+        gInvCurrAmpPI = 0.0f;
+        gInvCurrThetaPI = 0.0f;
+        gInvIdPI = 0.0f;
+        gInvIqPI = 0.0f;
+        gDuty_err = 0.0f;
+        /***********************************/
+        //交流计算量初始化
+        RmsPwrClaInit(&gstInvData, PWR_COMPUTE_FREQ, PWR_LOWEST_AC_FREQ, PWR_HIGHEST_AC_FREQ, PWR_COMPUTE_AC_PERIOD);
+        RmsPwrClaInit(&gstBackUpData, PWR_COMPUTE_FREQ, PWR_LOWEST_AC_FREQ, PWR_HIGHEST_AC_FREQ, PWR_COMPUTE_AC_PERIOD);
+        RmsPwrClaInit(&gstGeneratorData, PWR_COMPUTE_FREQ, PWR_LOWEST_AC_FREQ, PWR_HIGHEST_AC_FREQ, PWR_COMPUTE_AC_PERIOD);
+        RmsPwrClaInit(&gstGridData, PWR_COMPUTE_FREQ, PWR_LOWEST_AC_FREQ, PWR_HIGHEST_AC_FREQ, PWR_COMPUTE_AC_PERIOD);
+        RmsPwrClaInit(&gstCTData, PWR_COMPUTE_FREQ, PWR_LOWEST_AC_FREQ, PWR_HIGHEST_AC_FREQ, PWR_COMPUTE_AC_PERIOD);
+        RmsPwrClaInit(&gstNormalLoadData, PWR_COMPUTE_FREQ, PWR_LOWEST_AC_FREQ, PWR_HIGHEST_AC_FREQ, PWR_COMPUTE_AC_PERIOD);
+        /***********************************/
+        gClaInitFinish = 1;
+    }
+}
+/**
+  * @brief  AlgoInterfaceUpdata
+  * @param  None
+  * @return None
+  * @note   算法业务交互变量更新
+*/
+static void AlgoInterfaceUpdata(void)
+{
+    gstAlgoInterface.bus_vol = gstBusPos.volt.instant;    
+    gstAlgoInterface.bus_cur = gstBusPos.curr.instant;
+    /* bus_vol_rms、bus_cur_rms、bus2batpower、relay_middle_volt_phase_a_rms 由 CPU 侧 PwrCpuRelayBusStep 更新 */
+
+    gstAlgoInterface.inv_vol = gstInv.volt.value.instant;
+    gstAlgoInterface.inv_vol_ave = gstInv.volt.value.average;
+    gstAlgoInterface.inv_cur = gstInv.curr.value.instant;
+    gstAlgoInterface.grid_vol = gstGrid.volt.value.instant;
+    gstAlgoInterface.grid_vol_ave = gstGrid.volt.value.average;
+    gstAlgoInterface.grid_cur = gstGrid.curr.value.instant;
+    gstAlgoInterface.generator_vol = gstGenerator.volt.value.instant;
+    gstAlgoInterface.generator_cur = gstGenerator.curr.value.instant;
+    gstAlgoInterface.generator_vol_ave = gstGenerator.volt.value.average;
+
+    gstAlgoInterface.inv_freq = gstInv.volt.pll.freq;
+    gstAlgoInterface.inv_vol_rms = gstInv.volt.value.rms;
+    gstAlgoInterface.inv_cur_rms = gstInv.curr.value.rms;
+    gstAlgoInterface.inv_active_power = gstInv.power.p;
+    gstAlgoInterface.inv_reactive_power = gstInv.power.q;
+    gstAlgoInterface.inv_apperant_power = gstInv.power.all;
+
+    gstAlgoInterface.grid_freq = gstGrid.volt.pll.freq;   
+    gstAlgoInterface.grid_vol_rms = gstGrid.volt.value.rms;
+    gstAlgoInterface.grid_cur_rms = gstGrid.curr.value.rms;
+    gstAlgoInterface.grid_active_power = gstGrid.power.p;
+    gstAlgoInterface.grid_reactive_power = gstGrid.power.q;
+    gstAlgoInterface.grid_apperant_power = gstGrid.power.all;
+
+    gstAlgoInterface.generator_freq =  gstGenerator.volt.pll.freq;                                   
+    gstAlgoInterface.generator_vol_rms = gstGenerator.volt.value.rms;
+    gstAlgoInterface.generator_cur_rms = gstGenerator.curr.value.rms;
+    gstAlgoInterface.generator_active_power = gstGenerator.power.p;
+    gstAlgoInterface.generator_reactive_power = gstGenerator.power.q;
+    gstAlgoInterface.generator_apperant_power = gstGenerator.power.all;
+
+    gstAlgoInterface.load_vol_rms = gstBackUp.volt.value.rms;
+    gstAlgoInterface.load_cur_rms = gstBackUp.curr.value.rms;
+    gstAlgoInterface.load_active_power = gstBackUp.power.p;
+    gstAlgoInterface.load_reactive_power = gstBackUp.power.q_filter;
+    gstAlgoInterface.load_apperant_power = gstBackUp.power.all;
+
+    gstAlgoInterface.ct_vol_rms = gstCT.volt.value.rms;
+    gstAlgoInterface.ct_cur_rms = gstCT.curr.value.rms;
+    gstAlgoInterface.ct_active_power = gstCT.power.p;
+    gstAlgoInterface.ct_reactive_power = gstCT.power.q;
+    gstAlgoInterface.ct_apperant_power = gstCT.power.all;
+
+    gstAlgoInterface.normalload_vol_rms = gstNormalLoad.volt.value.rms;
+    gstAlgoInterface.normalload_cur_rms = gstNormalLoad.curr.value.rms;
+    gstAlgoInterface.normalload_active_power = gstNormalLoad.power.p;
+    gstAlgoInterface.normalload_reactive_power = gstNormalLoad.power.q;
+    gstAlgoInterface.normalload_apperant_power = gstNormalLoad.power.all;
+
+    gstAlgoInterface.inv_vol_theta = gstInv.volt.pll.theta;
+    gstAlgoInterface.grid_vol_theta = gstGrid.volt.pll.theta;
+    gstAlgoInterface.grid_vol_sin = gstGrid.volt.pll.sin0;
+    gstAlgoInterface.generator_vol_theta = gstGenerator.volt.pll.theta;
+    // if(geInvControlStateCla == INV_STATE_GRID_CONNECTED)
+    // {
+    //     gstAlgoInterface.grid_connect = 1; 
+    // }
+    // else
+    // {
+    //     gstAlgoInterface.grid_connect = 0; 
+    // }
+    gstAlgoInterface.inv_state = geInvControlStateCla;
+    gstAlgoInterface.inv_start_ok = gstInvLoop.inv_start_ok;
+
+}
+/**
+* @brief: ADC_Int2
+* @param: static void
+* @return:Nothing
+* @note:所有与ADC相关的函数均放在ADC_Int1()上方写完
+*/
+static void ADC_Int2(void)
+{
+    ADC_Instant_Update();   //赋值本周期参与计算的瞬时值
+
+}
+/**
+* @brief: PLL_Int2
+* @param: static void
+* @return:Nothing
+* @note:所有与PLL相关的函数均放在PLL_Int2()上方写完
+*/
+static void PLL_Int2(void)
+{
+    SinglePhasePLL(&gstGrid.volt); //运行时间1.63us
+    SinglePhasePLL(&gstInv.volt);
+    SinglePhasePLL(&gstGenerator.volt);
+    // SetClaDebugData(1,gstGrid.volt.value.instant);
+    // SetClaDebugData(2,gstGrid.volt.pll.output *311.0f);
+}
+/**
+* @brief: Inv_Int2
+* @param: static void
+* @return:Nothing
+* @note:所有与Inv相关的函数均放在Inv_Int2()上方写完
+*/
+static void Inv_Int2(void)
+{    
+       
+    /* InvWorkStateSwitch2(); */     //逆变状态机,决策当前逆变器状态,TODO:决策放在CPU中进行
+    InvControl();               //逆变控制
+    SinglePhasePwmUpDate(gstInvLoop.duty ,gstInvLoop.en_inv);
+}
+/**
+* @brief: CLA_Task
+* @param: static inline void
+* @return:Nothing
+* @note:所有CLA工程函数加入此函数（最终加入到CLA_TASK的总函数）
+*/
+inline void CLA_Task(void)
+{
+
+//    float32 cla_time;
+//    float32 cla_time_next;
+//    cla_time = ECap1Regs.TSCTR;
+    /*Control_Init();   */ //初始化已迁移至CPU侧
+    ADC_Int2();
+    PLL_Int2();
+    Phase_updata(); //TODO:放在这里目标相位变化会滞后一个控制周期，后续需考虑放在控制环路里还是状态机里
+    Inv_Int2();
+    AlgoInterfaceUpdata();
+    RmsCompute();
+
+    // cla_time_next = ECap1Regs.TSCTR;
+    // if(cla_time > cla_time_next)
+    // {
+    //     gClaRunTime = cla_time_next + (0xffffffffUL - cla_time);
+    // }
+    // else
+    // {
+    //     gClaRunTime = cla_time_next - cla_time;
+    // }
+
+    ClearClaInterrupt();//清除中断标志位,新增函数需放在这里上方
+}
+
+__attribute__((interrupt)) void Cla1Task1 (void)
+{
+    GpioDataRegs.GPCSET.bit.GPIO94 = 1;
+    CLA_Task();
+    GpioDataRegs.GPCCLEAR.bit.GPIO94 = 1;
+}
+__attribute__((interrupt)) void Cla1Task2 (void)
+{
+
+}
+__attribute__((interrupt)) void Cla1Task3 (void)
+{
+
+}
+__attribute__((interrupt)) void Cla1Task4 (void)
+{
+
+}
+__attribute__((interrupt)) void Cla1Task5 (void)
+{
+
+}
+__attribute__((interrupt)) void Cla1Task6 (void)
+{
+
+}
+__attribute__((interrupt)) void Cla1Task7 (void)
+{
+
+}
+__attribute__((interrupt)) void Cla1Task8 (void)
+{
+
+}

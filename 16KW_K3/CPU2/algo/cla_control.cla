@@ -1,0 +1,51 @@
+/**
+  ******************************************************************************
+  * @file        cla_control.cla
+  * @brief       CLA 任务入口（空实现，预留后续算法）
+  ******************************************************************************
+  */
+#include "F28x_Project.h"
+
+static void ClearClaInterrupt(void)
+{
+//    EPwm10Regs.ETCLR.bit.INT = 1;
+//    PieCtrlRegs.PIEACK.all = PIEACK_GROUP3;
+}
+
+void CLA_Task(void)
+{
+    ClearClaInterrupt();
+}
+
+__attribute__((interrupt)) void Cla1Task1(void)
+{
+    CLA_Task();
+}
+
+__attribute__((interrupt)) void Cla1Task2(void)
+{
+}
+
+__attribute__((interrupt)) void Cla1Task3(void)
+{
+}
+
+__attribute__((interrupt)) void Cla1Task4(void)
+{
+}
+
+__attribute__((interrupt)) void Cla1Task5(void)
+{
+}
+
+__attribute__((interrupt)) void Cla1Task6(void)
+{
+}
+
+__attribute__((interrupt)) void Cla1Task7(void)
+{
+}
+
+__attribute__((interrupt)) void Cla1Task8(void)
+{
+}

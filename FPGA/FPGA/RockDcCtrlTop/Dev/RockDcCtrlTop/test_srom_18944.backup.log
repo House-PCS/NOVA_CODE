@@ -1,0 +1,39 @@
+#-----------------------------------------------------------
+# Vivado v2019.1 (64-bit)
+# SW Build 2552052 on Fri May 24 14:49:42 MDT 2019
+# IP Build 2548770 on Fri May 24 18:01:18 MDT 2019
+# Start of session at: Fri Jun 26 18:48:47 2026
+# Process ID: 18944
+# Current directory: E:/FPGA
+# Command line: vivado.exe -mode batch -source e:\FPGA\RockDcCtrlTop\Dev\RockDcCtrlTop\test_srom.tcl -log e:\FPGA\RockDcCtrlTop\Dev\RockDcCtrlTop\test_srom.log
+# Log file: e:/FPGA/RockDcCtrlTop/Dev/RockDcCtrlTop/test_srom.log
+# Journal file: E:/FPGA\vivado.jou
+#-----------------------------------------------------------
+source {e:\FPGA\RockDcCtrlTop\Dev\RockDcCtrlTop\test_srom.tcl}
+# open_project E:/FPGA/RockDcCtrlTop/Dev/RockDcCtrlTop/RockDcCtrlTop.xpr
+CRITICAL WARNING: [Project 1-19] Could not find the file 'E:/FPGA/RockDcCtrlTop/Dev/RockDcCtrlTop/RockDcCtrlTop.srcs/sources_1/ip/Sdpram4096x16_4096x16_D2.xcix'.
+CRITICAL WARNING: [Project 1-19] Could not find the file 'E:/FPGA/RockDcCtrlTop/Dev/RockDcCtrlTop/RockDcCtrlTop.srcs/sources_1/ip/ila_5.xcix'.
+CRITICAL WARNING: [Project 1-19] Could not find the file 'E:/FPGA/RockDcCtrlTop/Dev/RockDcCtrlTop/RockDcCtrlTop.srcs/sources_1/ip/Sdpram4096x16_4096x16_D2/Sdpram4096x16_4096x16_D2.xci'.
+CRITICAL WARNING: [Project 1-19] Could not find the file 'E:/FPGA/RockDcCtrlTop/Dev/RockDcCtrlTop/RockDcCtrlTop.srcs/sources_1/ip/Sdpram72x32_18x128_D2.xcix'.
+CRITICAL WARNING: [Project 1-19] Could not find the file 'E:/FPGA/RockDcCtrlTop/Dev/RockDcCtrlTop/RockDcCtrlTop.srcs/sources_1/ip/Sdpram72x32_18x128_D2/Sdpram72x32_18x128_D2.xci'.
+Scanning sources...
+Finished scanning sources
+INFO: [IP_Flow 19-234] Refreshing IP repositories
+INFO: [IP_Flow 19-1704] No user IP repositories specified
+INFO: [IP_Flow 19-2313] Loaded Vivado IP repository 'E:/VIVADO/Vivado/2019.1/data/ip'.
+ERROR: [IP_Flow 19-993] Could not find IP file for IP 'Sdpram4096x16_4096x16_D2'.
+CRITICAL WARNING: [IP_Flow 19-5097] Unable to determine VLNV from IP file; verify it has the correct syntax: 
+ERROR: [IP_Flow 19-993] Could not find IP file for IP 'Sdpram72x32_18x128_D2'.
+CRITICAL WARNING: [IP_Flow 19-5097] Unable to determine VLNV from IP file; verify it has the correct syntax: 
+WARNING: [IP_Flow 19-3664] IP 'Srom_1024x10' generated file not found 'e:/FPGA/RockDcCtrlTop/Src/Core/Srom_1024x10/Srom_1024x10/hdl/blk_mem_gen_v8_4_vhsyn_rfs.vhd'. Please regenerate to continue.
+WARNING: [IP_Flow 19-3664] IP 'Srom_1024x10' generated file not found 'e:/FPGA/RockDcCtrlTop/Src/Core/Srom_1024x10/Srom_1024x10/Srom_1024x10.dcp'. Please regenerate to continue.
+WARNING: [IP_Flow 19-3664] IP 'Srom_1024x10' generated file not found 'e:/FPGA/RockDcCtrlTop/Src/Core/Srom_1024x10/Srom_1024x10/Srom_1024x10_stub.v'. Please regenerate to continue.
+WARNING: [IP_Flow 19-3664] IP 'Srom_1024x10' generated file not found 'e:/FPGA/RockDcCtrlTop/Src/Core/Srom_1024x10/Srom_1024x10/Srom_1024x10_stub.vhdl'. Please regenerate to continue.
+WARNING: [IP_Flow 19-3664] IP 'Srom_1024x10' generated file not found 'e:/FPGA/RockDcCtrlTop/Src/Core/Srom_1024x10/Srom_1024x10/Srom_1024x10_sim_netlist.v'. Please regenerate to continue.
+WARNING: [IP_Flow 19-3664] IP 'Srom_1024x10' generated file not found 'e:/FPGA/RockDcCtrlTop/Src/Core/Srom_1024x10/Srom_1024x10/Srom_1024x10_sim_netlist.vhdl'. Please regenerate to continue.
+ERROR: [Common 17-39] 'open_project' failed due to earlier errors.
+
+    while executing
+"open_project E:/FPGA/RockDcCtrlTop/Dev/RockDcCtrlTop/RockDcCtrlTop.xpr"
+    (file "e:\FPGA\RockDcCtrlTop\Dev\RockDcCtrlTop\test_srom.tcl" line 1)
+INFO: [Common 17-206] Exiting Vivado at Fri Jun 26 18:48:53 2026...
