@@ -1,0 +1,123 @@
+Dependencies for Project 'CortexM0', Target 'Target 1': (DO NOT MODIFY !)
+CompilerVersion: 5060750::V5.06 update 6 (build 750)::ARMCC
+F (..\Src\StartUp\startup_CMSDK_CM0.s)(0x6A3CE175)(--cpu Cortex-M0 --li -g --apcs=interwork -I.\RTE\_Target_1-IC:\Users\Nova006348\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include-IC:\Users\Nova006348\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\Device\ARM\ARMCM0\Include--pd "__UVISION_VERSION SETA 537" --pd "_RTE_ SETA 1" --pd "ARMCM0 SETA 1" --pd "_RTE_ SETA 1"--list .\listings\startup_cmsdk_cm0.lst --xref -o .\objects\startup_cmsdk_cm0.o --depend .\objects\startup_cmsdk_cm0.d)
+F (..\Src\System\src\system_CMSDK_CM0.c)(0x6A3CE175)(--c99 -c --cpu Cortex-M0 --li -g -O0 --apcs=interwork --split_sections -I ..\Src\Core -I ..\Src\System\inc -I ..\Src\Peripheral\inc -I ..\Src\RTOS\inc -I ..\Src\UserCode\Inc-I.\RTE\_Target_1-IC:\Users\Nova006348\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include-IC:\Users\Nova006348\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\Device\ARM\ARMCM0\Include-D__UVISION_VERSION="537" -D_RTE_ -DARMCM0 -D_RTE_-o .\objects\system_cmsdk_cm0.o --omf_browse .\objects\system_cmsdk_cm0.crf --depend .\objects\system_cmsdk_cm0.d)
+I (..\Src\System\inc\system_CMSDK_CM0.h)(0x6A3CE175)
+I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5D9AD218)
+I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x5D9AD21A)
+I (C:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x5D9AD218)
+I (..\Src\Core\CMSDK_CM0.h)(0x6A3CE175)
+I (..\Src\Core\core_cm0.h)(0x6A3CE175)
+I (..\Src\Core\core_cmInstr.h)(0x6A3CE175)
+I (..\Src\Core\core_cmFunc.h)(0x6A3CE175)
+F (..\Src\Peripheral\src\Gpio.c)(0x6A3CE175)(--c99 -c --cpu Cortex-M0 --li -g -O0 --apcs=interwork --split_sections -I ..\Src\Core -I ..\Src\System\inc -I ..\Src\Peripheral\inc -I ..\Src\RTOS\inc -I ..\Src\UserCode\Inc-I.\RTE\_Target_1-IC:\Users\Nova006348\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include-IC:\Users\Nova006348\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\Device\ARM\ARMCM0\Include-D__UVISION_VERSION="537" -D_RTE_ -DARMCM0 -D_RTE_-o .\objects\gpio.o --omf_browse .\objects\gpio.crf --depend .\objects\gpio.d)
+I (..\Src\Peripheral\inc\Gpio.h)(0x6A3CE175)
+I (..\Src\System\inc\system_CMSDK_CM0.h)(0x6A3CE175)
+I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5D9AD218)
+I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x5D9AD21A)
+I (C:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x5D9AD218)
+I (..\Src\Core\CMSDK_CM0.h)(0x6A3CE175)
+I (..\Src\Core\core_cm0.h)(0x6A3CE175)
+I (..\Src\Core\core_cmInstr.h)(0x6A3CE175)
+I (..\Src\Core\core_cmFunc.h)(0x6A3CE175)
+F (..\Src\Peripheral\src\Timer.c)(0x6A3CE175)(--c99 -c --cpu Cortex-M0 --li -g -O0 --apcs=interwork --split_sections -I ..\Src\Core -I ..\Src\System\inc -I ..\Src\Peripheral\inc -I ..\Src\RTOS\inc -I ..\Src\UserCode\Inc-I.\RTE\_Target_1-IC:\Users\Nova006348\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include-IC:\Users\Nova006348\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\Device\ARM\ARMCM0\Include-D__UVISION_VERSION="537" -D_RTE_ -DARMCM0 -D_RTE_-o .\objects\timer.o --omf_browse .\objects\timer.crf --depend .\objects\timer.d)
+I (..\Src\Peripheral\inc\Gpio.h)(0x6A3CE175)
+I (..\Src\System\inc\system_CMSDK_CM0.h)(0x6A3CE175)
+I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5D9AD218)
+I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x5D9AD21A)
+I (C:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x5D9AD218)
+I (..\Src\Core\CMSDK_CM0.h)(0x6A3CE175)
+I (..\Src\Core\core_cm0.h)(0x6A3CE175)
+I (..\Src\Core\core_cmInstr.h)(0x6A3CE175)
+I (..\Src\Core\core_cmFunc.h)(0x6A3CE175)
+I (..\Src\Peripheral\inc\Uart.h)(0x6A3CE175)
+I (..\Src\Peripheral\inc\Timer.h)(0x6A3CE175)
+F (..\Src\Peripheral\src\Uart.c)(0x6A3CE175)(--c99 -c --cpu Cortex-M0 --li -g -O0 --apcs=interwork --split_sections -I ..\Src\Core -I ..\Src\System\inc -I ..\Src\Peripheral\inc -I ..\Src\RTOS\inc -I ..\Src\UserCode\Inc-I.\RTE\_Target_1-IC:\Users\Nova006348\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include-IC:\Users\Nova006348\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\Device\ARM\ARMCM0\Include-D__UVISION_VERSION="537" -D_RTE_ -DARMCM0 -D_RTE_-o .\objects\uart.o --omf_browse .\objects\uart.crf --depend .\objects\uart.d)
+I (..\Src\Peripheral\inc\Uart.h)(0x6A3CE175)
+I (..\Src\System\inc\system_CMSDK_CM0.h)(0x6A3CE175)
+I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5D9AD218)
+I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x5D9AD21A)
+I (C:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x5D9AD218)
+I (..\Src\Core\CMSDK_CM0.h)(0x6A3CE175)
+I (..\Src\Core\core_cm0.h)(0x6A3CE175)
+I (..\Src\Core\core_cmInstr.h)(0x6A3CE175)
+I (..\Src\Core\core_cmFunc.h)(0x6A3CE175)
+F (..\Src\Peripheral\src\BmsCache.c)(0x6A3CE175)(--c99 -c --cpu Cortex-M0 --li -g -O0 --apcs=interwork --split_sections -I ..\Src\Core -I ..\Src\System\inc -I ..\Src\Peripheral\inc -I ..\Src\RTOS\inc -I ..\Src\UserCode\Inc-I.\RTE\_Target_1-IC:\Users\Nova006348\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include-IC:\Users\Nova006348\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\Device\ARM\ARMCM0\Include-D__UVISION_VERSION="537" -D_RTE_ -DARMCM0 -D_RTE_-o .\objects\bmscache.o --omf_browse .\objects\bmscache.crf --depend .\objects\bmscache.d)
+I (..\Src\Peripheral\inc\BmsCache.h)(0x6A3CE175)
+I (..\Src\System\inc\system_CMSDK_CM0.h)(0x6A3CE175)
+I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5D9AD218)
+I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x5D9AD21A)
+I (C:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x5D9AD218)
+I (..\Src\Core\CMSDK_CM0.h)(0x6A3CE175)
+I (..\Src\Core\core_cm0.h)(0x6A3CE175)
+I (..\Src\Core\core_cmInstr.h)(0x6A3CE175)
+I (..\Src\Core\core_cmFunc.h)(0x6A3CE175)
+F (..\Src\Peripheral\src\EthUdp.c)(0x6A3CE175)(--c99 -c --cpu Cortex-M0 --li -g -O0 --apcs=interwork --split_sections -I ..\Src\Core -I ..\Src\System\inc -I ..\Src\Peripheral\inc -I ..\Src\RTOS\inc -I ..\Src\UserCode\Inc-I.\RTE\_Target_1-IC:\Users\Nova006348\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include-IC:\Users\Nova006348\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\Device\ARM\ARMCM0\Include-D__UVISION_VERSION="537" -D_RTE_ -DARMCM0 -D_RTE_-o .\objects\ethudp.o --omf_browse .\objects\ethudp.crf --depend .\objects\ethudp.d)
+I (..\Src\Peripheral\inc\EthUdp.h)(0x6A3CE175)
+I (..\Src\System\inc\system_CMSDK_CM0.h)(0x6A3CE175)
+I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5D9AD218)
+I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x5D9AD21A)
+I (C:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x5D9AD218)
+I (..\Src\Core\CMSDK_CM0.h)(0x6A3CE175)
+I (..\Src\Core\core_cm0.h)(0x6A3CE175)
+I (..\Src\Core\core_cmInstr.h)(0x6A3CE175)
+I (..\Src\Core\core_cmFunc.h)(0x6A3CE175)
+F (..\Src\Peripheral\src\dev_phy.c)(0x6A3CE175)(--c99 -c --cpu Cortex-M0 --li -g -O0 --apcs=interwork --split_sections -I ..\Src\Core -I ..\Src\System\inc -I ..\Src\Peripheral\inc -I ..\Src\RTOS\inc -I ..\Src\UserCode\Inc-I.\RTE\_Target_1-IC:\Users\Nova006348\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include-IC:\Users\Nova006348\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\Device\ARM\ARMCM0\Include-D__UVISION_VERSION="537" -D_RTE_ -DARMCM0 -D_RTE_-o .\objects\dev_phy.o --omf_browse .\objects\dev_phy.crf --depend .\objects\dev_phy.d)
+I (..\Src\Peripheral\inc\dev_phy.h)(0x6A3CE175)
+I (..\Src\Peripheral\inc\mdio.h)(0x6A3CE175)
+I (..\Src\System\inc\system_CMSDK_CM0.h)(0x6A3CE175)
+I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5D9AD218)
+I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x5D9AD21A)
+I (C:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x5D9AD218)
+I (..\Src\Core\CMSDK_CM0.h)(0x6A3CE175)
+I (..\Src\Core\core_cm0.h)(0x6A3CE175)
+I (..\Src\Core\core_cmInstr.h)(0x6A3CE175)
+I (..\Src\Core\core_cmFunc.h)(0x6A3CE175)
+F (..\Src\Peripheral\src\mdio.c)(0x6A3CE175)(--c99 -c --cpu Cortex-M0 --li -g -O0 --apcs=interwork --split_sections -I ..\Src\Core -I ..\Src\System\inc -I ..\Src\Peripheral\inc -I ..\Src\RTOS\inc -I ..\Src\UserCode\Inc-I.\RTE\_Target_1-IC:\Users\Nova006348\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include-IC:\Users\Nova006348\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\Device\ARM\ARMCM0\Include-D__UVISION_VERSION="537" -D_RTE_ -DARMCM0 -D_RTE_-o .\objects\mdio.o --omf_browse .\objects\mdio.crf --depend .\objects\mdio.d)
+I (..\Src\Peripheral\inc\mdio.h)(0x6A3CE175)
+I (..\Src\System\inc\system_CMSDK_CM0.h)(0x6A3CE175)
+I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5D9AD218)
+I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x5D9AD21A)
+I (C:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x5D9AD218)
+I (..\Src\Core\CMSDK_CM0.h)(0x6A3CE175)
+I (..\Src\Core\core_cm0.h)(0x6A3CE175)
+I (..\Src\Core\core_cmInstr.h)(0x6A3CE175)
+I (..\Src\Core\core_cmFunc.h)(0x6A3CE175)
+F (..\Src\Peripheral\src\DdrCache.c)(0x6A3CE175)(--c99 -c --cpu Cortex-M0 --li -g -O0 --apcs=interwork --split_sections -I ..\Src\Core -I ..\Src\System\inc -I ..\Src\Peripheral\inc -I ..\Src\RTOS\inc -I ..\Src\UserCode\Inc-I.\RTE\_Target_1-IC:\Users\Nova006348\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include-IC:\Users\Nova006348\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\Device\ARM\ARMCM0\Include-D__UVISION_VERSION="537" -D_RTE_ -DARMCM0 -D_RTE_-o .\objects\ddrcache.o --omf_browse .\objects\ddrcache.crf --depend .\objects\ddrcache.d)
+I (..\Src\Peripheral\inc\DdrCache.h)(0x6A3CE175)
+I (..\Src\System\inc\system_CMSDK_CM0.h)(0x6A3CE175)
+I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5D9AD218)
+I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x5D9AD21A)
+I (C:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x5D9AD218)
+I (..\Src\Core\CMSDK_CM0.h)(0x6A3CE175)
+I (..\Src\Core\core_cm0.h)(0x6A3CE175)
+I (..\Src\Core\core_cmInstr.h)(0x6A3CE175)
+I (..\Src\Core\core_cmFunc.h)(0x6A3CE175)
+F (..\Src\Peripheral\src\Spi.c)(0x6A3CE175)(--c99 -c --cpu Cortex-M0 --li -g -O0 --apcs=interwork --split_sections -I ..\Src\Core -I ..\Src\System\inc -I ..\Src\Peripheral\inc -I ..\Src\RTOS\inc -I ..\Src\UserCode\Inc-I.\RTE\_Target_1-IC:\Users\Nova006348\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include-IC:\Users\Nova006348\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\Device\ARM\ARMCM0\Include-D__UVISION_VERSION="537" -D_RTE_ -DARMCM0 -D_RTE_-o .\objects\spi.o --omf_browse .\objects\spi.crf --depend .\objects\spi.d)
+I (..\Src\Peripheral\inc\Spi.h)(0x6A3CE175)
+I (..\Src\System\inc\system_CMSDK_CM0.h)(0x6A3CE175)
+I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5D9AD218)
+I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x5D9AD21A)
+I (C:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x5D9AD218)
+I (..\Src\Core\CMSDK_CM0.h)(0x6A3CE175)
+I (..\Src\Core\core_cm0.h)(0x6A3CE175)
+I (..\Src\Core\core_cmInstr.h)(0x6A3CE175)
+I (..\Src\Core\core_cmFunc.h)(0x6A3CE175)
+F (..\Src\UserCode\main.c)(0x6A3CE175)(--c99 -c --cpu Cortex-M0 --li -g -O0 --apcs=interwork --split_sections -I ..\Src\Core -I ..\Src\System\inc -I ..\Src\Peripheral\inc -I ..\Src\RTOS\inc -I ..\Src\UserCode\Inc-I.\RTE\_Target_1-IC:\Users\Nova006348\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include-IC:\Users\Nova006348\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\Device\ARM\ARMCM0\Include-D__UVISION_VERSION="537" -D_RTE_ -DARMCM0 -D_RTE_-o .\objects\main.o --omf_browse .\objects\main.crf --depend .\objects\main.d)
+I (..\Src\Peripheral\inc\Gpio.h)(0x6A3CE175)
+I (..\Src\System\inc\system_CMSDK_CM0.h)(0x6A3CE175)
+I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5D9AD218)
+I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x5D9AD21A)
+I (C:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x5D9AD218)
+I (..\Src\Core\CMSDK_CM0.h)(0x6A3CE175)
+I (..\Src\Core\core_cm0.h)(0x6A3CE175)
+I (..\Src\Core\core_cmInstr.h)(0x6A3CE175)
+I (..\Src\Core\core_cmFunc.h)(0x6A3CE175)
+I (..\Src\Peripheral\inc\Timer.h)(0x6A3CE175)
+I (..\Src\Peripheral\inc\Uart.h)(0x6A3CE175)
+I (..\Src\Peripheral\inc\Spi.h)(0x6A3CE175)
+I (..\Src\Peripheral\inc\BmsCache.h)(0x6A3CE175)
+I (..\Src\Peripheral\inc\DdrCache.h)(0x6A3CE175)
+I (..\Src\Peripheral\inc\EthUdp.h)(0x6A3CE175)
+I (..\Src\Peripheral\inc\dev_phy.h)(0x6A3CE175)
+I (..\Src\Peripheral\inc\mdio.h)(0x6A3CE175)

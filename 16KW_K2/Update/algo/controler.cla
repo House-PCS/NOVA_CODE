@@ -1,0 +1,113 @@
+/* include ------------------------------------------------------------------*/
+#include <controler.h>
+
+
+
+/* private define -----------------------------------------------------------*/
+
+
+
+/* private variables --------------------------------------------------------*/
+
+
+
+/* public function prototype ------------------------------------------------*/
+
+/**
+ * @brief 带前馈调节器
+ * @param ref 给定
+ * @param fbk 反馈
+ * @return 控制器输出
+ */
+float AddPIControlerForward(ForWardPi_t * loop, float ref, float fbk, float forward)
+{
+    float delta = 0;
+    float out = 0;
+    loop->Ref = ref;
+    loop->Fbk = fbk;
+    loop->erro = loop->Ref - loop->Fbk;
+    
+    delta = loop->Kp*(loop->erro - loop->erro_up) + loop->Ki * loop->erro; //增量
+    loop->delta = delta;
+    if(delta > loop->delta_max)
+    { 
+        delta = loop->delta_max;
+    }
+    if(delta < -loop->delta_max)
+    {
+        delta = -loop->delta_max;
+    }
+    out = loop->Out_pi + delta + forward;
+    if(out > loop->Umax)
+    {
+        out = loop->Umax;
+    }
+    if(out < loop->Umin)
+    {
+        out = loop->Umin;
+    }
+    loop->Out_pi = out - forward;
+    loop->Out = out; 
+    loop->erro_up = loop->erro;
+
+    return out;
+}
+/**
+ * @brief 带前馈调节器位置式PI控制器
+ * @param ref 给定
+ * @param fbk 反馈
+ * @return 控制器输出
+ */
+float PIControlerForward(ForWardPi_t * loop, float ref, float fbk, float forward)
+{
+    float Kp_out = 0;
+    float Ki_out = 0;
+    float out = 0;
+    loop->Ref = ref;
+    loop->Fbk = fbk;
+    loop->erro = loop->Ref - loop->Fbk;
+    Kp_out = loop->Kp * loop->erro;
+    Ki_out = loop->Out_Ki + loop->Ki * loop->erro;
+    if(loop->Ki == 0)
+    {
+        Ki_out = 0.0f;
+    }
+    out = Kp_out + Ki_out + forward;
+    if(out > loop->Umax)
+    {
+        out = loop->Umax;
+    }
+    if(out < loop->Umin)
+    {
+        out = loop->Umin;
+    }
+    // Ki_out = out - Kp_out - forward;
+    if(Ki_out > 70.0f)
+    {
+        Ki_out = 70.0f;
+    }
+    if(Ki_out < -70.0f)
+    {
+        Ki_out = -70.0f;
+    }
+    loop->Out_Ki = Ki_out;
+    loop->Out_pi = Kp_out;
+    loop->Out = out;
+    return out;
+}
+void AddPIControlerForwardInit(ForWardPi_t * loop, float kp, float ki, float delta_max, float umax)
+{
+    loop->Kp = kp;
+    loop->Ki = ki;
+    loop->Umax = umax;
+    loop->Umin = -umax;
+    loop->delta_max = delta_max;
+    loop->Out_pi = 0.0f;
+    loop->Out_Ki = 0.0f;
+    loop->erro = 0.0f;
+    loop->erro_up = 0.0f;
+    loop->Out = 0.0f;
+}
+
+
+/* private function prototype -----------------------------------------------*/

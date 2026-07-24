@@ -1,0 +1,30 @@
+#-----------------------------------------------------------
+# Vivado v2019.1 (64-bit)
+# SW Build 2552052 on Fri May 24 14:49:42 MDT 2019
+# IP Build 2548770 on Fri May 24 18:01:18 MDT 2019
+# Start of session at: Fri Jun 26 18:39:46 2026
+# Process ID: 22788
+# Current directory: E:/FPGA
+# Command line: vivado.exe -mode batch -source e:\FPGA\RockDcCtrlTop\Dev\RockDcCtrlTop\gen_srom.tcl -log e:\FPGA\RockDcCtrlTop\Dev\RockDcCtrlTop\gen_srom.log
+# Log file: e:/FPGA/RockDcCtrlTop/Dev/RockDcCtrlTop/gen_srom.log
+# Journal file: E:/FPGA\vivado.jou
+#-----------------------------------------------------------
+source {e:\FPGA\RockDcCtrlTop\Dev\RockDcCtrlTop\gen_srom.tcl}
+# open_project E:/FPGA/RockDcCtrlTop/Dev/RockDcCtrlTop/RockDcCtrlTop.xpr
+Scanning sources...
+Finished scanning sources
+INFO: [IP_Flow 19-234] Refreshing IP repositories
+INFO: [IP_Flow 19-1704] No user IP repositories specified
+INFO: [IP_Flow 19-2313] Loaded Vivado IP repository 'E:/VIVADO/Vivado/2019.1/data/ip'.
+# set f [get_files E:/FPGA/RockDcCtrlTop/Src/Core/Srom_1024x10/Srom_1024x10.xcix]
+# puts "IP file: $f"
+IP file: E:/FPGA/RockDcCtrlTop/Src/Core/Srom_1024x10/Srom_1024x10.xcix
+# generate_target {synthesis} $f
+WARNING: [Vivado 12-1783] Unsupported target specified: 'synthesis'. Supported targets for this IPX are: 'all'. File: 'Srom_1024x10.xcix'. 
+ERROR: [Vivado 12-1773] No legal targets specified.  Supported targets for this IPX are: all. File: 'Srom_1024x10.xcix'.
+ERROR: [Common 17-39] 'generate_target' failed due to earlier errors.
+
+    while executing
+"generate_target {synthesis} $f"
+    (file "e:\FPGA\RockDcCtrlTop\Dev\RockDcCtrlTop\gen_srom.tcl" line 4)
+INFO: [Common 17-206] Exiting Vivado at Fri Jun 26 18:39:51 2026...

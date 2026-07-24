@@ -1,0 +1,251 @@
+/**
+ * @file inv_3ph_pwm.c
+ * @brief Three-phase T-type three-level split-bus EPWM driver
+ * @note EPWMxA = bridge arm, EPWMxB = neutral-point complementary switch
+ */
+
+#include "inv_3ph_pwm.h"
+#include "F28x_Project.h"
+
+volatile float32 gInv3PhPwm_duty_err[3];
+#pragma DATA_SECTION(gInv3PhPwm_duty_err,"Cla1DataRam");
+
+#define INV_3PH_PWM_DUTY_CLAMP(x) \
+    (((x) > INV_3PH_PWM_DUTY_MAX) ? INV_3PH_PWM_DUTY_MAX : (((x) < INV_3PH_PWM_DUTY_MIN) ? INV_3PH_PWM_DUTY_MIN : (x)))
+
+#define INV_3PH_PWM_FABS(x) (((x) >= 0.0f) ? (x) : -(x))
+
+void Inv3PhPwm_ErrClear(void)
+{
+    gInv3PhPwm_duty_err[0] = 0.0f;
+    gInv3PhPwm_duty_err[1] = 0.0f;
+    gInv3PhPwm_duty_err[2] = 0.0f;
+}
+
+static float Inv3PhPwm_DeadZoneWithErr(float duty_raw, volatile float *p_duty_err)
+{
+    float duty_temp;
+    float duty_eff;
+
+    duty_temp = duty_raw + (*p_duty_err);
+    if((duty_temp > -INV_3PH_PWM_ZERO_BAND) && (duty_temp < INV_3PH_PWM_ZERO_BAND))
+    {
+        duty_eff = 0.0f;
+    }
+    else
+    {
+        duty_eff = duty_temp;
+    }
+    (*p_duty_err) = duty_temp - duty_eff;
+    return duty_eff;
+}
+
+static Uint16 Inv3PhPwm_DutyToTicks(float duty, Uint16 tbprd)
+{
+    return (Uint16)((float)tbprd * (1.0f - INV_3PH_PWM_FABS(duty)));
+}
+
+/**
+ * @brief Force both EPWM outputs low (full off)
+ */
+static void Inv3PhPwm_ForceOutputOff(volatile struct EPWM_REGS *epwm)
+{
+    epwm->AQCSFRC.bit.CSFA = 0x01;
+    epwm->AQCSFRC.bit.CSFB = 0x01;
+    epwm->CMPA.bit.CMPA = epwm->TBPRD;
+    epwm->CMPB.bit.CMPB = 0;
+}
+
+static void Inv3PhPwm_ShutdownAll(void)
+{
+    Inv3PhPwm_ForceOutputOff(&EPwm1Regs);
+    Inv3PhPwm_ForceOutputOff(&EPwm2Regs);
+    Inv3PhPwm_ForceOutputOff(&EPwm3Regs);
+    Inv3PhPwm_ForceOutputOff(&EPwm4Regs);
+    Inv3PhPwm_ForceOutputOff(&EPwm5Regs);
+    Inv3PhPwm_ForceOutputOff(&EPwm6Regs);
+}
+
+/**
+ * @brief Force freewheel path: bridge arm off (A low) + neutral switch on (B high)
+ */
+static void Inv3PhPwm_ForceBridgeOffMiddleOn(volatile struct EPWM_REGS *epwm)
+{
+    epwm->AQCSFRC.bit.CSFA = 0x01;
+    epwm->AQCSFRC.bit.CSFB = 0x02;
+    epwm->CMPA.bit.CMPA = epwm->TBPRD;
+    epwm->CMPB.bit.CMPB = epwm->TBPRD;
+}
+
+/**
+ * @brief T-type three-level zero state: both pos/neg bridge off, neutral on (clamped near 0)
+ */
+static void Inv3PhPwm_PhaseZeroState(volatile struct EPWM_REGS *epwm_pos,
+                                     volatile struct EPWM_REGS *epwm_neg)
+{
+    Inv3PhPwm_ForceBridgeOffMiddleOn(epwm_pos);
+    Inv3PhPwm_ForceBridgeOffMiddleOn(epwm_neg);
+}
+
+static void Inv3PhPwm_PhaseUpdate(float duty, Uint16 duty_ticks,
+                                  volatile struct EPWM_REGS *epwm_pos,
+                                  volatile struct EPWM_REGS *epwm_neg)
+{
+    if(INV_3PH_PWM_FABS(duty) < INV_3PH_PWM_ZERO_BAND)
+    {
+        Inv3PhPwm_PhaseZeroState(epwm_pos, epwm_neg);
+    }
+    else if(duty >= 0.0f)
+    {
+        /** Positive half-cycle: PWM on positive bridge; negative bridge off + neutral on */
+        Inv3PhPwm_ForceBridgeOffMiddleOn(epwm_neg);
+        epwm_pos->CMPA.bit.CMPA = duty_ticks;
+        epwm_pos->CMPB.bit.CMPB = duty_ticks;
+    }
+    else
+    {
+        /** Negative half-cycle: PWM on negative bridge; positive bridge off + neutral on */
+        Inv3PhPwm_ForceBridgeOffMiddleOn(epwm_pos);
+        epwm_neg->CMPA.bit.CMPA = duty_ticks;
+        epwm_neg->CMPB.bit.CMPB = duty_ticks;
+    }
+}
+
+static void Inv3PhPwm_ThreePhaseUpdate(float duty_a, float duty_b, float duty_c)
+{
+    Uint16 tbprd;
+    Uint16 duty_a_ticks;
+    Uint16 duty_b_ticks;
+    Uint16 duty_c_ticks;
+
+    tbprd = EPwm1Regs.TBPRD;
+    duty_a_ticks = Inv3PhPwm_DutyToTicks(duty_a, tbprd);
+    duty_b_ticks = Inv3PhPwm_DutyToTicks(duty_b, tbprd);
+    duty_c_ticks = Inv3PhPwm_DutyToTicks(duty_c, tbprd);
+
+    EPwm1Regs.AQCSFRC.all = 0;
+    EPwm2Regs.AQCSFRC.all = 0;
+    EPwm3Regs.AQCSFRC.all = 0;
+    EPwm4Regs.AQCSFRC.all = 0;
+    EPwm5Regs.AQCSFRC.all = 0;
+    EPwm6Regs.AQCSFRC.all = 0;
+
+    Inv3PhPwm_PhaseUpdate(duty_a, duty_a_ticks, &EPwm1Regs, &EPwm2Regs);
+    Inv3PhPwm_PhaseUpdate(duty_b, duty_b_ticks, &EPwm3Regs, &EPwm4Regs);
+    Inv3PhPwm_PhaseUpdate(duty_c, duty_c_ticks, &EPwm5Regs, &EPwm6Regs);
+}
+
+uint16_t Inv3PhPwm_Update(float duty_a, float duty_b, float duty_c, uint16_t en)
+{
+    float duty_a_eff;
+    float duty_b_eff;
+    float duty_c_eff;
+
+    if(en == 0U)
+    {
+        GpioDataRegs.GPBCLEAR.bit.GPIO45 = 1;
+        Inv3PhPwm_ShutdownAll();
+        Inv3PhPwm_ErrClear();
+        return 0U;
+    }
+
+    GpioDataRegs.GPBSET.bit.GPIO45 = 1;
+
+    duty_a = INV_3PH_PWM_DUTY_CLAMP(duty_a);
+    duty_b = INV_3PH_PWM_DUTY_CLAMP(duty_b);
+    duty_c = INV_3PH_PWM_DUTY_CLAMP(duty_c);
+
+    duty_a_eff = Inv3PhPwm_DeadZoneWithErr(duty_a, &gInv3PhPwm_duty_err[0]);
+    duty_b_eff = Inv3PhPwm_DeadZoneWithErr(duty_b, &gInv3PhPwm_duty_err[1]);
+    duty_c_eff = Inv3PhPwm_DeadZoneWithErr(duty_c, &gInv3PhPwm_duty_err[2]);
+
+    Inv3PhPwm_ThreePhaseUpdate(duty_a_eff, duty_b_eff, duty_c_eff);
+    return 1U;
+}
+
+/**
+* @brief: ThreePhasePwmUpDate
+* @param: static  void
+* @return:Nothing
+* @note:
+*/
+void ThreePhasePwmUpDate(float dutyA,float dutyB,float dutyC,float en_flag)
+{
+    Uint16  DutyA_ticks = 0;
+    Uint16  DutyB_ticks = 0;
+    Uint16  DutyC_ticks = 0;
+
+    //待机模式就封波
+    if(!en_flag)
+    {
+        GpioDataRegs.GPBCLEAR.bit.GPIO45 = 1;
+    }
+    else
+    {
+        GpioDataRegs.GPBSET.bit.GPIO45 = 1;
+    }
+
+    DutyA_ticks = (Uint16)((float)(EPwm1Regs.TBPRD)* (1.0f - fabsf(dutyA)));
+    DutyB_ticks = (Uint16)((float)(EPwm1Regs.TBPRD)* (1.0f - fabsf(dutyB)));
+    DutyC_ticks = (Uint16)((float)(EPwm1Regs.TBPRD)* (1.0f - fabsf(dutyC)));
+
+
+    /*  说明：Q13为硬件原理图中的Q13,SA4为MATLAB仿真模型中的SA4
+     * A组当调制波大于0时，Q13（SA4）强制为低  EPWM2A，Q8(SA2)强制为高电平  EPWM2B
+     * A组当调制波小于零时，Q4(SA1)强制为低电平 EPWM1A,Q7(SA3)强制为高电平  EPWM1B
+     * B组当调制波大于0时，Q14（SB4）强制为低  EPWM4A，Q10(SB2)强制为高电平 EPWM4B
+     * B组当调制波小于零时，Q5(SB1)强制为低电平 EPWM3A,Q9(SB3)强制为高电平  EPWM3B
+     * C组当调制波大于0时，Q15（SC4）强制为低  EPWM6A ，Q12(SC2)强制为高电平EPWM6B
+     * C组当调制波小于零时，Q6(SC1)强制为低电平 EPWM5A,Q11(SC3)强制为高电平 EPWM5B*/
+    EPwm1Regs.AQCSFRC.all = 0;
+    EPwm2Regs.AQCSFRC.all = 0;
+    EPwm3Regs.AQCSFRC.all = 0;
+    EPwm4Regs.AQCSFRC.all = 0;
+    EPwm5Regs.AQCSFRC.all = 0;
+    EPwm6Regs.AQCSFRC.all = 0;
+
+    if(dutyA >= 0.0f)
+    {
+        EPwm2Regs.AQCSFRC.bit.CSFA = 0x01;      //强制Q8的发波驱动为低
+        EPwm2Regs.AQCSFRC.bit.CSFB = 0x02;      //强制Q13的对应的发波驱动为高(0x01代表低，0x02代表高电平)
+        EPwm1Regs.CMPA.bit.CMPA = DutyA_ticks; //Q4发波
+        EPwm1Regs.CMPB.bit.CMPB = DutyA_ticks; //Q7发波
+    }
+    else
+    {
+        EPwm1Regs.AQCSFRC.bit.CSFA = 0x01;      //强制Q4的对应的发波驱动为低(0x01代表低，0x02代表高电平)
+        EPwm1Regs.AQCSFRC.bit.CSFB = 0x02;      //强制Q7的发波驱动为高
+        EPwm2Regs.CMPA.bit.CMPA = DutyA_ticks; //Q8发波
+        EPwm2Regs.CMPB.bit.CMPB = DutyA_ticks; //Q13发波
+    }
+
+    if(dutyB >= 0.0f)
+    {
+        EPwm4Regs.AQCSFRC.bit.CSFA = 0x01;      //强制Q10的发波驱动为低
+        EPwm4Regs.AQCSFRC.bit.CSFB = 0x02;      //强制Q14的对应的发波驱动为高(0x01代表低，0x02代表高电平)
+        EPwm3Regs.CMPA.bit.CMPA = DutyB_ticks; //Q5发波
+        EPwm3Regs.CMPB.bit.CMPB = DutyB_ticks; //Q9发波
+    }
+    else
+    {
+        EPwm3Regs.AQCSFRC.bit.CSFA = 0x01;      //强制Q5的对应的发波驱动为低(0x01代表低，0x02代表高电平)
+        EPwm3Regs.AQCSFRC.bit.CSFB = 0x02;      //强制Q9的发波驱动为高
+        EPwm4Regs.CMPA.bit.CMPA = DutyB_ticks; //Q14发波
+        EPwm4Regs.CMPB.bit.CMPB = DutyB_ticks; //Q10发波
+    }
+
+    if(dutyC >= 0.0f)
+    {
+        EPwm6Regs.AQCSFRC.bit.CSFA = 0x01;      //强制Q12的发波驱动为低
+        EPwm6Regs.AQCSFRC.bit.CSFB = 0x02;      //强制Q15的对应的发波驱动为高(0x01代表低，0x02代表高电平)
+        EPwm5Regs.CMPA.bit.CMPA = DutyC_ticks; //Q6发波
+        EPwm5Regs.CMPB.bit.CMPB = DutyC_ticks; //Q11发波
+    }
+    else
+    {
+        EPwm5Regs.AQCSFRC.bit.CSFA = 0x01;      //强制Q6的对应的发波驱动为低(0x01代表低，0x02代表高电平)
+        EPwm5Regs.AQCSFRC.bit.CSFB = 0x02;      //强制Q11的发波驱动为高
+        EPwm6Regs.CMPA.bit.CMPA = DutyC_ticks; //Q15发波
+        EPwm6Regs.CMPB.bit.CMPB = DutyC_ticks; //Q12发波
+    }
+}

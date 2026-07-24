@@ -1,0 +1,108 @@
+/**
+  ******************************************************************************
+  * @copyright (C) COPYRIGHT  Nova
+  * @file        i2c.h
+  * @author      Xi'an NovaStar Tech Co.,LTD.
+  * @version     V1.0.0
+  * @date        2022-10-31
+  * @brief	     GD32F4xx
+  ******************************************************************************
+  * @attention
+  * @relation
+
+  * @par :
+  * <table>
+  * <tr><th>Date          <th>Version   <th>Author      <th>Description
+  * <tr><td>2022-10-31    <td>V1.0.0    <td>           <td>InitialVersion 
+  * </table>
+  ******************************************************************************
+  */
+#ifndef __I2C_H_
+#define __I2C_H_
+
+#include "gd32f4xx_gpio.h"
+#include "gd32f4xx_i2c.h"
+#include "stdbool.h"
+#include "drv_opt.h"
+
+
+typedef enum
+{
+    I2C0_PORT,
+    I2C1_PORT,
+    I2C2_PORT,
+    I2C_NUM
+}EN_I2Cx_PORT;
+
+
+typedef struct _i2c_config_stru_t
+{
+    uint32_t                scl_gpiox;
+    uint32_t                scl_gpio_pinx;
+    uint32_t                scl_alt_num;
+    
+    uint32_t                sda_gpiox;
+    uint32_t                sda_gpio_pinx;
+    uint32_t                sda_alt_num;
+    
+    rcu_periph_enum         rcu_i2c;
+    uint32_t                i2c_peri;
+    uint32_t                speed;/*直接填对应的频率，100K对应就是100000*/
+    
+    
+    bool                    en_irq;
+    uint32_t                nvic_irq;
+    uint8_t                 irq_prio;
+    uint8_t                 irq_sub_prio;
+    usart_interrupt_enum    irq_type;
+}I2C_Config;
+
+typedef enum
+{
+    EN_I2C_REG_ADDR_WIDTH_8,
+    EN_I2C_REG_ADDR_WIDTH_16
+}EN_I2C_REG_ADDR_WIDTH;
+
+typedef struct _i2c_handle_stru_t
+{
+    EN_I2Cx_PORT            i2cx;
+    I2C_Config              *i2c_cfg;
+    
+    uint32_t                slave_addr0;/*暂不支持双地址从机*/
+    uint32_t                reg_addr;
+    EN_I2C_REG_ADDR_WIDTH   reg_addr_width;
+    void                    *pTxBuf;
+    uint32_t                tx_size;
+    void                    *pRxBuf;
+    uint32_t                rx_size;
+}I2C_HandleType;
+
+
+
+
+void I2CInit(I2C_HandleType *pHandle);
+bool I2CRegWrite(I2C_HandleType *pHandle);
+bool I2CRegRead(I2C_HandleType *pHandle);
+void I2CDeviceWaitStandby(I2C_HandleType *pHandle);
+#endif
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,39 @@
+#-----------------------------------------------------------
+# Vivado v2019.1 (64-bit)
+# SW Build 2552052 on Fri May 24 14:49:42 MDT 2019
+# IP Build 2548770 on Fri May 24 18:01:18 MDT 2019
+# Start of session at: Thu Jul  9 17:26:57 2026
+# Process ID: 24144
+# Current directory: E:/FPGA/RockDcCtrlTop/Dev/RockDcCtrlTop
+# Command line: vivado.exe -gui_launcher_event rodinguilauncherevent30912 E:\FPGA\RockDcCtrlTop\Dev\RockDcCtrlTop\RockDcCtrlTop.xpr
+# Log file: E:/FPGA/RockDcCtrlTop/Dev/RockDcCtrlTop/vivado.log
+# Journal file: E:/FPGA/RockDcCtrlTop/Dev/RockDcCtrlTop\vivado.jou
+#-----------------------------------------------------------
+start_gui
+open_project E:/FPGA/RockDcCtrlTop/Dev/RockDcCtrlTop/RockDcCtrlTop.xpr
+Scanning sources...
+Finished scanning sources
+INFO: [IP_Flow 19-234] Refreshing IP repositories
+INFO: [IP_Flow 19-1704] No user IP repositories specified
+INFO: [IP_Flow 19-2313] Loaded Vivado IP repository 'E:/VIVADO/Vivado/2019.1/data/ip'.
+open_project: Time (s): cpu = 00:00:10 ; elapsed = 00:00:06 . Memory (MB): peak = 850.797 ; gain = 141.422
+open_hw
+connect_hw_server
+INFO: [Labtools 27-2285] Connecting to hw_server url TCP:localhost:3121
+open_hw_target
+INFO: [Labtoolstcl 44-466] Opening hw_target localhost:3121/xilinx_tcf/Digilent/C306BC3EABCD
+ERROR: [Labtools 27-2269] No devices detected on target localhost:3121/xilinx_tcf/Digilent/C306BC3EABCD.
+Check cable connectivity and that the target board is powered up then
+use the disconnect_hw_server and connect_hw_server to re-register this hardware target.
+ERROR: [Common 17-39] 'open_hw_target' failed due to earlier errors.
+ERROR: [Labtoolstcl 44-513] HW Target shutdown. Closing target: localhost:3121/xilinx_tcf/Digilent/C306BC3EABCD
+INFO: [Labtoolstcl 44-466] Opening hw_target localhost:3121/xilinx_tcf/Digilent/C306BC3EABCD
+INFO: [Labtools 27-1435] Device xc7a50t (JTAG device index = 0) is not programmed (DONE status = 0).
+WARNING: [Labtoolstcl 44-129] No matching hw_ila_data was found.
+ERROR: [Labtoolstcl 44-513] HW Target shutdown. Closing target: localhost:3121/xilinx_tcf/Digilent/C306BC3EABCD
+INFO: [Labtoolstcl 44-466] Opening hw_target localhost:3121/xilinx_tcf/Digilent/C306BC3EABCD
+INFO: [Labtools 27-1435] Device xc7a50t (JTAG device index = 0) is not programmed (DONE status = 0).
+WARNING: [Labtoolstcl 44-129] No matching hw_ila_data was found.
+close_hw
+exit
+INFO: [Common 17-206] Exiting Vivado at Thu Jul  9 17:53:05 2026...

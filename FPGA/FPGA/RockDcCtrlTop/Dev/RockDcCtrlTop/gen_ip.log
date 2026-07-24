@@ -1,0 +1,58 @@
+#-----------------------------------------------------------
+# Vivado v2019.1 (64-bit)
+# SW Build 2552052 on Fri May 24 14:49:42 MDT 2019
+# IP Build 2548770 on Fri May 24 18:01:18 MDT 2019
+# Start of session at: Fri Jun 26 18:47:25 2026
+# Process ID: 16008
+# Current directory: E:/FPGA
+# Command line: vivado.exe -mode batch -source e:\FPGA\RockDcCtrlTop\Dev\RockDcCtrlTop\gen_ip.tcl -log e:\FPGA\RockDcCtrlTop\Dev\RockDcCtrlTop\gen_ip.log
+# Log file: e:/FPGA/RockDcCtrlTop/Dev/RockDcCtrlTop/gen_ip.log
+# Journal file: E:/FPGA\vivado.jou
+#-----------------------------------------------------------
+source {e:\FPGA\RockDcCtrlTop\Dev\RockDcCtrlTop\gen_ip.tcl}
+# open_project E:/FPGA/RockDcCtrlTop/Dev/RockDcCtrlTop/RockDcCtrlTop.xpr
+Scanning sources...
+Finished scanning sources
+INFO: [IP_Flow 19-234] Refreshing IP repositories
+INFO: [IP_Flow 19-1704] No user IP repositories specified
+INFO: [IP_Flow 19-2313] Loaded Vivado IP repository 'E:/VIVADO/Vivado/2019.1/data/ip'.
+# set ip_files [get_files -filter {FILE_TYPE =~ "IP*"}]
+# foreach ip $ip_files {
+#     puts "Generating: $ip"
+#     catch {generate_target all $ip} err
+#     if {$err != ""} {
+#         puts "WARN generate_target: $err"
+#     }
+# }
+Generating: E:/FPGA/RockDcCtrlTop/Src/Core/MigCore/MigCore.xci
+Generating: E:/FPGA/RockDcCtrlTop/Src/Core/DPRam_512x32_2048x8/DPRam_512x32_2048x8.xcix
+Generating: E:/FPGA/RockDcCtrlTop/Src/Core/DPRam_512x32_2048x8/DPRam_512x32_2048x8/DPRam_512x32_2048x8.xci
+Generating: E:/FPGA/RockDcCtrlTop/Src/Core/Sdpram8192x2_2048x8_D2/Sdpram8192x2_2048x8_D2.xcix
+Generating: E:/FPGA/RockDcCtrlTop/Src/Core/Sdpram8192x2_2048x8_D2/Sdpram8192x2_2048x8_D2/Sdpram8192x2_2048x8_D2.xci
+Generating: E:/FPGA/RockDcCtrlTop/Src/Core/Sdpram2048x8_8192x2_D2/Sdpram2048x8_8192x2_D2.xcix
+Generating: E:/FPGA/RockDcCtrlTop/Src/Core/Sdpram2048x8_8192x2_D2/Sdpram2048x8_8192x2_D2/Sdpram2048x8_8192x2_D2.xci
+Generating: E:/FPGA/RockDcCtrlTop/Src/Core/Sdpram72x32_18x128_D2/Sdpram72x32_18x128_D2.xcix
+Generating: E:/FPGA/RockDcCtrlTop/Src/Core/Sdpram72x32_18x128_D2/Sdpram72x32_18x128_D2/Sdpram72x32_18x128_D2.xci
+Generating: E:/FPGA/RockDcCtrlTop/Src/Core/Srom_2048x8_d2/Srom_2048x8_d2.xcix
+Generating: E:/FPGA/RockDcCtrlTop/Src/Core/Srom_2048x8_d2/Srom_2048x8_d2/Srom_2048x8_d2.xci
+Generating: E:/FPGA/RockDcCtrlTop/Src/Core/SysPllCore/SysPllCore.xci
+Generating: E:/FPGA/RockDcCtrlTop/Src/Core/XadcCore/XadcCore.xci
+Generating: E:/FPGA/RockDcCtrlTop/Src/Core/Fifo48x16_48x16/Fifo48x16_48x16.xci
+Generating: E:/FPGA/RockDcCtrlTop/Src/Core/Fifo16x32_16x32/Fifo16x32_16x32.xci
+Generating: E:/FPGA/RockDcCtrlTop/Src/Core/SDPRam_512x32_2048x8/SDPRam_512x32_2048x8.xci
+Generating: E:/FPGA/RockDcCtrlTop/Src/Core/SDPRam_2048x8_512x32/SDPRam_2048x8_512x32.xci
+Generating: E:/FPGA/RockDcCtrlTop/Src/Core/Sram_8192x8_2/Sram_8192x8_2.xci
+Generating: E:/FPGA/RockDcCtrlTop/Src/Core/Sram_8192x8_1/Sram_8192x8_1.xci
+Generating: E:/FPGA/RockDcCtrlTop/Src/Core/UnsigMult10x16/UnsigMult10x16.xci
+Generating: E:/FPGA/RockDcCtrlTop/Src/Core/Sram_8192x8_0/Sram_8192x8_0.xci
+Generating: E:/FPGA/RockDcCtrlTop/Src/Core/SSCPllCore/SSCPllCore.xcix
+Generating: E:/FPGA/RockDcCtrlTop/Src/Core/SSCPllCore/SSCPllCore/SSCPllCore.xci
+Generating: E:/FPGA/RockDcCtrlTop/Src/Core/DPRam_512x32_Dly1_1024x16_Dly2/DPRam_512x32_Dly1_1024x16_Dly2.xcix
+Generating: E:/FPGA/RockDcCtrlTop/Src/Core/DPRam_512x32_Dly1_1024x16_Dly2/DPRam_512x32_Dly1_1024x16_Dly2/DPRam_512x32_Dly1_1024x16_Dly2.xci
+Generating: E:/FPGA/RockDcCtrlTop/Src/Core/Sram_8192x8_3/Sram_8192x8_3.xci
+Generating: E:/FPGA/RockDcCtrlTop/Src/Core/Srom_1024x10/Srom_1024x10.xcix
+Generating: E:/FPGA/RockDcCtrlTop/Src/Core/Srom_1024x10/Srom_1024x10/Srom_1024x10.xci
+# puts "GENERATE_TARGET_DONE"
+GENERATE_TARGET_DONE
+# exit 0
+INFO: [Common 17-206] Exiting Vivado at Fri Jun 26 18:47:30 2026...

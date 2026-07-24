@@ -1,0 +1,11 @@
+.\objects\ethudp.o: ..\Src\Peripheral\src\EthUdp.c
+.\objects\ethudp.o: ..\Src\Peripheral\inc\EthUdp.h
+.\objects\ethudp.o: ..\Src\System\inc\system_CMSDK_CM0.h
+.\objects\ethudp.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+.\objects\ethudp.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+.\objects\ethudp.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdbool.h
+.\objects\ethudp.o: ..\Src\Core\CMSDK_CM0.h
+.\objects\ethudp.o: ..\Src\Core\core_cm0.h
+.\objects\ethudp.o: ..\Src\Core\core_cmInstr.h
+.\objects\ethudp.o: ..\Src\Core\core_cmFunc.h
+.\objects\ethudp.o: ..\Src\System\inc\system_CMSDK_CM0.h

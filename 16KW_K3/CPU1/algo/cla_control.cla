@@ -1,0 +1,361 @@
+/**
+  ******************************************************************************
+  * @copyright (C) COPYRIGHT  Nova
+  * @file        cla_control.cla
+  * @author      Xi'an NovaStar Tech Co.,LTD.
+  * @version     V1.0.0
+  * @date        2024-8-30
+  * @brief       CLA control task and interrupt handlers
+  ******************************************************************************
+  * @attention
+  * @relation
+
+  * @par Revision history:
+  * <table>
+  * <tr><th>Date          <th>Version   <th>Author
+  * <tr><td>2024-8-30     <td>V1.0.0    <td>jindongze
+  * </table>
+  ******************************************************************************
+  */
+#include "cla_control.h"
+
+#pragma DATA_SECTION(gstClaAdcData,"Cla1DataRam");
+CLAAdc_t gstClaAdcData;
+#pragma DATA_SECTION(gstAfpInvVol,"Cla1DataRam");
+#pragma DATA_SECTION(gstAfpInvCurrL1,"Cla1DataRam");
+AFP_FilterState_Cla_t gstAfpInvVol;
+AFP_FilterState_Cla_t gstAfpInvCurrL1;
+#pragma DATA_SECTION(gstInvVolDecoupleData,"Cla1DataRam");
+#pragma DATA_SECTION(gstInvCurrL1DecoupleData,"Cla1DataRam");
+Inv3Ph_DecoupleData_Cla_t gstInvVolDecoupleData;
+Inv3Ph_DecoupleData_Cla_t gstInvCurrL1DecoupleData;
+#pragma DATA_SECTION(gstClaInv3PhState,"Cla1DataRam");
+EN_INV3PH_STATE gstClaInv3PhState;
+#pragma DATA_SECTION(gClaRunTime,"Cla1DataRam");
+#pragma DATA_SECTION(gstClaFirstRunFlag,"Cla1DataRam");
+#pragma DATA_SECTION(gstClaPwmEnFlag,"Cla1DataRam");
+float32 gClaRunTime;
+float32 gstClaFirstRunFlag;
+float32 gstClaPwmEnFlag;
+/**
+ * @brief Set CLA debug buffer value
+ * @param buff_num Debug buffer index
+ * @param value Value to write
+ */
+void SetClaDebugData(uint16_t buff_num,float value)
+{
+    garrDebugDataCla[buff_num] = (float)value;
+}
+/**
+* @brief Clear CLA/EPWM interrupt flags
+* @param void
+* @return Nothing
+* @note Clears EPWM10 interrupt and PIE group 3 ACK
+*/
+void ClearClaInterrupt(void)
+{
+    EPwm10Regs.ETCLR.bit.INT = 1;
+    PieCtrlRegs.PIEACK.all = PIEACK_GROUP3;
+}
+
+/**
+ * @brief INV control initialization
+ */
+void InvClaCtrl_InDataUpdate(void)
+{
+    float32 single_phase_active_pwr;
+    float32 single_phase_reactive_pwr;
+    /***************************ADC数据更新(直接从ADC计算后的采样数据快速拿值)***********************************/
+    gstClaAdcData.inv_volt_phase_a = gstClaAdcResult.inv_volt_phase_a;
+    gstClaAdcData.inv_volt_phase_b = gstClaAdcResult.inv_volt_phase_b;
+    gstClaAdcData.inv_volt_phase_c = gstClaAdcResult.inv_volt_phase_c;
+
+    gstClaAdcData.inv_curr_phase_a = gstClaAdcResult.inv_curr_phase_a;
+    gstClaAdcData.inv_curr_phase_b = gstClaAdcResult.inv_curr_phase_b;
+    gstClaAdcData.inv_curr_phase_c = gstClaAdcResult.inv_curr_phase_c;
+
+    gstClaAdcData.bus_volt_neg = gstClaAdcResult.bus_volt_neg;
+    gstClaAdcData.bus_volt_pos = gstClaAdcResult.bus_volt_pos;
+
+    /**************************************从业务端进行数据获取*********************************************/
+//    gstClaInv3PhState = gstClaInvRunState;
+//    gstClaAdcData.inv_volt_phase_a = gstCpuTransforClaData.inv_vol_a;
+//    gstClaAdcData.inv_volt_phase_b = gstCpuTransforClaData.inv_vol_b;
+//    gstClaAdcData.inv_volt_phase_c = gstCpuTransforClaData.inv_vol_c;
+//
+//    gstClaAdcData.inv_curr_phase_a = gstCpuTransforClaData.inv_curr_L1_a;
+//    gstClaAdcData.inv_curr_phase_b = gstCpuTransforClaData.inv_curr_L1_b;
+//    gstClaAdcData.inv_curr_phase_c = gstCpuTransforClaData.inv_curr_L1_c;
+//
+//    gstClaAdcData.bus_volt_neg = gstCpuTransforClaData.bus_vol_neg;
+//    gstClaAdcData.bus_volt_pos = gstCpuTransforClaData.bus_vol_pos;
+
+    gInv3Ph_CalcData_Cla.bus_volt = gstClaAdcData.bus_volt_neg + gstClaAdcData.bus_volt_pos;
+    gInv3Ph_CalcData_Cla.bus_volt_neg =     gstClaAdcData.bus_volt_neg;
+    gInv3Ph_CalcData_Cla.bus_volt_pos =     gstClaAdcData.bus_volt_pos;
+    gInv3Ph_CalcData_Cla.state = gstCpuTransforClaData.ClaInv3PhState;
+    gInv3Ph_CalcData_Cla.theta = gstCpuTransforClaData.theta;
+    gInv3Ph_CalcData_Cla.volt_ref = gstCpuTransforClaData.vol_amp_ref;
+    gInv3Ph_CalcData_Cla.w = gstCpuTransforClaData.w0;
+    gstClaInv3PhState = gstCpuTransforClaData.ClaInv3PhState;
+
+    /******************************当前调试暂时不考虑防逆流分功率控制********************************/
+    single_phase_active_pwr = gstPwrCtrlInterface.inv_active_pwr / 3.0f;
+    single_phase_reactive_pwr = gstPwrCtrlInterface.inv_reactive_pwr / 3.0f;
+
+//    gInv3Ph_CalcData_Cla.pwr_pa_ref = single_phase_active_pwr;
+//    gInv3Ph_CalcData_Cla.pwr_pb_ref = single_phase_active_pwr;
+//    gInv3Ph_CalcData_Cla.pwr_pc_ref = single_phase_active_pwr;
+//
+//    gInv3Ph_CalcData_Cla.pwr_qa_ref = single_phase_reactive_pwr;
+//    gInv3Ph_CalcData_Cla.pwr_qb_ref = single_phase_reactive_pwr;
+//    gInv3Ph_CalcData_Cla.pwr_qc_ref =  single_phase_reactive_pwr;
+    gInv3Ph_CalcData_Cla.pwr_pa_ref = 0;
+    gInv3Ph_CalcData_Cla.pwr_pb_ref = 0;
+    gInv3Ph_CalcData_Cla.pwr_pc_ref = 0;
+
+    gInv3Ph_CalcData_Cla.pwr_qa_ref = 0;
+    gInv3Ph_CalcData_Cla.pwr_qb_ref = 0;
+    gInv3Ph_CalcData_Cla.pwr_qc_ref =  0;
+}
+
+/**
+ * @brief INV control initialization
+ */
+void InvClaCtrl_PosNegData(float32 theta)
+{
+
+    gstInvVolDecoupleData = Comp_3phDecouple_Run_Expanded_Cla(&gstAfpInvVol,theta,gstClaAdcData.inv_volt_phase_a,\
+                                                              gstClaAdcData.inv_volt_phase_b,gstClaAdcData.inv_volt_phase_c);
+    gInv3Ph_CalcData_Cla.vc_dp = gstInvVolDecoupleData.dp;
+    gInv3Ph_CalcData_Cla.vc_dn = gstInvVolDecoupleData.dn;
+    gInv3Ph_CalcData_Cla.vc_qp = gstInvVolDecoupleData.qp;
+    gInv3Ph_CalcData_Cla.vc_qn = gstInvVolDecoupleData.qn;
+    gstInvCurrL1DecoupleData = Comp_3phDecouple_Run_Expanded_Cla(&gstAfpInvCurrL1,theta,gstClaAdcData.inv_curr_phase_a,\
+                                                              gstClaAdcData.inv_curr_phase_b,gstClaAdcData.inv_curr_phase_c);
+    gInv3Ph_CalcData_Cla.iL1_dp = gstInvCurrL1DecoupleData.dp;
+    gInv3Ph_CalcData_Cla.iL1_dn = gstInvCurrL1DecoupleData.dn;
+    gInv3Ph_CalcData_Cla.iL1_qp = gstInvCurrL1DecoupleData.qp;
+    gInv3Ph_CalcData_Cla.iL1_qn = gstInvCurrL1DecoupleData.qn;
+
+    gInv3Ph_CalcData_Cla.vc_z = (gstClaAdcData.inv_volt_phase_a + gstClaAdcData.inv_volt_phase_b + \
+                                gstClaAdcData.inv_volt_phase_c) / 3.0f;
+}
+
+/**
+ * @brief INV control initialization
+ */
+void InvClaCtrl_Init(void)
+{
+    Inv3Ph_Calc_Cla_Init();
+    AFP_FilterState_Init_Cla(&gstAfpInvVol);
+    AFP_FilterState_Init_Cla(&gstAfpInvCurrL1);
+    gstInvVolDecoupleData.dn = 0;
+    gstInvVolDecoupleData.dp = 0;
+    gstInvVolDecoupleData.qn = 0;
+    gstInvVolDecoupleData.qp = 0;
+    gstInvVolDecoupleData.zn = 0;
+    gstInvVolDecoupleData.zp = 0;
+
+    gstInvCurrL1DecoupleData.dn = 0;
+    gstInvCurrL1DecoupleData.dp = 0;
+    gstInvCurrL1DecoupleData.qn = 0;
+    gstInvCurrL1DecoupleData.qp = 0;
+    gstInvCurrL1DecoupleData.zn = 0;
+    gstInvCurrL1DecoupleData.zp = 0;
+
+    gstClaPwmEnFlag = 0;
+}
+
+/**
+ * @brief Clear INV control loops
+ */
+void InvClaCtrl_ClearLoops(void)
+{
+    AFP_FilterState_Init_Cla(&gstAfpInvVol);
+    AFP_FilterState_Init_Cla(&gstAfpInvCurrL1);
+    gstInvVolDecoupleData.dn = 0;
+    gstInvVolDecoupleData.dp = 0;
+    gstInvVolDecoupleData.qn = 0;
+    gstInvVolDecoupleData.qp = 0;
+    gstInvVolDecoupleData.zn = 0;
+    gstInvVolDecoupleData.zp = 0;
+
+    gstInvCurrL1DecoupleData.dn = 0;
+    gstInvCurrL1DecoupleData.dp = 0;
+    gstInvCurrL1DecoupleData.qn = 0;
+    gstInvCurrL1DecoupleData.qp = 0;
+    gstInvCurrL1DecoupleData.zn = 0;
+    gstInvCurrL1DecoupleData.zp = 0;
+
+//    gInv3Ph_CalcData_Cla.duty_A = 0;
+//    gInv3Ph_CalcData_Cla.duty_B = 0;
+//    gInv3Ph_CalcData_Cla.duty_C = 0;
+//
+//    gInv3Ph_CalcData_Cla.volt_ref = 0;
+}
+
+void Inv3PhSwitchRun(void)
+{
+//    gInv3Ph_CalcData_Cla.theta += gInv3Ph_CalcData_Cla.w * gInv3Ph_CalcData_Cla.Ts;
+//    if(gInv3Ph_CalcData_Cla.theta >= M_2PI)
+//    {
+//        gInv3Ph_CalcData_Cla.theta -= M_2PI;
+//    }
+//
+    switch (gstClaInv3PhState)
+    {
+        case EN_INV3PH_STATE_IDLE:
+        {
+            InvClaCtrl_ClearLoops();
+            gstClaPwmEnFlag = 0;
+            break;
+        }
+        case EN_INV3PH_STATE_ERR:
+        {
+            InvClaCtrl_ClearLoops();
+            gstClaPwmEnFlag = 0;
+            break;
+        }
+        case EN_INV3PH_STATE_SELFCHECK:
+        {
+            gstClaPwmEnFlag = 0;
+            break;
+        }
+        case EN_INV3PH_STATE_STARTING:
+        {
+            gstClaPwmEnFlag = 1;
+            InvClaCtrl_PosNegData(gInv3Ph_CalcData_Cla.theta);
+            break;
+        }
+        case EN_INV3PH_STATE_DISCONNECTED:
+        {
+            gstClaPwmEnFlag = 1;
+            InvClaCtrl_PosNegData(gInv3Ph_CalcData_Cla.theta);
+            break;
+        }
+        case EN_INV3PH_STATE_CONNECTING:
+        {
+            gstClaPwmEnFlag = 1;
+            InvClaCtrl_PosNegData(gInv3Ph_CalcData_Cla.theta);
+            break;
+        }
+        case EN_INV3PH_STATE_CONNECTED:
+        {
+            gstClaPwmEnFlag = 1;
+            InvClaCtrl_PosNegData(gInv3Ph_CalcData_Cla.theta);
+            break;
+        }
+        case EN_INV3PH_STATE_DISCONNECTING:
+        {
+            gstClaPwmEnFlag = 1;
+            InvClaCtrl_PosNegData(gInv3Ph_CalcData_Cla.theta);
+            break;
+        }
+        default:
+
+            break;
+    }
+}
+
+void InvClaCtrl_DebugDataUpdate(void)
+{
+    SetClaDebugData(0,gstClaInv3PhState);
+    SetClaDebugData(1,gstClaAdcData.inv_volt_phase_a);
+    SetClaDebugData(2,gstClaAdcData.inv_volt_phase_b);
+    SetClaDebugData(3,gstClaAdcData.inv_volt_phase_c);
+    SetClaDebugData(4,gstClaAdcData.inv_curr_phase_a);
+    SetClaDebugData(5,gstClaAdcData.inv_curr_phase_b);
+    SetClaDebugData(6,gstClaAdcData.inv_curr_phase_c);
+
+    SetClaDebugData(7,gstClaAdcData.bus_volt_neg);
+    SetClaDebugData(8,gstClaAdcData.bus_volt_pos);
+    SetClaDebugData(9,gClaRunTime);
+    SetClaDebugData(10,gInv3Ph_CalcData_Cla.theta);
+    SetClaDebugData(11,gInv3Ph_CalcData_Cla.volt_ref);
+    SetClaDebugData(12,gInv3Ph_CalcData_Cla.w);
+    SetClaDebugData(13,gInv3Ph_CalcData_Cla.pwr_pa_ref);
+    SetClaDebugData(14,gInv3Ph_CalcData_Cla.pwr_pb_ref);
+    SetClaDebugData(15,gInv3Ph_CalcData_Cla.pwr_pc_ref);
+}
+/**
+ * @brief INV control periodic run
+ */
+void InvClaCtrl_Run(void)
+{
+    if(gstClaFirstRunFlag == 0)
+    {
+        gstClaFirstRunFlag = 1;
+        InvClaCtrl_Init();
+    }
+    //更新逆变数据
+    InvClaCtrl_InDataUpdate();
+    //逆变控制函数运行
+    Inv3PhSwitchRun();
+    //逆变代码运行
+    Inv3Ph_Calc_Cla_Run();
+    //占空比数据更新
+//    Inv3PhPwm_Update(gInv3Ph_CalcData_Cla.duty_A,gInv3Ph_CalcData_Cla.duty_B,\
+//                     gInv3Ph_CalcData_Cla.duty_C,gstClaPwmEnFlag);
+    ThreePhasePwmUpDate(gInv3Ph_CalcData_Cla.duty_A,gInv3Ph_CalcData_Cla.duty_B,\
+                        gInv3Ph_CalcData_Cla.duty_C,gstClaPwmEnFlag);
+    //Debug数据更新
+    InvClaCtrl_DebugDataUpdate();
+}
+
+/**
+* @brief CLA task entry (timing and interrupt housekeeping only)
+* @param
+* @return Nothing
+* @note Do not place real-time control algorithms here; implement them in CLA_TASK
+*/
+void CLA_Task(void)
+{
+    float32 cla_time;
+    float32 cla_time_next;
+    cla_time = ECap1Regs.TSCTR;
+    InvClaCtrl_Run();
+    cla_time_next = ECap1Regs.TSCTR;
+    if(cla_time > cla_time_next)
+    {
+        gClaRunTime = cla_time_next + (0xffffffffUL - cla_time);
+    }
+    else
+    {
+        gClaRunTime = cla_time_next - cla_time;
+    }
+    ClearClaInterrupt();
+}
+
+__attribute__((interrupt)) void Cla1Task1 (void)
+{
+    CLA_Task();
+}
+__attribute__((interrupt)) void Cla1Task2 (void)
+{
+
+}
+__attribute__((interrupt)) void Cla1Task3 (void)
+{
+
+}
+__attribute__((interrupt)) void Cla1Task4 (void)
+{
+
+}
+__attribute__((interrupt)) void Cla1Task5 (void)
+{
+
+}
+__attribute__((interrupt)) void Cla1Task6 (void)
+{
+
+}
+__attribute__((interrupt)) void Cla1Task7 (void)
+{
+
+}
+__attribute__((interrupt)) void Cla1Task8 (void)
+{
+
+}

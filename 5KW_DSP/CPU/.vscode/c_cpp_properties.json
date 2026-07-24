@@ -1,0 +1,27 @@
+{
+    "configurations": [
+        {
+            "name": "Win32",
+            "includePath": [
+                "${workspaceFolder}/**",
+                "C:/ti/ccs1250/ccs/tools/compiler/ti-cgt-c2000_22.6.1.LTS/include",
+                "C:/ti/controlSUITE/device_support/F2837xD/v210/F2837xD_headers",
+                "C:/ti/controlSUITE/device_support/F2837xD/v210/F2837xD_common",
+                "C:/ti/controlSUITE/libs/math/IQmath/v160/include",
+                "C:/ti/controlSUITE/libs/app_libs/SFRA/v1_20_00_00/Float/include",
+                "C:/ti/controlSUITE/libs/app_libs/solar/v1.2/float/include"
+            ],
+            "defines": [
+                "_DEBUG",
+                "UNICODE",
+                "_UNICODE"
+            ],
+            "windowsSdkVersion": "10.0.22000.0",
+            "compilerPath": "cl.exe",
+            "cStandard": "c17",
+            "cppStandard": "c++17",
+            "intelliSenseMode": "windows-msvc-x64"
+        }
+    ],
+    "version": 4
+}

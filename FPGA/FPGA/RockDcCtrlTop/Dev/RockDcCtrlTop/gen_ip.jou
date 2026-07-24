@@ -1,0 +1,12 @@
+#-----------------------------------------------------------
+# Vivado v2019.1 (64-bit)
+# SW Build 2552052 on Fri May 24 14:49:42 MDT 2019
+# IP Build 2548770 on Fri May 24 18:01:18 MDT 2019
+# Start of session at: Fri Jun 26 18:38:09 2026
+# Process ID: 23880
+# Current directory: E:/FPGA
+# Command line: vivado.exe -mode batch -source e:\FPGA\RockDcCtrlTop\Dev\RockDcCtrlTop\gen_ip.tcl -log e:\FPGA\RockDcCtrlTop\Dev\RockDcCtrlTop\gen_ip.log -journal e:\FPGA\RockDcCtrlTop\Dev\RockDcCtrlTop\gen_ip.jou
+# Log file: e:/FPGA/RockDcCtrlTop/Dev/RockDcCtrlTop/gen_ip.log
+# Journal file: e:\FPGA\RockDcCtrlTop\Dev\RockDcCtrlTop\gen_ip.jou
+#-----------------------------------------------------------
+source {e:\FPGA\RockDcCtrlTop\Dev\RockDcCtrlTop\gen_ip.tcl}

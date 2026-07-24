@@ -1,0 +1,208 @@
+#-----------------------------------------------------------
+# Vivado v2019.1 (64-bit)
+# SW Build 2552052 on Fri May 24 14:49:42 MDT 2019
+# IP Build 2548770 on Fri May 24 18:01:18 MDT 2019
+# Start of session at: Fri Jun 26 18:43:52 2026
+# Process ID: 30360
+# Current directory: E:/FPGA
+# Command line: vivado.exe -mode batch -source e:\FPGA\RockDcCtrlTop\Dev\RockDcCtrlTop\run_synth.tcl -log e:\FPGA\RockDcCtrlTop\Dev\RockDcCtrlTop\synth_check.log -journal e:\FPGA\RockDcCtrlTop\Dev\RockDcCtrlTop\synth_check.jou
+# Log file: e:/FPGA/RockDcCtrlTop/Dev/RockDcCtrlTop/synth_check.log
+# Journal file: e:\FPGA\RockDcCtrlTop\Dev\RockDcCtrlTop\synth_check.jou
+#-----------------------------------------------------------
+source {e:\FPGA\RockDcCtrlTop\Dev\RockDcCtrlTop\run_synth.tcl}
+# open_project E:/FPGA/RockDcCtrlTop/Dev/RockDcCtrlTop/RockDcCtrlTop.xpr
+Scanning sources...
+Finished scanning sources
+INFO: [IP_Flow 19-234] Refreshing IP repositories
+INFO: [IP_Flow 19-1704] No user IP repositories specified
+INFO: [IP_Flow 19-2313] Loaded Vivado IP repository 'E:/VIVADO/Vivado/2019.1/data/ip'.
+WARNING: [IP_Flow 19-3664] IP 'Srom_1024x10' generated file not found 'e:/FPGA/RockDcCtrlTop/Src/Core/Srom_1024x10/Srom_1024x10.dcp'. Please regenerate to continue.
+WARNING: [IP_Flow 19-3664] IP 'Srom_1024x10' generated file not found 'e:/FPGA/RockDcCtrlTop/Src/Core/Srom_1024x10/Srom_1024x10_stub.v'. Please regenerate to continue.
+WARNING: [IP_Flow 19-3664] IP 'Srom_1024x10' generated file not found 'e:/FPGA/RockDcCtrlTop/Src/Core/Srom_1024x10/Srom_1024x10_stub.vhdl'. Please regenerate to continue.
+WARNING: [IP_Flow 19-3664] IP 'Srom_1024x10' generated file not found 'e:/FPGA/RockDcCtrlTop/Src/Core/Srom_1024x10/Srom_1024x10_sim_netlist.v'. Please regenerate to continue.
+WARNING: [IP_Flow 19-3664] IP 'Srom_1024x10' generated file not found 'e:/FPGA/RockDcCtrlTop/Src/Core/Srom_1024x10/Srom_1024x10_sim_netlist.vhdl'. Please regenerate to continue.
+# set ip_files [get_files -filter {FILE_TYPE =~ "IP*"}]
+# foreach ip $ip_files {
+#     catch {generate_target all $ip}
+# }
+# set synth_runs [get_runs -filter {IS_SYNTHESIS == 1}]
+# foreach r $synth_runs {
+#     reset_run $r
+# }
+# launch_runs -jobs 4 $synth_runs
+INFO: [Vivado 12-4149] The synthesis checkpoint for IP 'E:/FPGA/RockDcCtrlTop/Src/Core/Sdpram8192x2_2048x8_D2/Sdpram8192x2_2048x8_D2/Sdpram8192x2_2048x8_D2.xci' is already up-to-date
+INFO: [Vivado 12-4149] The synthesis checkpoint for IP 'E:/FPGA/RockDcCtrlTop/Src/Core/Sdpram2048x8_8192x2_D2/Sdpram2048x8_8192x2_D2/Sdpram2048x8_8192x2_D2.xci' is already up-to-date
+INFO: [Vivado 12-4149] The synthesis checkpoint for IP 'E:/FPGA/RockDcCtrlTop/Src/Core/Sdpram72x32_18x128_D2/Sdpram72x32_18x128_D2/Sdpram72x32_18x128_D2.xci' is already up-to-date
+INFO: [Vivado 12-4149] The synthesis checkpoint for IP 'E:/FPGA/RockDcCtrlTop/Src/Core/Srom_2048x8_d2/Srom_2048x8_d2/Srom_2048x8_d2.xci' is already up-to-date
+INFO: [Vivado 12-4149] The synthesis checkpoint for IP 'E:/FPGA/RockDcCtrlTop/Src/Core/SysPllCore/SysPllCore.xci' is already up-to-date
+INFO: [Vivado 12-4149] The synthesis checkpoint for IP 'E:/FPGA/RockDcCtrlTop/Src/Core/XadcCore/XadcCore.xci' is already up-to-date
+INFO: [Vivado 12-4149] The synthesis checkpoint for IP 'E:/FPGA/RockDcCtrlTop/Src/Core/Fifo48x16_48x16/Fifo48x16_48x16.xci' is already up-to-date
+INFO: [Vivado 12-4149] The synthesis checkpoint for IP 'E:/FPGA/RockDcCtrlTop/Src/Core/Fifo16x32_16x32/Fifo16x32_16x32.xci' is already up-to-date
+INFO: [Vivado 12-4149] The synthesis checkpoint for IP 'E:/FPGA/RockDcCtrlTop/Src/Core/SDPRam_512x32_2048x8/SDPRam_512x32_2048x8.xci' is already up-to-date
+INFO: [Vivado 12-4149] The synthesis checkpoint for IP 'E:/FPGA/RockDcCtrlTop/Src/Core/SDPRam_2048x8_512x32/SDPRam_2048x8_512x32.xci' is already up-to-date
+INFO: [Vivado 12-4149] The synthesis checkpoint for IP 'E:/FPGA/RockDcCtrlTop/Src/Core/Sram_8192x8_2/Sram_8192x8_2.xci' is already up-to-date
+INFO: [Vivado 12-4149] The synthesis checkpoint for IP 'E:/FPGA/RockDcCtrlTop/Src/Core/Sram_8192x8_1/Sram_8192x8_1.xci' is already up-to-date
+INFO: [Vivado 12-4149] The synthesis checkpoint for IP 'E:/FPGA/RockDcCtrlTop/Src/Core/UnsigMult10x16/UnsigMult10x16.xci' is already up-to-date
+INFO: [Vivado 12-4149] The synthesis checkpoint for IP 'E:/FPGA/RockDcCtrlTop/Src/Core/Sram_8192x8_0/Sram_8192x8_0.xci' is already up-to-date
+INFO: [Vivado 12-4149] The synthesis checkpoint for IP 'E:/FPGA/RockDcCtrlTop/Src/Core/SSCPllCore/SSCPllCore/SSCPllCore.xci' is already up-to-date
+INFO: [Vivado 12-4149] The synthesis checkpoint for IP 'E:/FPGA/RockDcCtrlTop/Src/Core/DPRam_512x32_Dly1_1024x16_Dly2/DPRam_512x32_Dly1_1024x16_Dly2/DPRam_512x32_Dly1_1024x16_Dly2.xci' is already up-to-date
+INFO: [Vivado 12-4149] The synthesis checkpoint for IP 'E:/FPGA/RockDcCtrlTop/Src/Core/Sram_8192x8_3/Sram_8192x8_3.xci' is already up-to-date
+[Fri Jun 26 18:44:01 2026] Launched SysPllCore_synth_1, XadcCore_synth_1, Fifo48x16_48x16_synth_1, Fifo16x32_16x32_synth_1, SDPRam_512x32_2048x8_synth_1, SDPRam_2048x8_512x32_synth_1, Sram_8192x8_2_synth_1, Sram_8192x8_1_synth_1, UnsigMult10x16_synth_1, Sram_8192x8_0_synth_1, SSCPllCore_synth_1, DPRam_512x32_Dly1_1024x16_Dly2_synth_1, Sram_8192x8_3_synth_1, Srom_1024x10_synth_1...
+Run output will be captured here:
+SysPllCore_synth_1: E:/FPGA/RockDcCtrlTop/Dev/RockDcCtrlTop/RockDcCtrlTop.runs/SysPllCore_synth_1/runme.log
+XadcCore_synth_1: E:/FPGA/RockDcCtrlTop/Dev/RockDcCtrlTop/RockDcCtrlTop.runs/XadcCore_synth_1/runme.log
+Fifo48x16_48x16_synth_1: E:/FPGA/RockDcCtrlTop/Dev/RockDcCtrlTop/RockDcCtrlTop.runs/Fifo48x16_48x16_synth_1/runme.log
+Fifo16x32_16x32_synth_1: E:/FPGA/RockDcCtrlTop/Dev/RockDcCtrlTop/RockDcCtrlTop.runs/Fifo16x32_16x32_synth_1/runme.log
+SDPRam_512x32_2048x8_synth_1: E:/FPGA/RockDcCtrlTop/Dev/RockDcCtrlTop/RockDcCtrlTop.runs/SDPRam_512x32_2048x8_synth_1/runme.log
+SDPRam_2048x8_512x32_synth_1: E:/FPGA/RockDcCtrlTop/Dev/RockDcCtrlTop/RockDcCtrlTop.runs/SDPRam_2048x8_512x32_synth_1/runme.log
+Sram_8192x8_2_synth_1: E:/FPGA/RockDcCtrlTop/Dev/RockDcCtrlTop/RockDcCtrlTop.runs/Sram_8192x8_2_synth_1/runme.log
+Sram_8192x8_1_synth_1: E:/FPGA/RockDcCtrlTop/Dev/RockDcCtrlTop/RockDcCtrlTop.runs/Sram_8192x8_1_synth_1/runme.log
+UnsigMult10x16_synth_1: E:/FPGA/RockDcCtrlTop/Dev/RockDcCtrlTop/RockDcCtrlTop.runs/UnsigMult10x16_synth_1/runme.log
+Sram_8192x8_0_synth_1: E:/FPGA/RockDcCtrlTop/Dev/RockDcCtrlTop/RockDcCtrlTop.runs/Sram_8192x8_0_synth_1/runme.log
+SSCPllCore_synth_1: E:/FPGA/RockDcCtrlTop/Dev/RockDcCtrlTop/RockDcCtrlTop.runs/SSCPllCore_synth_1/runme.log
+DPRam_512x32_Dly1_1024x16_Dly2_synth_1: E:/FPGA/RockDcCtrlTop/Dev/RockDcCtrlTop/RockDcCtrlTop.runs/DPRam_512x32_Dly1_1024x16_Dly2_synth_1/runme.log
+Sram_8192x8_3_synth_1: E:/FPGA/RockDcCtrlTop/Dev/RockDcCtrlTop/RockDcCtrlTop.runs/Sram_8192x8_3_synth_1/runme.log
+Srom_1024x10_synth_1: E:/FPGA/RockDcCtrlTop/Dev/RockDcCtrlTop/RockDcCtrlTop.runs/Srom_1024x10_synth_1/runme.log
+[Fri Jun 26 18:44:01 2026] Launched synth_1, SysPllCore_synth_1, XadcCore_synth_1, Fifo48x16_48x16_synth_1, Fifo16x32_16x32_synth_1, SDPRam_512x32_2048x8_synth_1, SDPRam_2048x8_512x32_synth_1, Sram_8192x8_2_synth_1, Sram_8192x8_1_synth_1, UnsigMult10x16_synth_1, Sram_8192x8_0_synth_1, SSCPllCore_synth_1, DPRam_512x32_Dly1_1024x16_Dly2_synth_1, Sram_8192x8_3_synth_1, Srom_1024x10_synth_1...
+Run output will be captured here:
+synth_1: E:/FPGA/RockDcCtrlTop/Dev/RockDcCtrlTop/RockDcCtrlTop.runs/synth_1/runme.log
+SysPllCore_synth_1: E:/FPGA/RockDcCtrlTop/Dev/RockDcCtrlTop/RockDcCtrlTop.runs/SysPllCore_synth_1/runme.log
+XadcCore_synth_1: E:/FPGA/RockDcCtrlTop/Dev/RockDcCtrlTop/RockDcCtrlTop.runs/XadcCore_synth_1/runme.log
+Fifo48x16_48x16_synth_1: E:/FPGA/RockDcCtrlTop/Dev/RockDcCtrlTop/RockDcCtrlTop.runs/Fifo48x16_48x16_synth_1/runme.log
+Fifo16x32_16x32_synth_1: E:/FPGA/RockDcCtrlTop/Dev/RockDcCtrlTop/RockDcCtrlTop.runs/Fifo16x32_16x32_synth_1/runme.log
+SDPRam_512x32_2048x8_synth_1: E:/FPGA/RockDcCtrlTop/Dev/RockDcCtrlTop/RockDcCtrlTop.runs/SDPRam_512x32_2048x8_synth_1/runme.log
+SDPRam_2048x8_512x32_synth_1: E:/FPGA/RockDcCtrlTop/Dev/RockDcCtrlTop/RockDcCtrlTop.runs/SDPRam_2048x8_512x32_synth_1/runme.log
+Sram_8192x8_2_synth_1: E:/FPGA/RockDcCtrlTop/Dev/RockDcCtrlTop/RockDcCtrlTop.runs/Sram_8192x8_2_synth_1/runme.log
+Sram_8192x8_1_synth_1: E:/FPGA/RockDcCtrlTop/Dev/RockDcCtrlTop/RockDcCtrlTop.runs/Sram_8192x8_1_synth_1/runme.log
+UnsigMult10x16_synth_1: E:/FPGA/RockDcCtrlTop/Dev/RockDcCtrlTop/RockDcCtrlTop.runs/UnsigMult10x16_synth_1/runme.log
+Sram_8192x8_0_synth_1: E:/FPGA/RockDcCtrlTop/Dev/RockDcCtrlTop/RockDcCtrlTop.runs/Sram_8192x8_0_synth_1/runme.log
+SSCPllCore_synth_1: E:/FPGA/RockDcCtrlTop/Dev/RockDcCtrlTop/RockDcCtrlTop.runs/SSCPllCore_synth_1/runme.log
+DPRam_512x32_Dly1_1024x16_Dly2_synth_1: E:/FPGA/RockDcCtrlTop/Dev/RockDcCtrlTop/RockDcCtrlTop.runs/DPRam_512x32_Dly1_1024x16_Dly2_synth_1/runme.log
+Sram_8192x8_3_synth_1: E:/FPGA/RockDcCtrlTop/Dev/RockDcCtrlTop/RockDcCtrlTop.runs/Sram_8192x8_3_synth_1/runme.log
+Srom_1024x10_synth_1: E:/FPGA/RockDcCtrlTop/Dev/RockDcCtrlTop/RockDcCtrlTop.runs/Srom_1024x10_synth_1/runme.log
+# foreach r $synth_runs {
+#     wait_on_run $r
+# }
+[Fri Jun 26 18:44:01 2026] Waiting for synth_1 to finish...
+[Fri Jun 26 18:44:33 2026] synth_1 finished
+wait_on_run: Time (s): cpu = 00:00:01 ; elapsed = 00:00:31 . Memory (MB): peak = 349.027 ; gain = 0.000
+[Fri Jun 26 18:44:33 2026] Waiting for SysPllCore_synth_1 to finish...
+
+*** Running vivado
+    with args -log SysPllCore.vds -m64 -product Vivado -mode batch -messageDb vivado.pb -notrace -source SysPllCore.tcl
+
+[Fri Jun 26 18:44:33 2026] SysPllCore_synth_1 finished
+[Fri Jun 26 18:44:33 2026] Waiting for XadcCore_synth_1 to finish...
+
+*** Running vivado
+    with args -log XadcCore.vds -m64 -product Vivado -mode batch -messageDb vivado.pb -notrace -source XadcCore.tcl
+
+[Fri Jun 26 18:44:33 2026] XadcCore_synth_1 finished
+[Fri Jun 26 18:44:33 2026] Waiting for Fifo48x16_48x16_synth_1 to finish...
+
+*** Running vivado
+    with args -log Fifo48x16_48x16.vds -m64 -product Vivado -mode batch -messageDb vivado.pb -notrace -source Fifo48x16_48x16.tcl
+
+[Fri Jun 26 18:44:33 2026] Fifo48x16_48x16_synth_1 finished
+[Fri Jun 26 18:44:33 2026] Waiting for Fifo16x32_16x32_synth_1 to finish...
+
+*** Running vivado
+    with args -log Fifo16x32_16x32.vds -m64 -product Vivado -mode batch -messageDb vivado.pb -notrace -source Fifo16x32_16x32.tcl
+
+[Fri Jun 26 18:44:33 2026] Fifo16x32_16x32_synth_1 finished
+[Fri Jun 26 18:44:33 2026] Waiting for SDPRam_512x32_2048x8_synth_1 to finish...
+
+*** Running vivado
+    with args -log SDPRam_512x32_2048x8.vds -m64 -product Vivado -mode batch -messageDb vivado.pb -notrace -source SDPRam_512x32_2048x8.tcl
+
+[Fri Jun 26 18:44:33 2026] SDPRam_512x32_2048x8_synth_1 finished
+[Fri Jun 26 18:44:33 2026] Waiting for SDPRam_2048x8_512x32_synth_1 to finish...
+
+*** Running vivado
+    with args -log SDPRam_2048x8_512x32.vds -m64 -product Vivado -mode batch -messageDb vivado.pb -notrace -source SDPRam_2048x8_512x32.tcl
+
+[Fri Jun 26 18:44:33 2026] SDPRam_2048x8_512x32_synth_1 finished
+[Fri Jun 26 18:44:33 2026] Waiting for Sram_8192x8_2_synth_1 to finish...
+
+*** Running vivado
+    with args -log Sram_8192x8_2.vds -m64 -product Vivado -mode batch -messageDb vivado.pb -notrace -source Sram_8192x8_2.tcl
+
+[Fri Jun 26 18:44:33 2026] Sram_8192x8_2_synth_1 finished
+[Fri Jun 26 18:44:33 2026] Waiting for Sram_8192x8_1_synth_1 to finish...
+
+*** Running vivado
+    with args -log Sram_8192x8_1.vds -m64 -product Vivado -mode batch -messageDb vivado.pb -notrace -source Sram_8192x8_1.tcl
+
+[Fri Jun 26 18:44:33 2026] Sram_8192x8_1_synth_1 finished
+[Fri Jun 26 18:44:33 2026] Waiting for UnsigMult10x16_synth_1 to finish...
+
+*** Running vivado
+    with args -log UnsigMult10x16.vds -m64 -product Vivado -mode batch -messageDb vivado.pb -notrace -source UnsigMult10x16.tcl
+
+
+****** Vivado v2019.1 (64-bit)
+  **** SW Build 2552052 on Fri May 24 14:49:42 MDT 2019
+  **** IP Build 2548770 on Fri May 24 18:01:18 MDT 2019
+    ** Copyright 1986-2019 Xilinx, Inc. All Rights Reserved.
+
+source UnsigMult10x16.tcl -notrace
+INFO: [IP_Flow 19-4838] Using cached IP synthesis design for IP UnsigMult10x16, cache-ID = 713ccfeb291c0513.
+INFO: [Common 17-206] Exiting Vivado at Fri Jun 26 18:44:23 2026...
+[Fri Jun 26 18:44:33 2026] UnsigMult10x16_synth_1 finished
+[Fri Jun 26 18:44:33 2026] Waiting for Sram_8192x8_0_synth_1 to finish...
+
+*** Running vivado
+    with args -log Sram_8192x8_0.vds -m64 -product Vivado -mode batch -messageDb vivado.pb -notrace -source Sram_8192x8_0.tcl
+
+[Fri Jun 26 18:44:33 2026] Sram_8192x8_0_synth_1 finished
+[Fri Jun 26 18:44:33 2026] Waiting for SSCPllCore_synth_1 to finish...
+
+*** Running vivado
+    with args -log SSCPllCore.vds -m64 -product Vivado -mode batch -messageDb vivado.pb -notrace -source SSCPllCore.tcl
+
+[Fri Jun 26 18:44:33 2026] SSCPllCore_synth_1 finished
+[Fri Jun 26 18:44:33 2026] Waiting for DPRam_512x32_Dly1_1024x16_Dly2_synth_1 to finish...
+
+*** Running vivado
+    with args -log DPRam_512x32_Dly1_1024x16_Dly2.vds -m64 -product Vivado -mode batch -messageDb vivado.pb -notrace -source DPRam_512x32_Dly1_1024x16_Dly2.tcl
+
+[Fri Jun 26 18:44:33 2026] DPRam_512x32_Dly1_1024x16_Dly2_synth_1 finished
+[Fri Jun 26 18:44:33 2026] Waiting for Sram_8192x8_3_synth_1 to finish...
+
+*** Running vivado
+    with args -log Sram_8192x8_3.vds -m64 -product Vivado -mode batch -messageDb vivado.pb -notrace -source Sram_8192x8_3.tcl
+
+[Fri Jun 26 18:44:33 2026] Sram_8192x8_3_synth_1 finished
+[Fri Jun 26 18:44:33 2026] Waiting for Srom_1024x10_synth_1 to finish...
+
+*** Running vivado
+    with args -log Srom_1024x10.vds -m64 -product Vivado -mode batch -messageDb vivado.pb -notrace -source Srom_1024x10.tcl
+
+[Fri Jun 26 18:44:33 2026] Srom_1024x10_synth_1 finished
+# set failed 0
+# foreach r $synth_runs {
+#     set status [get_property STATUS $r]
+#     puts "RUN $r STATUS: $status"
+#     if {$status != "synth_design Complete!"} {
+#         set failed 1
+#     }
+# }
+RUN synth_1 STATUS: Scripts Generated
+RUN SysPllCore_synth_1 STATUS: synth_design Complete!
+RUN XadcCore_synth_1 STATUS: synth_design Complete!
+RUN Fifo48x16_48x16_synth_1 STATUS: synth_design Complete!
+RUN Fifo16x32_16x32_synth_1 STATUS: synth_design Complete!
+RUN SDPRam_512x32_2048x8_synth_1 STATUS: synth_design Complete!
+RUN SDPRam_2048x8_512x32_synth_1 STATUS: synth_design Complete!
+RUN Sram_8192x8_2_synth_1 STATUS: synth_design Complete!
+RUN Sram_8192x8_1_synth_1 STATUS: synth_design Complete!
+RUN UnsigMult10x16_synth_1 STATUS: synth_design Complete!
+RUN Sram_8192x8_0_synth_1 STATUS: synth_design Complete!
+RUN SSCPllCore_synth_1 STATUS: synth_design Complete!
+RUN DPRam_512x32_Dly1_1024x16_Dly2_synth_1 STATUS: synth_design Complete!
+RUN Sram_8192x8_3_synth_1 STATUS: synth_design Complete!
+RUN Srom_1024x10_synth_1 STATUS: synth_design ERROR
+# if {$failed} {
+#     exit 1
+# }
+INFO: [Common 17-206] Exiting Vivado at Fri Jun 26 18:44:33 2026...

@@ -1,0 +1,177 @@
+/**
+  ******************************************************************************
+  * @copyright (C) COPYRIGHT  Nova
+  * @file        timer.h
+  * @author      Xi'an NovaStar Tech Co.,LTD.
+  * @version     V1.0.0
+  * @date        2022-10-31
+  * @brief       GD32F30x
+  ******************************************************************************
+  * @attention
+  * @relation
+  
+  * @par :
+  * <table>
+  * <tr><th>Date          <th>Version   <th>Author      <th>Description
+  * <tr><td>2022-10-31    <td>V1.0.0    <td>           <td>InitialVersion
+  * </table>
+  ******************************************************************************
+  */
+#ifndef __TIMER_H_
+#define __TIMER_H_
+
+
+#include "gd32f30x_timer.h"
+#include "stdlib.h"
+#include "stdbool.h"
+#include "drv_opt.h"
+
+typedef enum
+{
+#if USE_TIMER0
+    TIMER0_PERI,
+#endif
+#if USE_TIMER1
+    TIMER1_PERI,
+#endif
+#if USE_TIMER2
+    TIMER2_PERI,
+#endif
+#if USE_TIMER3
+    TIMER3_PERI,
+#endif
+#if USE_TIMER4
+    TIMER4_PERI,
+#endif
+#if USE_TIMER5
+    TIMER5_PERI,
+#endif
+#if USE_TIMER6
+    TIMER6_PERI,
+#endif
+#if USE_TIMER7
+    TIMER7_PERI,
+#endif
+#if USE_TIMER8
+    TIMER8_PERI,
+#endif
+#if USE_TIMER9
+    TIMER9_PERI,
+#endif
+#if USE_TIMER10
+    TIMER10_PERI,
+#endif
+#if USE_TIMER11
+    TIMER11_PERI,
+#endif
+#if USE_TIMER12
+    TIMER12_PERI,
+#endif
+#if USE_TIMER13
+    TIMER13_PERI,
+#endif
+    TIMER_NUM
+} EN_TIMERx_PERI;
+
+#define TIMER_CHANNEL_NUM   4
+
+typedef struct _timer_config_channel_stru_t
+{
+    bool                    enable;
+    uint8_t                 chl_num;
+    uint8_t                 ic_or_oc;/*0表示IC，1表示OC*/
+    uint32_t                timer_ch_gpiox;
+    uint32_t                timer_ch_gpio_pinx;
+    uint8_t                 alt_rmp_mode;/*2:Alternate, 3:Remap*/
+    uint32_t                alt_rmp_function;/*alt_rmp_mode=3时表示remap function, alt_rmp_mode为其他值，该字段无意义*/
+    
+    bool                    complementary_enable;
+    uint32_t                timer_ch_on_gpiox;
+    uint32_t                timer_ch_on_gpio_pinx;
+    uint8_t                 comp_alt_rmp_mode;/*2:Alternate, 3:Remap*/
+    uint32_t                comp_alt_rmp_function;/*alt_rmp_mode=3时表示remap function, alt_rmp_mode为其他值，该字段无意义*/
+    
+
+    uint16_t                outputstate;
+    uint16_t                outputnstate;
+    uint16_t                ocpolarity;
+    uint16_t                ocnpolarity;
+    uint16_t                ocidlestate;
+    uint16_t                ocnidlestate;
+    uint16_t                oc_mode;
+    uint16_t                oc_duty;
+
+    uint16_t                icpolarity;
+    uint16_t                icselection;
+    uint16_t                icprescaler;
+    uint16_t                icfilter;
+} Timer_Config_Channel;
+
+
+typedef struct _timer_config_stru_t
+{
+    Timer_Config_Channel    channel_config[TIMER_CHANNEL_NUM];
+	uint8_t                 alt_rmp_mode;/*1:Alternate1, 2:Alternate2(GD32F30x不存在), 3:Remap*/
+    uint32_t                alt_rmp_function;/*alt_rmp_mode=1时表示afio_function， alt_rmp_mode=3时表示remap function, alt_rmp_mode为其他值，该字段无意义*/
+	
+    rcu_periph_enum         rcu_timer;
+    uint32_t                timer_peri;
+
+    uint16_t                prescaler;
+    uint16_t                alignedmode;
+    uint16_t                counterdirection;
+    uint16_t                clockdivision;
+    uint32_t                period;
+    uint8_t                 repetitioncounter;
+
+    bool                    quadrature_decoder_mode_enable;
+	bool                    dual_pwm_cap_mode;//双通道捕获PWM信息模式，该模式对应的定时器硬件必须选择通道0或1，选择通道0，则通道1自动配置，且通道1不可做别的功能使用
+    
+    bool                    break_enable;
+    uint32_t                timer_brkin_gpiox;
+    uint32_t                timer_brkin_gpio_pinx;
+    uint8_t                 brkin_alt_rmp_mode;/*2:Alternate, 3:Remap*/
+    uint32_t                brkin_alt_rmp_function;/*alt_rmp_mode=3时表示remap function, alt_rmp_mode为其他值，该字段无意义*/
+    
+    uint8_t                 dead_time;
+    uint16_t                breakpolarity;
+    
+
+    bool                    en_irq;
+    uint32_t                nvic_irq;
+    uint8_t                 irq_prio;
+    uint8_t                 irq_sub_prio;
+    uint8_t                 irq_type;
+
+} Timer_Config;
+
+
+typedef struct _timer_handle_stru_t
+{
+    EN_TIMERx_PERI          timerx;
+    Timer_Config            *timer_cfg;
+
+    uint8_t                 current_chl;
+    uint32_t                current_cnt;/*读写均用*/
+    uint32_t                oc_pwm_duty;
+	
+	uint32_t                pwm_capture_freq[TIMER_CHANNEL_NUM];  //
+    float                   pwm_capture_duty[TIMER_CHANNEL_NUM];   //0~100,针对高电平占比
+
+    void                    (*irq_process)();
+} Timer_HandleType;
+
+#define TIMER_INT_FLAG(int)     int
+
+
+void TimerInit(Timer_HandleType *pHandle);
+void TimerClkInit(void);
+void TimerCntSet(Timer_HandleType *pHandle);
+uint32_t TimPeriodDefaultGet(Timer_HandleType *pHandle);
+//void TimerPWMDutySet(Timer_HandleType *pHandle);
+void TimerPWMDutySet(Timer_HandleType *pHandle, uint16_t duty_particle);
+void TimerIrqProcess(Timer_HandleType *pHandle);
+
+void TimerNoCapEventDetect(Timer_HandleType *pHandle);
+void TimerIrqProcess(Timer_HandleType *pHandle);
+#endif

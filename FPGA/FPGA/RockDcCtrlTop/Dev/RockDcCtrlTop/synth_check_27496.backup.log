@@ -1,0 +1,543 @@
+#-----------------------------------------------------------
+# Vivado v2019.1 (64-bit)
+# SW Build 2552052 on Fri May 24 14:49:42 MDT 2019
+# IP Build 2548770 on Fri May 24 18:01:18 MDT 2019
+# Start of session at: Fri Jun 26 18:47:43 2026
+# Process ID: 27496
+# Current directory: E:/FPGA
+# Command line: vivado.exe -mode batch -source e:\FPGA\RockDcCtrlTop\Dev\RockDcCtrlTop\run_synth.tcl -log e:\FPGA\RockDcCtrlTop\Dev\RockDcCtrlTop\synth_check.log -journal e:\FPGA\RockDcCtrlTop\Dev\RockDcCtrlTop\synth_check.jou
+# Log file: e:/FPGA/RockDcCtrlTop/Dev/RockDcCtrlTop/synth_check.log
+# Journal file: e:\FPGA\RockDcCtrlTop\Dev\RockDcCtrlTop\synth_check.jou
+#-----------------------------------------------------------
+source {e:\FPGA\RockDcCtrlTop\Dev\RockDcCtrlTop\run_synth.tcl}
+# open_project E:/FPGA/RockDcCtrlTop/Dev/RockDcCtrlTop/RockDcCtrlTop.xpr
+Scanning sources...
+Finished scanning sources
+INFO: [IP_Flow 19-234] Refreshing IP repositories
+INFO: [IP_Flow 19-1704] No user IP repositories specified
+INFO: [IP_Flow 19-2313] Loaded Vivado IP repository 'E:/VIVADO/Vivado/2019.1/data/ip'.
+# set ip_files [get_files -filter {FILE_TYPE =~ "IP*"}]
+# foreach ip $ip_files {
+#     catch {generate_target all $ip}
+# }
+# set synth_runs [get_runs -filter {IS_SYNTHESIS == 1}]
+# foreach r $synth_runs {
+#     reset_run $r
+# }
+# launch_runs -jobs 4 $synth_runs
+INFO: [Vivado 12-4149] The synthesis checkpoint for IP 'E:/FPGA/RockDcCtrlTop/Src/Core/Sdpram8192x2_2048x8_D2/Sdpram8192x2_2048x8_D2/Sdpram8192x2_2048x8_D2.xci' is already up-to-date
+INFO: [Vivado 12-4149] The synthesis checkpoint for IP 'E:/FPGA/RockDcCtrlTop/Src/Core/Sdpram2048x8_8192x2_D2/Sdpram2048x8_8192x2_D2/Sdpram2048x8_8192x2_D2.xci' is already up-to-date
+INFO: [Vivado 12-4149] The synthesis checkpoint for IP 'E:/FPGA/RockDcCtrlTop/Src/Core/Sdpram72x32_18x128_D2/Sdpram72x32_18x128_D2/Sdpram72x32_18x128_D2.xci' is already up-to-date
+INFO: [Vivado 12-4149] The synthesis checkpoint for IP 'E:/FPGA/RockDcCtrlTop/Src/Core/Srom_2048x8_d2/Srom_2048x8_d2/Srom_2048x8_d2.xci' is already up-to-date
+INFO: [Vivado 12-4149] The synthesis checkpoint for IP 'E:/FPGA/RockDcCtrlTop/Src/Core/SysPllCore/SysPllCore.xci' is already up-to-date
+INFO: [Vivado 12-4149] The synthesis checkpoint for IP 'E:/FPGA/RockDcCtrlTop/Src/Core/XadcCore/XadcCore.xci' is already up-to-date
+INFO: [Vivado 12-4149] The synthesis checkpoint for IP 'E:/FPGA/RockDcCtrlTop/Src/Core/Fifo48x16_48x16/Fifo48x16_48x16.xci' is already up-to-date
+INFO: [Vivado 12-4149] The synthesis checkpoint for IP 'E:/FPGA/RockDcCtrlTop/Src/Core/Fifo16x32_16x32/Fifo16x32_16x32.xci' is already up-to-date
+INFO: [Vivado 12-4149] The synthesis checkpoint for IP 'E:/FPGA/RockDcCtrlTop/Src/Core/SDPRam_512x32_2048x8/SDPRam_512x32_2048x8.xci' is already up-to-date
+INFO: [Vivado 12-4149] The synthesis checkpoint for IP 'E:/FPGA/RockDcCtrlTop/Src/Core/SDPRam_2048x8_512x32/SDPRam_2048x8_512x32.xci' is already up-to-date
+INFO: [Vivado 12-4149] The synthesis checkpoint for IP 'E:/FPGA/RockDcCtrlTop/Src/Core/Sram_8192x8_2/Sram_8192x8_2.xci' is already up-to-date
+INFO: [Vivado 12-4149] The synthesis checkpoint for IP 'E:/FPGA/RockDcCtrlTop/Src/Core/Sram_8192x8_1/Sram_8192x8_1.xci' is already up-to-date
+INFO: [Vivado 12-4149] The synthesis checkpoint for IP 'E:/FPGA/RockDcCtrlTop/Src/Core/UnsigMult10x16/UnsigMult10x16.xci' is already up-to-date
+INFO: [Vivado 12-4149] The synthesis checkpoint for IP 'E:/FPGA/RockDcCtrlTop/Src/Core/Sram_8192x8_0/Sram_8192x8_0.xci' is already up-to-date
+INFO: [Vivado 12-4149] The synthesis checkpoint for IP 'E:/FPGA/RockDcCtrlTop/Src/Core/SSCPllCore/SSCPllCore/SSCPllCore.xci' is already up-to-date
+INFO: [Vivado 12-4149] The synthesis checkpoint for IP 'E:/FPGA/RockDcCtrlTop/Src/Core/DPRam_512x32_Dly1_1024x16_Dly2/DPRam_512x32_Dly1_1024x16_Dly2/DPRam_512x32_Dly1_1024x16_Dly2.xci' is already up-to-date
+INFO: [Vivado 12-4149] The synthesis checkpoint for IP 'E:/FPGA/RockDcCtrlTop/Src/Core/Sram_8192x8_3/Sram_8192x8_3.xci' is already up-to-date
+[Fri Jun 26 18:47:53 2026] Launched SysPllCore_synth_1, XadcCore_synth_1, Fifo48x16_48x16_synth_1, Fifo16x32_16x32_synth_1, SDPRam_512x32_2048x8_synth_1, SDPRam_2048x8_512x32_synth_1, Sram_8192x8_2_synth_1, Sram_8192x8_1_synth_1, UnsigMult10x16_synth_1, Sram_8192x8_0_synth_1, SSCPllCore_synth_1, DPRam_512x32_Dly1_1024x16_Dly2_synth_1, Sram_8192x8_3_synth_1, Srom_1024x10_synth_1...
+Run output will be captured here:
+SysPllCore_synth_1: E:/FPGA/RockDcCtrlTop/Dev/RockDcCtrlTop/RockDcCtrlTop.runs/SysPllCore_synth_1/runme.log
+XadcCore_synth_1: E:/FPGA/RockDcCtrlTop/Dev/RockDcCtrlTop/RockDcCtrlTop.runs/XadcCore_synth_1/runme.log
+Fifo48x16_48x16_synth_1: E:/FPGA/RockDcCtrlTop/Dev/RockDcCtrlTop/RockDcCtrlTop.runs/Fifo48x16_48x16_synth_1/runme.log
+Fifo16x32_16x32_synth_1: E:/FPGA/RockDcCtrlTop/Dev/RockDcCtrlTop/RockDcCtrlTop.runs/Fifo16x32_16x32_synth_1/runme.log
+SDPRam_512x32_2048x8_synth_1: E:/FPGA/RockDcCtrlTop/Dev/RockDcCtrlTop/RockDcCtrlTop.runs/SDPRam_512x32_2048x8_synth_1/runme.log
+SDPRam_2048x8_512x32_synth_1: E:/FPGA/RockDcCtrlTop/Dev/RockDcCtrlTop/RockDcCtrlTop.runs/SDPRam_2048x8_512x32_synth_1/runme.log
+Sram_8192x8_2_synth_1: E:/FPGA/RockDcCtrlTop/Dev/RockDcCtrlTop/RockDcCtrlTop.runs/Sram_8192x8_2_synth_1/runme.log
+Sram_8192x8_1_synth_1: E:/FPGA/RockDcCtrlTop/Dev/RockDcCtrlTop/RockDcCtrlTop.runs/Sram_8192x8_1_synth_1/runme.log
+UnsigMult10x16_synth_1: E:/FPGA/RockDcCtrlTop/Dev/RockDcCtrlTop/RockDcCtrlTop.runs/UnsigMult10x16_synth_1/runme.log
+Sram_8192x8_0_synth_1: E:/FPGA/RockDcCtrlTop/Dev/RockDcCtrlTop/RockDcCtrlTop.runs/Sram_8192x8_0_synth_1/runme.log
+SSCPllCore_synth_1: E:/FPGA/RockDcCtrlTop/Dev/RockDcCtrlTop/RockDcCtrlTop.runs/SSCPllCore_synth_1/runme.log
+DPRam_512x32_Dly1_1024x16_Dly2_synth_1: E:/FPGA/RockDcCtrlTop/Dev/RockDcCtrlTop/RockDcCtrlTop.runs/DPRam_512x32_Dly1_1024x16_Dly2_synth_1/runme.log
+Sram_8192x8_3_synth_1: E:/FPGA/RockDcCtrlTop/Dev/RockDcCtrlTop/RockDcCtrlTop.runs/Sram_8192x8_3_synth_1/runme.log
+Srom_1024x10_synth_1: E:/FPGA/RockDcCtrlTop/Dev/RockDcCtrlTop/RockDcCtrlTop.runs/Srom_1024x10_synth_1/runme.log
+[Fri Jun 26 18:47:53 2026] Launched synth_1, SysPllCore_synth_1, XadcCore_synth_1, Fifo48x16_48x16_synth_1, Fifo16x32_16x32_synth_1, SDPRam_512x32_2048x8_synth_1, SDPRam_2048x8_512x32_synth_1, Sram_8192x8_2_synth_1, Sram_8192x8_1_synth_1, UnsigMult10x16_synth_1, Sram_8192x8_0_synth_1, SSCPllCore_synth_1, DPRam_512x32_Dly1_1024x16_Dly2_synth_1, Sram_8192x8_3_synth_1, Srom_1024x10_synth_1...
+Run output will be captured here:
+synth_1: E:/FPGA/RockDcCtrlTop/Dev/RockDcCtrlTop/RockDcCtrlTop.runs/synth_1/runme.log
+SysPllCore_synth_1: E:/FPGA/RockDcCtrlTop/Dev/RockDcCtrlTop/RockDcCtrlTop.runs/SysPllCore_synth_1/runme.log
+XadcCore_synth_1: E:/FPGA/RockDcCtrlTop/Dev/RockDcCtrlTop/RockDcCtrlTop.runs/XadcCore_synth_1/runme.log
+Fifo48x16_48x16_synth_1: E:/FPGA/RockDcCtrlTop/Dev/RockDcCtrlTop/RockDcCtrlTop.runs/Fifo48x16_48x16_synth_1/runme.log
+Fifo16x32_16x32_synth_1: E:/FPGA/RockDcCtrlTop/Dev/RockDcCtrlTop/RockDcCtrlTop.runs/Fifo16x32_16x32_synth_1/runme.log
+SDPRam_512x32_2048x8_synth_1: E:/FPGA/RockDcCtrlTop/Dev/RockDcCtrlTop/RockDcCtrlTop.runs/SDPRam_512x32_2048x8_synth_1/runme.log
+SDPRam_2048x8_512x32_synth_1: E:/FPGA/RockDcCtrlTop/Dev/RockDcCtrlTop/RockDcCtrlTop.runs/SDPRam_2048x8_512x32_synth_1/runme.log
+Sram_8192x8_2_synth_1: E:/FPGA/RockDcCtrlTop/Dev/RockDcCtrlTop/RockDcCtrlTop.runs/Sram_8192x8_2_synth_1/runme.log
+Sram_8192x8_1_synth_1: E:/FPGA/RockDcCtrlTop/Dev/RockDcCtrlTop/RockDcCtrlTop.runs/Sram_8192x8_1_synth_1/runme.log
+UnsigMult10x16_synth_1: E:/FPGA/RockDcCtrlTop/Dev/RockDcCtrlTop/RockDcCtrlTop.runs/UnsigMult10x16_synth_1/runme.log
+Sram_8192x8_0_synth_1: E:/FPGA/RockDcCtrlTop/Dev/RockDcCtrlTop/RockDcCtrlTop.runs/Sram_8192x8_0_synth_1/runme.log
+SSCPllCore_synth_1: E:/FPGA/RockDcCtrlTop/Dev/RockDcCtrlTop/RockDcCtrlTop.runs/SSCPllCore_synth_1/runme.log
+DPRam_512x32_Dly1_1024x16_Dly2_synth_1: E:/FPGA/RockDcCtrlTop/Dev/RockDcCtrlTop/RockDcCtrlTop.runs/DPRam_512x32_Dly1_1024x16_Dly2_synth_1/runme.log
+Sram_8192x8_3_synth_1: E:/FPGA/RockDcCtrlTop/Dev/RockDcCtrlTop/RockDcCtrlTop.runs/Sram_8192x8_3_synth_1/runme.log
+Srom_1024x10_synth_1: E:/FPGA/RockDcCtrlTop/Dev/RockDcCtrlTop/RockDcCtrlTop.runs/Srom_1024x10_synth_1/runme.log
+# foreach r $synth_runs {
+#     wait_on_run $r
+# }
+[Fri Jun 26 18:47:53 2026] Waiting for synth_1 to finish...
+[Fri Jun 26 18:48:39 2026] synth_1 finished
+wait_on_run: Time (s): cpu = 00:00:00 ; elapsed = 00:00:46 . Memory (MB): peak = 349.793 ; gain = 0.000
+[Fri Jun 26 18:48:39 2026] Waiting for SysPllCore_synth_1 to finish...
+
+*** Running vivado
+    with args -log SysPllCore.vds -m64 -product Vivado -mode batch -messageDb vivado.pb -notrace -source SysPllCore.tcl
+
+[Fri Jun 26 18:48:39 2026] SysPllCore_synth_1 finished
+[Fri Jun 26 18:48:39 2026] Waiting for XadcCore_synth_1 to finish...
+
+*** Running vivado
+    with args -log XadcCore.vds -m64 -product Vivado -mode batch -messageDb vivado.pb -notrace -source XadcCore.tcl
+
+[Fri Jun 26 18:48:39 2026] XadcCore_synth_1 finished
+[Fri Jun 26 18:48:39 2026] Waiting for Fifo48x16_48x16_synth_1 to finish...
+
+*** Running vivado
+    with args -log Fifo48x16_48x16.vds -m64 -product Vivado -mode batch -messageDb vivado.pb -notrace -source Fifo48x16_48x16.tcl
+
+[Fri Jun 26 18:48:39 2026] Fifo48x16_48x16_synth_1 finished
+[Fri Jun 26 18:48:39 2026] Waiting for Fifo16x32_16x32_synth_1 to finish...
+
+*** Running vivado
+    with args -log Fifo16x32_16x32.vds -m64 -product Vivado -mode batch -messageDb vivado.pb -notrace -source Fifo16x32_16x32.tcl
+
+[Fri Jun 26 18:48:39 2026] Fifo16x32_16x32_synth_1 finished
+[Fri Jun 26 18:48:39 2026] Waiting for SDPRam_512x32_2048x8_synth_1 to finish...
+
+*** Running vivado
+    with args -log SDPRam_512x32_2048x8.vds -m64 -product Vivado -mode batch -messageDb vivado.pb -notrace -source SDPRam_512x32_2048x8.tcl
+
+[Fri Jun 26 18:48:39 2026] SDPRam_512x32_2048x8_synth_1 finished
+[Fri Jun 26 18:48:39 2026] Waiting for SDPRam_2048x8_512x32_synth_1 to finish...
+
+*** Running vivado
+    with args -log SDPRam_2048x8_512x32.vds -m64 -product Vivado -mode batch -messageDb vivado.pb -notrace -source SDPRam_2048x8_512x32.tcl
+
+[Fri Jun 26 18:48:39 2026] SDPRam_2048x8_512x32_synth_1 finished
+[Fri Jun 26 18:48:39 2026] Waiting for Sram_8192x8_2_synth_1 to finish...
+
+*** Running vivado
+    with args -log Sram_8192x8_2.vds -m64 -product Vivado -mode batch -messageDb vivado.pb -notrace -source Sram_8192x8_2.tcl
+
+[Fri Jun 26 18:48:39 2026] Sram_8192x8_2_synth_1 finished
+[Fri Jun 26 18:48:39 2026] Waiting for Sram_8192x8_1_synth_1 to finish...
+
+*** Running vivado
+    with args -log Sram_8192x8_1.vds -m64 -product Vivado -mode batch -messageDb vivado.pb -notrace -source Sram_8192x8_1.tcl
+
+[Fri Jun 26 18:48:39 2026] Sram_8192x8_1_synth_1 finished
+[Fri Jun 26 18:48:39 2026] Waiting for UnsigMult10x16_synth_1 to finish...
+
+*** Running vivado
+    with args -log UnsigMult10x16.vds -m64 -product Vivado -mode batch -messageDb vivado.pb -notrace -source UnsigMult10x16.tcl
+
+
+****** Vivado v2019.1 (64-bit)
+  **** SW Build 2552052 on Fri May 24 14:49:42 MDT 2019
+  **** IP Build 2548770 on Fri May 24 18:01:18 MDT 2019
+    ** Copyright 1986-2019 Xilinx, Inc. All Rights Reserved.
+
+source UnsigMult10x16.tcl -notrace
+INFO: [IP_Flow 19-4838] Using cached IP synthesis design for IP UnsigMult10x16, cache-ID = 713ccfeb291c0513.
+INFO: [Common 17-206] Exiting Vivado at Fri Jun 26 18:48:14 2026...
+[Fri Jun 26 18:48:39 2026] UnsigMult10x16_synth_1 finished
+[Fri Jun 26 18:48:39 2026] Waiting for Sram_8192x8_0_synth_1 to finish...
+
+*** Running vivado
+    with args -log Sram_8192x8_0.vds -m64 -product Vivado -mode batch -messageDb vivado.pb -notrace -source Sram_8192x8_0.tcl
+
+[Fri Jun 26 18:48:39 2026] Sram_8192x8_0_synth_1 finished
+[Fri Jun 26 18:48:39 2026] Waiting for SSCPllCore_synth_1 to finish...
+
+*** Running vivado
+    with args -log SSCPllCore.vds -m64 -product Vivado -mode batch -messageDb vivado.pb -notrace -source SSCPllCore.tcl
+
+[Fri Jun 26 18:48:39 2026] SSCPllCore_synth_1 finished
+[Fri Jun 26 18:48:39 2026] Waiting for DPRam_512x32_Dly1_1024x16_Dly2_synth_1 to finish...
+
+*** Running vivado
+    with args -log DPRam_512x32_Dly1_1024x16_Dly2.vds -m64 -product Vivado -mode batch -messageDb vivado.pb -notrace -source DPRam_512x32_Dly1_1024x16_Dly2.tcl
+
+[Fri Jun 26 18:48:40 2026] DPRam_512x32_Dly1_1024x16_Dly2_synth_1 finished
+[Fri Jun 26 18:48:40 2026] Waiting for Sram_8192x8_3_synth_1 to finish...
+
+*** Running vivado
+    with args -log Sram_8192x8_3.vds -m64 -product Vivado -mode batch -messageDb vivado.pb -notrace -source Sram_8192x8_3.tcl
+
+[Fri Jun 26 18:48:40 2026] Sram_8192x8_3_synth_1 finished
+[Fri Jun 26 18:48:40 2026] Waiting for Srom_1024x10_synth_1 to finish...
+
+*** Running vivado
+    with args -log Srom_1024x10.vds -m64 -product Vivado -mode batch -messageDb vivado.pb -notrace -source Srom_1024x10.tcl
+
+
+****** Vivado v2019.1 (64-bit)
+  **** SW Build 2552052 on Fri May 24 14:49:42 MDT 2019
+  **** IP Build 2548770 on Fri May 24 18:01:18 MDT 2019
+    ** Copyright 1986-2019 Xilinx, Inc. All Rights Reserved.
+
+source Srom_1024x10.tcl -notrace
+Command: synth_design -top Srom_1024x10 -part xc7a50tfgg484-2 -mode out_of_context
+Starting synth_design
+Attempting to get a license for feature 'Synthesis' and/or device 'xc7a50t'
+INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xc7a50t'
+INFO: [Device 21-403] Loading part xc7a50tfgg484-2
+ERROR: [Runs 36-287] File does not exist or is not accessible:'e:/FPGA/RockDcCtrlTop/Src/Core/Srom_1024x10/Srom_1024x10/hdl/blk_mem_gen_v8_4_vhsyn_rfs.vhd'
+INFO: Launching helper process for spawning children vivado processes
+INFO: Helper process launched with PID 23952 
+ERROR: [Synth 8-1771] cannot open vhdl file e:/FPGA/RockDcCtrlTop/Src/Core/Srom_1024x10/Srom_1024x10/hdl/blk_mem_gen_v8_4_vhsyn_rfs.vhd
+---------------------------------------------------------------------------------
+Starting RTL Elaboration : Time (s): cpu = 00:00:01 ; elapsed = 00:00:02 . Memory (MB): peak = 722.676 ; gain = 183.414
+---------------------------------------------------------------------------------
+WARNING: [Synth 8-1090] 'blk_mem_gen_v8_4_3' is not compiled in library blk_mem_gen_v8_4_3 [e:/FPGA/RockDcCtrlTop/Src/Core/Srom_1024x10/Srom_1024x10/synth/Srom_1024x10.vhd:57]
+INFO: [Synth 8-638] synthesizing module 'Srom_1024x10' [e:/FPGA/RockDcCtrlTop/Src/Core/Srom_1024x10/Srom_1024x10/synth/Srom_1024x10.vhd:68]
+	Parameter C_FAMILY bound to: artix7 - type: string 
+	Parameter C_XDEVICEFAMILY bound to: artix7 - type: string 
+	Parameter C_ELABORATION_DIR bound to: ./ - type: string 
+	Parameter C_INTERFACE_TYPE bound to: 0 - type: integer 
+	Parameter C_AXI_TYPE bound to: 1 - type: integer 
+	Parameter C_AXI_SLAVE_TYPE bound to: 0 - type: integer 
+	Parameter C_USE_BRAM_BLOCK bound to: 0 - type: integer 
+	Parameter C_ENABLE_32BIT_ADDRESS bound to: 0 - type: integer 
+	Parameter C_CTRL_ECC_ALGO bound to: NONE - type: string 
+	Parameter C_HAS_AXI_ID bound to: 0 - type: integer 
+	Parameter C_AXI_ID_WIDTH bound to: 4 - type: integer 
+	Parameter C_MEM_TYPE bound to: 3 - type: integer 
+	Parameter C_BYTE_SIZE bound to: 9 - type: integer 
+	Parameter C_ALGORITHM bound to: 1 - type: integer 
+	Parameter C_PRIM_TYPE bound to: 1 - type: integer 
+	Parameter C_LOAD_INIT_FILE bound to: 1 - type: integer 
+	Parameter C_INIT_FILE_NAME bound to: Srom_1024x10.mif - type: string 
+	Parameter C_INIT_FILE bound to: Srom_1024x10.mem - type: string 
+	Parameter C_USE_DEFAULT_DATA bound to: 0 - type: integer 
+	Parameter C_DEFAULT_DATA bound to: 0 - type: string 
+	Parameter C_HAS_RSTA bound to: 0 - type: integer 
+	Parameter C_RST_PRIORITY_A bound to: CE - type: string 
+	Parameter C_RSTRAM_A bound to: 0 - type: integer 
+	Parameter C_INITA_VAL bound to: 0 - type: string 
+	Parameter C_HAS_ENA bound to: 1 - type: integer 
+	Parameter C_HAS_REGCEA bound to: 0 - type: integer 
+	Parameter C_USE_BYTE_WEA bound to: 0 - type: integer 
+	Parameter C_WEA_WIDTH bound to: 1 - type: integer 
+	Parameter C_WRITE_MODE_A bound to: WRITE_FIRST - type: string 
+	Parameter C_WRITE_WIDTH_A bound to: 10 - type: integer 
+	Parameter C_READ_WIDTH_A bound to: 10 - type: integer 
+	Parameter C_WRITE_DEPTH_A bound to: 1024 - type: integer 
+	Parameter C_READ_DEPTH_A bound to: 1024 - type: integer 
+	Parameter C_ADDRA_WIDTH bound to: 10 - type: integer 
+	Parameter C_HAS_RSTB bound to: 0 - type: integer 
+	Parameter C_RST_PRIORITY_B bound to: CE - type: string 
+	Parameter C_RSTRAM_B bound to: 0 - type: integer 
+	Parameter C_INITB_VAL bound to: 0 - type: string 
+	Parameter C_HAS_ENB bound to: 0 - type: integer 
+	Parameter C_HAS_REGCEB bound to: 0 - type: integer 
+	Parameter C_USE_BYTE_WEB bound to: 0 - type: integer 
+	Parameter C_WEB_WIDTH bound to: 1 - type: integer 
+	Parameter C_WRITE_MODE_B bound to: WRITE_FIRST - type: string 
+	Parameter C_WRITE_WIDTH_B bound to: 10 - type: integer 
+	Parameter C_READ_WIDTH_B bound to: 10 - type: integer 
+	Parameter C_WRITE_DEPTH_B bound to: 1024 - type: integer 
+	Parameter C_READ_DEPTH_B bound to: 1024 - type: integer 
+	Parameter C_ADDRB_WIDTH bound to: 10 - type: integer 
+	Parameter C_HAS_MEM_OUTPUT_REGS_A bound to: 1 - type: integer 
+	Parameter C_HAS_MEM_OUTPUT_REGS_B bound to: 0 - type: integer 
+	Parameter C_HAS_MUX_OUTPUT_REGS_A bound to: 0 - type: integer 
+	Parameter C_HAS_MUX_OUTPUT_REGS_B bound to: 0 - type: integer 
+	Parameter C_MUX_PIPELINE_STAGES bound to: 0 - type: integer 
+	Parameter C_HAS_SOFTECC_INPUT_REGS_A bound to: 0 - type: integer 
+	Parameter C_HAS_SOFTECC_OUTPUT_REGS_B bound to: 0 - type: integer 
+	Parameter C_USE_SOFTECC bound to: 0 - type: integer 
+	Parameter C_USE_ECC bound to: 0 - type: integer 
+	Parameter C_EN_ECC_PIPE bound to: 0 - type: integer 
+	Parameter C_READ_LATENCY_A bound to: 1 - type: integer 
+	Parameter C_READ_LATENCY_B bound to: 1 - type: integer 
+	Parameter C_HAS_INJECTERR bound to: 0 - type: integer 
+	Parameter C_SIM_COLLISION_CHECK bound to: ALL - type: string 
+	Parameter C_COMMON_CLK bound to: 0 - type: integer 
+	Parameter C_DISABLE_WARN_BHV_COLL bound to: 0 - type: integer 
+	Parameter C_EN_SLEEP_PIN bound to: 0 - type: integer 
+	Parameter C_USE_URAM bound to: 0 - type: integer 
+	Parameter C_EN_RDADDRA_CHG bound to: 0 - type: integer 
+	Parameter C_EN_RDADDRB_CHG bound to: 0 - type: integer 
+	Parameter C_EN_DEEPSLEEP_PIN bound to: 0 - type: integer 
+	Parameter C_EN_SHUTDOWN_PIN bound to: 0 - type: integer 
+	Parameter C_EN_SAFETY_CKT bound to: 0 - type: integer 
+	Parameter C_DISABLE_WARN_BHV_RANGE bound to: 0 - type: integer 
+	Parameter C_COUNT_36K_BRAM bound to: 0 - type: string 
+	Parameter C_COUNT_18K_BRAM bound to: 1 - type: string 
+	Parameter C_EST_POWER_SUMMARY bound to: Estimated Power for IP     :     1.229999 mW - type: string 
+INFO: [Synth 8-637] synthesizing blackbox instance 'U0' of component 'blk_mem_gen_v8_4_3' [e:/FPGA/RockDcCtrlTop/Src/Core/Srom_1024x10/Srom_1024x10/synth/Srom_1024x10.vhd:232]
+INFO: [Synth 8-256] done synthesizing module 'Srom_1024x10' (1#1) [e:/FPGA/RockDcCtrlTop/Src/Core/Srom_1024x10/Srom_1024x10/synth/Srom_1024x10.vhd:68]
+---------------------------------------------------------------------------------
+Finished RTL Elaboration : Time (s): cpu = 00:00:02 ; elapsed = 00:00:03 . Memory (MB): peak = 761.465 ; gain = 222.203
+---------------------------------------------------------------------------------
+
+Report Check Netlist: 
++------+------------------+-------+---------+-------+------------------+
+|      |Item              |Errors |Warnings |Status |Description       |
++------+------------------+-------+---------+-------+------------------+
+|1     |multi_driven_nets |      0|        0|Passed |Multi driven nets |
++------+------------------+-------+---------+-------+------------------+
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:02 ; elapsed = 00:00:03 . Memory (MB): peak = 761.465 ; gain = 222.203
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:02 ; elapsed = 00:00:03 . Memory (MB): peak = 761.465 ; gain = 222.203
+---------------------------------------------------------------------------------
+INFO: [Project 1-570] Preparing netlist for logic optimization
+
+Processing XDC Constraints
+Initializing timing engine
+Parsing XDC File [e:/FPGA/RockDcCtrlTop/Src/Core/Srom_1024x10/Srom_1024x10/Srom_1024x10_ooc.xdc] for cell 'U0'
+Finished Parsing XDC File [e:/FPGA/RockDcCtrlTop/Src/Core/Srom_1024x10/Srom_1024x10/Srom_1024x10_ooc.xdc] for cell 'U0'
+Parsing XDC File [E:/FPGA/RockDcCtrlTop/Dev/RockDcCtrlTop/RockDcCtrlTop.runs/Srom_1024x10_synth_1/dont_touch.xdc]
+Finished Parsing XDC File [E:/FPGA/RockDcCtrlTop/Dev/RockDcCtrlTop/RockDcCtrlTop.runs/Srom_1024x10_synth_1/dont_touch.xdc]
+Completed Processing XDC Constraints
+
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 810.312 ; gain = 0.000
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+Constraint Validation Runtime : Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.005 . Memory (MB): peak = 810.312 ; gain = 0.000
+ERROR: [Runs 36-287] File does not exist or is not accessible:'e:/FPGA/RockDcCtrlTop/Src/Core/Srom_1024x10/Srom_1024x10/hdl/blk_mem_gen_v8_4_vhsyn_rfs.vhd'
+---------------------------------------------------------------------------------
+Finished Constraint Validation : Time (s): cpu = 00:00:05 ; elapsed = 00:00:06 . Memory (MB): peak = 810.312 ; gain = 271.051
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Loading Part and Timing Information
+---------------------------------------------------------------------------------
+Loading part: xc7a50tfgg484-2
+---------------------------------------------------------------------------------
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:05 ; elapsed = 00:00:06 . Memory (MB): peak = 810.312 ; gain = 271.051
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Applying 'set_property' XDC Constraints
+---------------------------------------------------------------------------------
+Applied set_property DONT_TOUCH = true for U0. (constraint file  E:/FPGA/RockDcCtrlTop/Dev/RockDcCtrlTop/RockDcCtrlTop.runs/Srom_1024x10_synth_1/dont_touch.xdc, line 9).
+---------------------------------------------------------------------------------
+Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:05 ; elapsed = 00:00:06 . Memory (MB): peak = 810.312 ; gain = 271.051
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:05 ; elapsed = 00:00:06 . Memory (MB): peak = 810.312 ; gain = 271.051
+---------------------------------------------------------------------------------
+
+Report RTL Partitions: 
++-+--------------+------------+----------+
+| |RTL Partition |Replication |Instances |
++-+--------------+------------+----------+
++-+--------------+------------+----------+
+---------------------------------------------------------------------------------
+Start RTL Component Statistics 
+---------------------------------------------------------------------------------
+Detailed RTL Component Info : 
+---------------------------------------------------------------------------------
+Finished RTL Component Statistics 
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start RTL Hierarchical Component Statistics 
+---------------------------------------------------------------------------------
+Hierarchical RTL Component report 
+---------------------------------------------------------------------------------
+Finished RTL Hierarchical Component Statistics
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Part Resource Summary
+---------------------------------------------------------------------------------
+Part Resources:
+DSPs: 120 (col length:60)
+BRAMs: 150 (col length: RAMB18 60 RAMB36 30)
+---------------------------------------------------------------------------------
+Finished Part Resource Summary
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Cross Boundary and Area Optimization
+---------------------------------------------------------------------------------
+Warning: Parallel synthesis criteria is not met 
+---------------------------------------------------------------------------------
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:05 ; elapsed = 00:00:06 . Memory (MB): peak = 810.312 ; gain = 271.051
+---------------------------------------------------------------------------------
+
+Report RTL Partitions: 
++-+--------------+------------+----------+
+| |RTL Partition |Replication |Instances |
++-+--------------+------------+----------+
++-+--------------+------------+----------+
+---------------------------------------------------------------------------------
+Start Applying XDC Timing Constraints
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Applying XDC Timing Constraints : Time (s): cpu = 00:00:10 ; elapsed = 00:00:11 . Memory (MB): peak = 852.164 ; gain = 312.902
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Timing Optimization
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Timing Optimization : Time (s): cpu = 00:00:10 ; elapsed = 00:00:11 . Memory (MB): peak = 852.164 ; gain = 312.902
+---------------------------------------------------------------------------------
+
+Report RTL Partitions: 
++-+--------------+------------+----------+
+| |RTL Partition |Replication |Instances |
++-+--------------+------------+----------+
++-+--------------+------------+----------+
+---------------------------------------------------------------------------------
+Start Technology Mapping
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Technology Mapping : Time (s): cpu = 00:00:10 ; elapsed = 00:00:11 . Memory (MB): peak = 861.797 ; gain = 322.535
+---------------------------------------------------------------------------------
+
+Report RTL Partitions: 
++-+--------------+------------+----------+
+| |RTL Partition |Replication |Instances |
++-+--------------+------------+----------+
++-+--------------+------------+----------+
+---------------------------------------------------------------------------------
+Start IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished IO Insertion : Time (s): cpu = 00:00:12 ; elapsed = 00:00:13 . Memory (MB): peak = 877.582 ; gain = 338.320
+---------------------------------------------------------------------------------
+
+Report Check Netlist: 
++------+------------------+-------+---------+-------+------------------+
+|      |Item              |Errors |Warnings |Status |Description       |
++------+------------------+-------+---------+-------+------------------+
+|1     |multi_driven_nets |      0|        0|Passed |Multi driven nets |
++------+------------------+-------+---------+-------+------------------+
+---------------------------------------------------------------------------------
+Start Renaming Generated Instances
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Instances : Time (s): cpu = 00:00:12 ; elapsed = 00:00:13 . Memory (MB): peak = 877.582 ; gain = 338.320
+---------------------------------------------------------------------------------
+
+Report RTL Partitions: 
++-+--------------+------------+----------+
+| |RTL Partition |Replication |Instances |
++-+--------------+------------+----------+
++-+--------------+------------+----------+
+---------------------------------------------------------------------------------
+Start Rebuilding User Hierarchy
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:12 ; elapsed = 00:00:13 . Memory (MB): peak = 877.582 ; gain = 338.320
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Ports
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Ports : Time (s): cpu = 00:00:12 ; elapsed = 00:00:13 . Memory (MB): peak = 877.582 ; gain = 338.320
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:12 ; elapsed = 00:00:13 . Memory (MB): peak = 877.582 ; gain = 338.320
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Nets
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Nets : Time (s): cpu = 00:00:12 ; elapsed = 00:00:13 . Memory (MB): peak = 877.582 ; gain = 338.320
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Writing Synthesis Report
+---------------------------------------------------------------------------------
+
+Report BlackBoxes: 
++------+-------------------+----------+
+|      |BlackBox name      |Instances |
++------+-------------------+----------+
+|1     |blk_mem_gen_v8_4_3 |         1|
++------+-------------------+----------+
+
+Report Cell Usage: 
++------+--------------------------+------+
+|      |Cell                      |Count |
++------+--------------------------+------+
+|1     |blk_mem_gen_v8_4_3_bbox_0 |     1|
++------+--------------------------+------+
+
+Report Instance Areas: 
++------+---------+-------+------+
+|      |Instance |Module |Cells |
++------+---------+-------+------+
+|1     |top      |       |    74|
++------+---------+-------+------+
+---------------------------------------------------------------------------------
+Finished Writing Synthesis Report : Time (s): cpu = 00:00:12 ; elapsed = 00:00:13 . Memory (MB): peak = 877.582 ; gain = 338.320
+---------------------------------------------------------------------------------
+Synthesis finished with 0 errors, 0 critical warnings and 0 warnings.
+Synthesis Optimization Runtime : Time (s): cpu = 00:00:09 ; elapsed = 00:00:12 . Memory (MB): peak = 877.582 ; gain = 289.473
+Synthesis Optimization Complete : Time (s): cpu = 00:00:12 ; elapsed = 00:00:13 . Memory (MB): peak = 877.582 ; gain = 338.320
+INFO: [Project 1-571] Translating synthesized netlist
+INFO: [Project 1-570] Preparing netlist for logic optimization
+INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 898.414 ; gain = 0.000
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+INFO: [Common 17-83] Releasing license: Synthesis
+12 Infos, 1 Warnings, 0 Critical Warnings and 3 Errors encountered.
+synth_design completed successfully
+synth_design: Time (s): cpu = 00:00:15 ; elapsed = 00:00:17 . Memory (MB): peak = 903.438 ; gain = 596.910
+ERROR: [Common 17-39] 'synth_design' failed due to earlier errors.
+
+    while executing
+"synth_design -top Srom_1024x10 -part xc7a50tfgg484-2 -mode out_of_context"
+    invoked from within
+"if { $cached_ip eq {} } {
+close [open __synthesis_is_running__ w]
+
+synth_design -top Srom_1024x10 -part xc7a50tfgg484-2 -mode out_of_context
+
+#-------..."
+    (file "Srom_1024x10.tcl" line 52)
+INFO: [Common 17-206] Exiting Vivado at Fri Jun 26 18:48:37 2026...
+[Fri Jun 26 18:48:40 2026] Srom_1024x10_synth_1 finished
+# set failed 0
+# foreach r $synth_runs {
+#     set status [get_property STATUS $r]
+#     puts "RUN $r STATUS: $status"
+#     if {$status != "synth_design Complete!"} {
+#         set failed 1
+#     }
+# }
+RUN synth_1 STATUS: Scripts Generated
+RUN SysPllCore_synth_1 STATUS: synth_design Complete!
+RUN XadcCore_synth_1 STATUS: synth_design Complete!
+RUN Fifo48x16_48x16_synth_1 STATUS: synth_design Complete!
+RUN Fifo16x32_16x32_synth_1 STATUS: synth_design Complete!
+RUN SDPRam_512x32_2048x8_synth_1 STATUS: synth_design Complete!
+RUN SDPRam_2048x8_512x32_synth_1 STATUS: synth_design Complete!
+RUN Sram_8192x8_2_synth_1 STATUS: synth_design Complete!
+RUN Sram_8192x8_1_synth_1 STATUS: synth_design Complete!
+RUN UnsigMult10x16_synth_1 STATUS: synth_design Complete!
+RUN Sram_8192x8_0_synth_1 STATUS: synth_design Complete!
+RUN SSCPllCore_synth_1 STATUS: synth_design Complete!
+RUN DPRam_512x32_Dly1_1024x16_Dly2_synth_1 STATUS: synth_design Complete!
+RUN Sram_8192x8_3_synth_1 STATUS: synth_design Complete!
+RUN Srom_1024x10_synth_1 STATUS: synth_design ERROR
+# if {$failed} {
+#     exit 1
+# }
+INFO: [Common 17-206] Exiting Vivado at Fri Jun 26 18:48:40 2026...

@@ -1,0 +1,23 @@
+{
+    "clangd.detectExtensionConflicts": true ,
+    "clangd.arguments": [
+        "--background-index",
+        "--enable-config",
+        "-log=verbose",
+        "-pretty",
+        "--all-scopes-completion",
+        "--completion-style=detailed",
+        "--header-insertion=iwyu",
+        "--pch-storage=disk",
+        "--compile-commands-dir=F:/dsp_proj/Roca2_Pcs_App/clangd",
+        "--query-driver=C:/ti/ccs1250/ccs/tools/compiler/ti-cgt-c2000_22.6.1.LTS/bin/cl2000",
+    ],
+    "clangd.serverCompletionRanking": true,
+    "clangd.fallbackFlags": [
+        "-D__cregister= "
+    ],
+    "files.associations": {
+        "comm_analysis.h": "c",
+        "mid_comservice.h": "c"
+    },
+}

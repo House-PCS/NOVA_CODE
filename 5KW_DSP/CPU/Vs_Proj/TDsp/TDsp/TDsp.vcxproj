@@ -1,0 +1,342 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>17.0</VCProjectVersion>
+    <Keyword>Win32Proj</Keyword>
+    <ProjectGuid>{debf2292-0ff4-4a56-800b-44e4f77a14f7}</ProjectGuid>
+    <RootNamespace>TDsp</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <IncludePath>C:\ti\controlSUITE\libs\app_libs\solar\v1.2\CLA\include;..\..\..\cntl;..\..\..\pll;C:\ti\controlSUITE\libs\app_libs\SFRA\v1_20_00_00\Float\include;C:\ti\controlSUITE\libs\math\IQmath\v160\include;C:\ti\controlSUITE\libs\app_libs\solar\v1.2\float\include;C:\ti\controlSUITE\device_support\F2837xD\v210\F2837xD_common;C:\ti\controlSUITE\device_support\F2837xD\v210\F2837xD_headers;C:\ti\ccs1250\ccs\tools\compiler\ti-cgt-c2000_22.6.1.LTS\include;..\..\..\include\FlashAPI\Constants;..\..\..\include\FlashAPI;..\..\..\include;..\..\..\sys;..\..\..\source;..\..\..\mppt;..\..\..\middleware;..\..\..\drive;..\..\..\device;..\..\..\app;$(IncludePath)</IncludePath>
+    <ExternalIncludePath />
+    <ReferencePath />
+    <LibraryPath />
+    <LibraryWPath />
+    <SourcePath />
+    <EnableClangTidyCodeAnalysis>true</EnableClangTidyCodeAnalysis>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;interrupt=;__TI_COMPILER_VERSION__=22006001;__TMS320C2000__=1;CPU1=;__attribute__(x)=;__einvf32(x)=(1.0/x);__eisqrtf32(x)=(1.0/x/x);__va_parmadr(x)=0;ClaToCpu_Volatile=;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\app\comm_analysis.c" />
+    <ClCompile Include="..\..\..\app\energy_management.c" />
+    <ClCompile Include="..\..\..\app\fault_diagnosis.c" />
+    <ClCompile Include="..\..\..\app\modbus_analysis.c" />
+    <ClCompile Include="..\..\..\app\sys_info.c" />
+    <ClCompile Include="..\..\..\cntl\CNTL_PI_F.c" />
+    <ClCompile Include="..\..\..\cntl\CountTrigger.c" />
+    <ClCompile Include="..\..\..\cntl\FSM.c" />
+    <ClCompile Include="..\..\..\cntl\rms.c" />
+    <ClCompile Include="..\..\..\cntl\TimeTrigger.c" />
+    <ClCompile Include="..\..\..\device\dev_flash.c" />
+    <ClCompile Include="..\..\..\device\dev_sensor.c" />
+    <ClCompile Include="..\..\..\drive\adc.c" />
+    <ClCompile Include="..\..\..\drive\adc_dma.c" />
+    <ClCompile Include="..\..\..\drive\cpu_timers.c" />
+    <ClCompile Include="..\..\..\drive\epwm.c" />
+    <ClCompile Include="..\..\..\drive\sci.c" />
+    <ClCompile Include="..\..\..\drive\spi.c" />
+    <ClCompile Include="..\..\..\middleware\activation.c" />
+    <ClCompile Include="..\..\..\middleware\algorithm_interface.c" />
+    <ClCompile Include="..\..\..\middleware\algo_debug_msg.c" />
+    <ClCompile Include="..\..\..\middleware\algo_err_check.c" />
+    <ClCompile Include="..\..\..\middleware\algo_info.c" />
+    <ClCompile Include="..\..\..\middleware\cla_init.c" />
+    <ClCompile Include="..\..\..\middleware\fan.c" />
+    <ClCompile Include="..\..\..\middleware\generator.c" />
+    <ClCompile Include="..\..\..\middleware\hard_cmpss.c" />
+    <ClCompile Include="..\..\..\middleware\inverter_func_def.c" />
+    <ClCompile Include="..\..\..\middleware\inverter_loop_cntl.c" />
+    <ClCompile Include="..\..\..\middleware\inverter_state_def.c" />
+    <ClCompile Include="..\..\..\middleware\llc_dcdc_cntl.c" />
+    <ClCompile Include="..\..\..\middleware\mid_comservice.c" />
+    <ClCompile Include="..\..\..\middleware\mppt_process.c" />
+    <ClCompile Include="..\..\..\middleware\pll.c" />
+    <ClCompile Include="..\..\..\middleware\pwm_cntl.c" />
+    <ClCompile Include="..\..\..\middleware\sineAnalyzerWithPowerMeas.c" />
+    <ClCompile Include="..\..\..\middleware\voltagesourceinvlcfltr.c" />
+    <ClCompile Include="..\..\..\middleware\ztransfer.c" />
+    <ClCompile Include="..\..\..\mppt\mid_position_pid.c" />
+    <ClCompile Include="..\..\..\mppt\mid_pv_data_conversion.c" />
+    <ClCompile Include="..\..\..\mppt\mid_pv_fault.c" />
+    <ClCompile Include="..\..\..\mppt\mid_pv_interrupt.c" />
+    <ClCompile Include="..\..\..\mppt\mid_pv_logic_control.c" />
+    <ClCompile Include="..\..\..\pll\NOTCH_FLTR_F.c" />
+    <ClCompile Include="..\..\..\pll\SPLL_1ph_F.c" />
+    <ClCompile Include="..\..\..\pll\SPLL_1ph_SOGI_F.c" />
+    <ClCompile Include="..\..\..\pll\SPLL_3ph_DDSRF_F.c" />
+    <ClCompile Include="..\..\..\pll\SPLL_3PH_SRF_F.c" />
+    <ClCompile Include="..\..\..\source\F2837xD_Adc.c" />
+    <ClCompile Include="..\..\..\source\F2837xD_can.c" />
+    <ClCompile Include="..\..\..\source\F2837xD_CpuTimers.c" />
+    <ClCompile Include="..\..\..\source\F2837xD_DefaultISR.c" />
+    <ClCompile Include="..\..\..\source\F2837xD_Dma.c" />
+    <ClCompile Include="..\..\..\source\F2837xD_ECap.c" />
+    <ClCompile Include="..\..\..\source\F2837xD_Emif.c" />
+    <ClCompile Include="..\..\..\source\F2837xD_EPwm.c" />
+    <ClCompile Include="..\..\..\source\F2837xD_EQep.c" />
+    <ClCompile Include="..\..\..\source\F2837xD_GlobalVariableDefs.c" />
+    <ClCompile Include="..\..\..\source\F2837xD_Gpio.c" />
+    <ClCompile Include="..\..\..\source\F2837xD_I2C.c" />
+    <ClCompile Include="..\..\..\source\F2837xD_Ipc.c" />
+    <ClCompile Include="..\..\..\source\F2837xD_Ipc_Driver.c" />
+    <ClCompile Include="..\..\..\source\F2837xD_Ipc_Driver_Lite.c" />
+    <ClCompile Include="..\..\..\source\F2837xD_Ipc_Driver_Util.c" />
+    <ClCompile Include="..\..\..\source\F2837xD_Mcbsp.c" />
+    <ClCompile Include="..\..\..\source\F2837xD_PieCtrl.c" />
+    <ClCompile Include="..\..\..\source\F2837xD_PieVect.c" />
+    <ClCompile Include="..\..\..\source\F2837xD_Sci.c" />
+    <ClCompile Include="..\..\..\source\F2837xD_sci_io.c" />
+    <ClCompile Include="..\..\..\source\F2837xD_sdfm_drivers.c" />
+    <ClCompile Include="..\..\..\source\F2837xD_Spi.c" />
+    <ClCompile Include="..\..\..\source\F2837xD_struct.c" />
+    <ClCompile Include="..\..\..\source\F2837xD_SysCtrl.c" />
+    <ClCompile Include="..\..\..\source\F2837xD_TempSensorConv.c" />
+    <ClCompile Include="..\..\..\source\F2837xD_Upp.c" />
+    <ClCompile Include="..\..\..\sys\crc.c" />
+    <ClCompile Include="..\..\..\sys\main.c" />
+    <ClCompile Include="..\..\..\sys\queue.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\app\comm_analysis.h" />
+    <ClInclude Include="..\..\..\app\energy_management.h" />
+    <ClInclude Include="..\..\..\app\fault_diagnosis.h" />
+    <ClInclude Include="..\..\..\app\modbus_analysis.h" />
+    <ClInclude Include="..\..\..\app\sys_info.h" />
+    <ClInclude Include="..\..\..\cntl\CNTL_PI_F.h" />
+    <ClInclude Include="..\..\..\cntl\CountTrigger.h" />
+    <ClInclude Include="..\..\..\cntl\Filter.h" />
+    <ClInclude Include="..\..\..\cntl\FSM.h" />
+    <ClInclude Include="..\..\..\cntl\rms.h" />
+    <ClInclude Include="..\..\..\cntl\TimeTrigger.h" />
+    <ClInclude Include="..\..\..\device\dev_flash.h" />
+    <ClInclude Include="..\..\..\device\dev_sensor.h" />
+    <ClInclude Include="..\..\..\drive\adc.h" />
+    <ClInclude Include="..\..\..\drive\cpu_timers.h" />
+    <ClInclude Include="..\..\..\drive\epwm.h" />
+    <ClInclude Include="..\..\..\drive\sci.h" />
+    <ClInclude Include="..\..\..\drive\spi.h" />
+    <ClInclude Include="..\..\..\include\F2837xD_adc.h" />
+    <ClInclude Include="..\..\..\include\F2837xD_Adc_defines.h" />
+    <ClInclude Include="..\..\..\include\F2837xD_analogsubsys.h" />
+    <ClInclude Include="..\..\..\include\F2837xD_can.h" />
+    <ClInclude Include="..\..\..\include\F2837xD_Can_defines.h" />
+    <ClInclude Include="..\..\..\include\F2837xD_cla.h" />
+    <ClInclude Include="..\..\..\include\F2837xD_Cla_defines.h" />
+    <ClInclude Include="..\..\..\include\F2837xD_Cla_typedefs.h" />
+    <ClInclude Include="..\..\..\include\F2837xD_cmpss.h" />
+    <ClInclude Include="..\..\..\include\F2837xD_cputimer.h" />
+    <ClInclude Include="..\..\..\include\F2837xD_cputimervars.h" />
+    <ClInclude Include="..\..\..\include\F2837xD_dac.h" />
+    <ClInclude Include="..\..\..\include\F2837xD_dcsm.h" />
+    <ClInclude Include="..\..\..\include\F2837xD_defaultisr.h" />
+    <ClInclude Include="..\..\..\include\F2837xD_device.h" />
+    <ClInclude Include="..\..\..\include\F2837xD_dma.h" />
+    <ClInclude Include="..\..\..\include\F2837xD_Dma_defines.h" />
+    <ClInclude Include="..\..\..\include\F2837xD_ecap.h" />
+    <ClInclude Include="..\..\..\include\F2837xD_emif.h" />
+    <ClInclude Include="..\..\..\include\F2837xD_Emif_defines.h" />
+    <ClInclude Include="..\..\..\include\F2837xD_epwm.h" />
+    <ClInclude Include="..\..\..\include\F2837xD_EPwm_defines.h" />
+    <ClInclude Include="..\..\..\include\F2837xD_epwm_xbar.h" />
+    <ClInclude Include="..\..\..\include\F2837xD_eqep.h" />
+    <ClInclude Include="..\..\..\include\F2837xD_Examples.h" />
+    <ClInclude Include="..\..\..\include\F2837xD_flash.h" />
+    <ClInclude Include="..\..\..\include\F2837xD_GlobalPrototypes.h" />
+    <ClInclude Include="..\..\..\include\F2837xD_gpio.h" />
+    <ClInclude Include="..\..\..\include\F2837xD_Gpio_defines.h" />
+    <ClInclude Include="..\..\..\include\F2837xD_i2c.h" />
+    <ClInclude Include="..\..\..\include\F2837xD_I2c_defines.h" />
+    <ClInclude Include="..\..\..\include\F2837xD_input_xbar.h" />
+    <ClInclude Include="..\..\..\include\F2837xD_ipc.h" />
+    <ClInclude Include="..\..\..\include\F2837xD_Ipc_defines.h" />
+    <ClInclude Include="..\..\..\include\F2837xD_Ipc_drivers.h" />
+    <ClInclude Include="..\..\..\include\F2837xD_mcbsp.h" />
+    <ClInclude Include="..\..\..\include\F2837xD_memconfig.h" />
+    <ClInclude Include="..\..\..\include\F2837xD_nmiintrupt.h" />
+    <ClInclude Include="..\..\..\include\F2837xD_output_xbar.h" />
+    <ClInclude Include="..\..\..\include\F2837xD_piectrl.h" />
+    <ClInclude Include="..\..\..\include\F2837xD_pievect.h" />
+    <ClInclude Include="..\..\..\include\F2837xD_Pie_defines.h" />
+    <ClInclude Include="..\..\..\include\F2837xD_sci.h" />
+    <ClInclude Include="..\..\..\include\F2837xD_sci_io.h" />
+    <ClInclude Include="..\..\..\include\F2837xD_sdfm.h" />
+    <ClInclude Include="..\..\..\include\F2837xD_sdfm_drivers.h" />
+    <ClInclude Include="..\..\..\include\F2837xD_spi.h" />
+    <ClInclude Include="..\..\..\include\F2837xD_struct.h" />
+    <ClInclude Include="..\..\..\include\F2837xD_SWPrioritizedIsrLevels.h" />
+    <ClInclude Include="..\..\..\include\F2837xD_sysctrl.h" />
+    <ClInclude Include="..\..\..\include\F2837xD_SysCtrl_defines.h" />
+    <ClInclude Include="..\..\..\include\F2837xD_Systick_defines.h" />
+    <ClInclude Include="..\..\..\include\F2837xD_upp.h" />
+    <ClInclude Include="..\..\..\include\F2837xD_Upp_defines.h" />
+    <ClInclude Include="..\..\..\include\F2837xD_xbar.h" />
+    <ClInclude Include="..\..\..\include\F2837xD_xint.h" />
+    <ClInclude Include="..\..\..\include\F28x_Project.h" />
+    <ClInclude Include="..\..\..\include\FlashAPI\Constants\Constants.h" />
+    <ClInclude Include="..\..\..\include\FlashAPI\Constants\F2837xD.h" />
+    <ClInclude Include="..\..\..\include\FlashAPI\Constants\FMC.h" />
+    <ClInclude Include="..\..\..\include\FlashAPI\F021.h" />
+    <ClInclude Include="..\..\..\include\FlashAPI\F021_F2837xD_C28x.h" />
+    <ClInclude Include="..\..\..\include\FlashAPI\Helpers.h" />
+    <ClInclude Include="..\..\..\include\FlashAPI\Init.h" />
+    <ClInclude Include="..\..\..\include\FlashAPI\Registers.h" />
+    <ClInclude Include="..\..\..\include\FlashAPI\Registers_C28x.h" />
+    <ClInclude Include="..\..\..\include\FlashAPI\Types.h" />
+    <ClInclude Include="..\..\..\include\SFO_V8.h" />
+    <ClInclude Include="..\..\..\middleware\activation.h" />
+    <ClInclude Include="..\..\..\middleware\algorithm_interface.h" />
+    <ClInclude Include="..\..\..\middleware\algo_debug_msg.h" />
+    <ClInclude Include="..\..\..\middleware\algo_err_check.h" />
+    <ClInclude Include="..\..\..\middleware\algo_info.h" />
+    <ClInclude Include="..\..\..\middleware\cla_algo.h" />
+    <ClInclude Include="..\..\..\middleware\fan.h" />
+    <ClInclude Include="..\..\..\middleware\generator.h" />
+    <ClInclude Include="..\..\..\middleware\hard_cmpss.h" />
+    <ClInclude Include="..\..\..\middleware\inverter_func_def.h" />
+    <ClInclude Include="..\..\..\middleware\inverter_loop_cntl.h" />
+    <ClInclude Include="..\..\..\middleware\inverter_state_def.h" />
+    <ClInclude Include="..\..\..\middleware\llc_dcdc_cntl.h" />
+    <ClInclude Include="..\..\..\middleware\mid_comservice.h" />
+    <ClInclude Include="..\..\..\middleware\mppt_process.h" />
+    <ClInclude Include="..\..\..\middleware\pll.h" />
+    <ClInclude Include="..\..\..\middleware\pwm_cntl.h" />
+    <ClInclude Include="..\..\..\middleware\sineAnalyzerWithPowerMeas.h" />
+    <ClInclude Include="..\..\..\middleware\voltagesourceinvlcfltr.h" />
+    <ClInclude Include="..\..\..\middleware\ztransfer.h" />
+    <ClInclude Include="..\..\..\mppt\mid_position_pid.h" />
+    <ClInclude Include="..\..\..\mppt\mid_pv_data_conversion.h" />
+    <ClInclude Include="..\..\..\mppt\mid_pv_fault.h" />
+    <ClInclude Include="..\..\..\mppt\mid_pv_interrupt.h" />
+    <ClInclude Include="..\..\..\mppt\mid_pv_logic_control.h" />
+    <ClInclude Include="..\..\..\sys\crc.h" />
+    <ClInclude Include="..\..\..\sys\queue.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\..\middleware\cla_task.c" />
+    <None Include="..\..\..\source\F2837xD_CodeStartBranch.asm" />
+    <None Include="..\..\..\source\F2837xD_DBGIER.asm" />
+    <None Include="..\..\..\source\F2837xD_usDelay.asm" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

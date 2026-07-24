@@ -1,0 +1,65 @@
+#-----------------------------------------------------------
+# Vivado v2019.1 (64-bit)
+# SW Build 2552052 on Fri May 24 14:49:42 MDT 2019
+# IP Build 2548770 on Fri May 24 18:01:18 MDT 2019
+# Start of session at: Fri Jun 26 18:42:27 2026
+# Process ID: 29592
+# Current directory: E:/FPGA
+# Command line: vivado.exe -mode batch -source e:\FPGA\RockDcCtrlTop\Dev\RockDcCtrlTop\run_synth.tcl -log e:\FPGA\RockDcCtrlTop\Dev\RockDcCtrlTop\synth_check.log -journal e:\FPGA\RockDcCtrlTop\Dev\RockDcCtrlTop\synth_check.jou
+# Log file: e:/FPGA/RockDcCtrlTop/Dev/RockDcCtrlTop/synth_check.log
+# Journal file: e:\FPGA\RockDcCtrlTop\Dev\RockDcCtrlTop\synth_check.jou
+#-----------------------------------------------------------
+source {e:\FPGA\RockDcCtrlTop\Dev\RockDcCtrlTop\run_synth.tcl}
+# open_project E:/FPGA/RockDcCtrlTop/Dev/RockDcCtrlTop/RockDcCtrlTop.xpr
+Scanning sources...
+Finished scanning sources
+INFO: [IP_Flow 19-234] Refreshing IP repositories
+INFO: [IP_Flow 19-1704] No user IP repositories specified
+INFO: [IP_Flow 19-2313] Loaded Vivado IP repository 'E:/VIVADO/Vivado/2019.1/data/ip'.
+open_project: Time (s): cpu = 00:00:06 ; elapsed = 00:00:06 . Memory (MB): peak = 374.500 ; gain = 68.082
+# set ip_files [get_files -filter {FILE_TYPE =~ "IP*"}]
+# foreach ip $ip_files {
+#     catch {generate_target all $ip}
+# }
+INFO: [IP_Flow 19-1686] Generating 'Instantiation Template' target for IP 'Srom_1024x10'...
+INFO: [IP_Flow 19-1686] Generating 'Synthesis' target for IP 'Srom_1024x10'...
+INFO: [IP_Flow 19-1686] Generating 'Simulation' target for IP 'Srom_1024x10'...
+INFO: [IP_Flow 19-1686] Generating 'Miscellaneous' target for IP 'Srom_1024x10'...
+INFO: [IP_Flow 19-1686] Generating 'Change Log' target for IP 'Srom_1024x10'...
+# foreach r [get_runs -filter {IS_SYNTHESIS == 1}] {
+#     reset_run $r
+# }
+# launch_runs synth_1 -jobs 4
+INFO: [Vivado 12-4149] The synthesis checkpoint for IP 'E:/FPGA/RockDcCtrlTop/Src/Core/Sdpram8192x2_2048x8_D2/Sdpram8192x2_2048x8_D2/Sdpram8192x2_2048x8_D2.xci' is already up-to-date
+INFO: [Vivado 12-4149] The synthesis checkpoint for IP 'E:/FPGA/RockDcCtrlTop/Src/Core/Sdpram2048x8_8192x2_D2/Sdpram2048x8_8192x2_D2/Sdpram2048x8_8192x2_D2.xci' is already up-to-date
+INFO: [Vivado 12-4149] The synthesis checkpoint for IP 'E:/FPGA/RockDcCtrlTop/Src/Core/Sdpram72x32_18x128_D2/Sdpram72x32_18x128_D2/Sdpram72x32_18x128_D2.xci' is already up-to-date
+INFO: [Vivado 12-4149] The synthesis checkpoint for IP 'E:/FPGA/RockDcCtrlTop/Src/Core/Srom_2048x8_d2/Srom_2048x8_d2/Srom_2048x8_d2.xci' is already up-to-date
+[Fri Jun 26 18:42:40 2026] Launched SysPllCore_synth_1, XadcCore_synth_1, Fifo48x16_48x16_synth_1, Fifo16x32_16x32_synth_1, SDPRam_512x32_2048x8_synth_1, SDPRam_2048x8_512x32_synth_1, Sram_8192x8_2_synth_1, Sram_8192x8_1_synth_1, UnsigMult10x16_synth_1, Sram_8192x8_0_synth_1, SSCPllCore_synth_1, DPRam_512x32_Dly1_1024x16_Dly2_synth_1, Sram_8192x8_3_synth_1, Srom_1024x10_synth_1...
+Run output will be captured here:
+SysPllCore_synth_1: E:/FPGA/RockDcCtrlTop/Dev/RockDcCtrlTop/RockDcCtrlTop.runs/SysPllCore_synth_1/runme.log
+XadcCore_synth_1: E:/FPGA/RockDcCtrlTop/Dev/RockDcCtrlTop/RockDcCtrlTop.runs/XadcCore_synth_1/runme.log
+Fifo48x16_48x16_synth_1: E:/FPGA/RockDcCtrlTop/Dev/RockDcCtrlTop/RockDcCtrlTop.runs/Fifo48x16_48x16_synth_1/runme.log
+Fifo16x32_16x32_synth_1: E:/FPGA/RockDcCtrlTop/Dev/RockDcCtrlTop/RockDcCtrlTop.runs/Fifo16x32_16x32_synth_1/runme.log
+SDPRam_512x32_2048x8_synth_1: E:/FPGA/RockDcCtrlTop/Dev/RockDcCtrlTop/RockDcCtrlTop.runs/SDPRam_512x32_2048x8_synth_1/runme.log
+SDPRam_2048x8_512x32_synth_1: E:/FPGA/RockDcCtrlTop/Dev/RockDcCtrlTop/RockDcCtrlTop.runs/SDPRam_2048x8_512x32_synth_1/runme.log
+Sram_8192x8_2_synth_1: E:/FPGA/RockDcCtrlTop/Dev/RockDcCtrlTop/RockDcCtrlTop.runs/Sram_8192x8_2_synth_1/runme.log
+Sram_8192x8_1_synth_1: E:/FPGA/RockDcCtrlTop/Dev/RockDcCtrlTop/RockDcCtrlTop.runs/Sram_8192x8_1_synth_1/runme.log
+UnsigMult10x16_synth_1: E:/FPGA/RockDcCtrlTop/Dev/RockDcCtrlTop/RockDcCtrlTop.runs/UnsigMult10x16_synth_1/runme.log
+Sram_8192x8_0_synth_1: E:/FPGA/RockDcCtrlTop/Dev/RockDcCtrlTop/RockDcCtrlTop.runs/Sram_8192x8_0_synth_1/runme.log
+SSCPllCore_synth_1: E:/FPGA/RockDcCtrlTop/Dev/RockDcCtrlTop/RockDcCtrlTop.runs/SSCPllCore_synth_1/runme.log
+DPRam_512x32_Dly1_1024x16_Dly2_synth_1: E:/FPGA/RockDcCtrlTop/Dev/RockDcCtrlTop/RockDcCtrlTop.runs/DPRam_512x32_Dly1_1024x16_Dly2_synth_1/runme.log
+Sram_8192x8_3_synth_1: E:/FPGA/RockDcCtrlTop/Dev/RockDcCtrlTop/RockDcCtrlTop.runs/Sram_8192x8_3_synth_1/runme.log
+Srom_1024x10_synth_1: E:/FPGA/RockDcCtrlTop/Dev/RockDcCtrlTop/RockDcCtrlTop.runs/Srom_1024x10_synth_1/runme.log
+[Fri Jun 26 18:42:40 2026] Launched synth_1...
+Run output will be captured here: E:/FPGA/RockDcCtrlTop/Dev/RockDcCtrlTop/RockDcCtrlTop.runs/synth_1/runme.log
+# wait_on_run synth_1
+[Fri Jun 26 18:42:40 2026] Waiting for synth_1 to finish...
+[Fri Jun 26 18:43:12 2026] synth_1 finished
+wait_on_run: Time (s): cpu = 00:00:01 ; elapsed = 00:00:31 . Memory (MB): peak = 376.539 ; gain = 0.000
+# set status [get_property STATUS [get_runs synth_1]]
+# puts "SYNTH_STATUS: $status"
+SYNTH_STATUS: Scripts Generated
+# if {$status != "synth_design Complete!"} {
+#     exit 1
+# }
+INFO: [Common 17-206] Exiting Vivado at Fri Jun 26 18:43:12 2026...

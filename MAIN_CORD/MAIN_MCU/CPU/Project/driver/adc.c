@@ -1,0 +1,248 @@
+/**
+  ******************************************************************************
+  * @copyright (C) COPYRIGHT  Nova
+  * @file        adc.c
+  * @author      Xi'an NovaStar Tech Co.,LTD.
+  * @version     V1.0.0
+  * @date        2022-10-31
+  * @brief       GD32F4xx
+  ******************************************************************************
+  * @attention
+  * @relation
+
+  * @par :
+  * <table>
+  * <tr><th>Date          <th>Version   <th>Author      <th>Description
+  * <tr><td>2022-10-31    <td>V1.0.0    <td>           <td>InitialVersion 当前版本仅支持独立模式、规则通道、单次软件触发采样转换
+  * <tr><td>2023-5-16     <td>V1.0.0    <td>           <td>InitialVersion 当前版本增加了连续模式、扫描模式以及DMA机制
+  * </table>
+  ******************************************************************************
+  */
+
+
+#include "adc.h"
+
+
+static dma_single_data_parameter_struct    _DMA_ADC_InitStructure[ADC_NUM];
+
+void AdcClkInit()
+{
+#if USE_ADC0
+    rcu_periph_clock_enable(RCU_ADC0);
+#endif
+#if USE_ADC1
+    rcu_periph_clock_enable(RCU_ADC1);
+#endif
+#if USE_ADC2
+    rcu_periph_clock_enable(RCU_ADC2);
+#endif
+
+//    rcu_adc_clock_config(RCU_CKADC_CKAPB2_DIV4);
+    adc_clock_config(ADC_ADCCK_PCLK2_DIV4);
+//    adc_deinit();
+//    adc_sync_mode_config(ADC_SYNC_MODE_INDEPENDENT);
+}
+
+
+static void _AdcGpioInit(Adc_HandleType *pHandle)
+{
+    uint8_t i;
+    for(i = 0; i < CHANNEL_NUM_PER_ADC; i++)
+    {
+        if(pHandle->adc_cfg->channel_config[i].enable == true && ADC_CHL(pHandle->adc_cfg->channel_config[i].chl_id) <= ADC_CHANNEL_15)
+        {
+            gpio_mode_set(pHandle->adc_cfg->channel_config[i].adc_gpiox, GPIO_MODE_ANALOG, GPIO_PUPD_NONE, pHandle->adc_cfg->channel_config[i].adc_gpio_pinx);
+        }
+    }
+
+}
+
+static void _DelayMs(uint16_t ms)
+{
+    soft_delayms(ms);
+}
+
+
+void AdcInit(Adc_HandleType *pHandle)
+{
+    uint8_t i;
+
+    pHandle->chl_valid_number = 0;
+
+    for(i = 0; i < CHANNEL_NUM_PER_ADC; i++)
+    {
+        if(pHandle->adc_cfg->channel_config[i].enable == true)
+        {
+            pHandle->chl_valid_number++;
+        }
+    }
+
+    AdcClkInit();
+    _AdcGpioInit(pHandle);
+
+    adc_sync_mode_config(ADC_SYNC_MODE_INDEPENDENT);
+    adc_data_alignment_config(pHandle->adc_cfg->adc_peri, ADC_DATAALIGN_RIGHT);
+
+    if(pHandle->adc_cfg->continuous_mode == true)
+    {
+        adc_special_function_config(pHandle->adc_cfg->adc_peri, ADC_CONTINUOUS_MODE, ENABLE);
+    }
+    else
+    {
+        adc_special_function_config(pHandle->adc_cfg->adc_peri, ADC_CONTINUOUS_MODE, DISABLE);
+    }
+
+    if(pHandle->adc_cfg->scan_mode == true)
+    {
+        uint8_t j = 0;
+        adc_special_function_config(pHandle->adc_cfg->adc_peri, ADC_SCAN_MODE, ENABLE);
+        adc_channel_length_config(pHandle->adc_cfg->adc_peri, ADC_ROUTINE_CHANNEL, pHandle->chl_valid_number);
+        pHandle->adc_cfg->en_dma = true;
+
+        for(i = 0; i < CHANNEL_NUM_PER_ADC; i++)
+        {
+            if(pHandle->adc_cfg->channel_config[i].enable == true)
+            {
+                adc_routine_channel_config(pHandle->adc_cfg->adc_peri, j, pHandle->adc_cfg->channel_config[i].chl_id, ADC_SAMPLETIME_56);
+                j++;
+            }
+        }
+    }
+    else
+    {
+        adc_special_function_config(pHandle->adc_cfg->adc_peri, ADC_SCAN_MODE, DISABLE);
+        adc_channel_length_config(pHandle->adc_cfg->adc_peri, ADC_ROUTINE_CHANNEL, 1);
+
+        for(i = 0; i < CHANNEL_NUM_PER_ADC; i++)
+        {
+            if(pHandle->adc_cfg->channel_config[i].enable == true)
+            {
+                break;
+            }
+        }
+        if(i == CHANNEL_NUM_PER_ADC)
+        {
+            pHandle->current_chl = ADC_CHANNEL_0;
+        }
+        else
+        {
+            pHandle->current_chl = pHandle->adc_cfg->channel_config[i].chl_id;
+        }
+        adc_routine_channel_config(pHandle->adc_cfg->adc_peri, 0, pHandle->current_chl, ADC_SAMPLETIME_56);
+    }
+
+
+
+    /* ADC trigger config */
+    adc_external_trigger_source_config(pHandle->adc_cfg->adc_peri, ADC_ROUTINE_CHANNEL, ADC_EXTTRIG_ROUTINE_T0_CH0);
+    adc_external_trigger_config(pHandle->adc_cfg->adc_peri, ADC_ROUTINE_CHANNEL, EXTERNAL_TRIGGER_DISABLE);
+
+    if(pHandle->adc_cfg->en_dma == true)
+    {
+        adc_dma_request_after_last_enable(pHandle->adc_cfg->adc_peri);
+        adc_dma_mode_enable(pHandle->adc_cfg->adc_peri);
+        AdcDMACfg(pHandle);
+        dma_channel_enable(pHandle->adc_cfg->dma_peri, pHandle->adc_cfg->dma_channel);
+    }
+
+    adc_enable(pHandle->adc_cfg->adc_peri);
+    _DelayMs(1);
+
+    /* ADC calibration and reset calibration */
+    adc_calibration_enable(pHandle->adc_cfg->adc_peri);
+    if(pHandle->adc_cfg->en_dma == true)
+    {
+        adc_software_trigger_enable(pHandle->adc_cfg->adc_peri, ADC_ROUTINE_CHANNEL);/*DMA模式(扫描连续运行模式)下一开始就开启转换*/
+    }
+}
+
+
+void AdcDMACfg(Adc_HandleType *pHandle)
+{
+    rcu_periph_clock_enable(RCU_DMA0);
+
+    _DMA_ADC_InitStructure[pHandle->adcx].periph_addr           = (uint32_t)(&ADC_RDATA(pHandle->adc_cfg->adc_peri));
+    _DMA_ADC_InitStructure[pHandle->adcx].periph_inc            = DMA_PERIPH_INCREASE_DISABLE;
+    _DMA_ADC_InitStructure[pHandle->adcx].memory0_addr          = (uint32_t)pHandle->pRData;
+    _DMA_ADC_InitStructure[pHandle->adcx].memory_inc            = DMA_MEMORY_INCREASE_ENABLE;
+    _DMA_ADC_InitStructure[pHandle->adcx].periph_memory_width   = DMA_PERIPH_WIDTH_32BIT;
+    _DMA_ADC_InitStructure[pHandle->adcx].circular_mode         = DMA_CIRCULAR_MODE_ENABLE;
+    _DMA_ADC_InitStructure[pHandle->adcx].direction             = DMA_PERIPH_TO_MEMORY;
+    _DMA_ADC_InitStructure[pHandle->adcx].number                = pHandle->chl_valid_number;
+    _DMA_ADC_InitStructure[pHandle->adcx].priority              = DMA_PRIORITY_HIGH;
+
+    dma_single_data_mode_init(pHandle->adc_cfg->dma_peri, pHandle->adc_cfg->dma_channel, &_DMA_ADC_InitStructure[pHandle->adcx]);
+    dma_channel_subperipheral_select(pHandle->adc_cfg->dma_peri, pHandle->adc_cfg->dma_channel, pHandle->adc_cfg->dma_subperi);
+    dma_circulation_enable(pHandle->adc_cfg->dma_peri, pHandle->adc_cfg->dma_channel);
+
+    /* enable DMA channel */
+    dma_channel_enable(pHandle->adc_cfg->dma_peri, pHandle->adc_cfg->dma_channel);
+}
+
+
+
+/*单次运行模式或连续运行模式，非DMA模式使用， 扫描模式不可用*/
+static bool _AdcValueGet(uint32_t adc_peri, uint8_t channel, uint16_t *p)
+{
+    uint32_t time_out = 0xFFFF;
+
+    adc_routine_channel_config(adc_peri, 0, channel, ADC_SAMPLETIME_56);
+    adc_software_trigger_enable(adc_peri, ADC_ROUTINE_CHANNEL);
+    while(!adc_flag_get(adc_peri, ADC_FLAG_EOC)) //检查转换标志
+    {
+        time_out--;
+        if(time_out == 0)
+        {
+            return false;
+        }
+    }
+    adc_flag_clear(adc_peri, ADC_FLAG_EOC); // 清除结束标志
+
+    *p = adc_routine_data_read(adc_peri);
+    return true;
+}
+
+/*单次运行模式或连续运行模式，非DMA模式使用， 扫描模式不可用*/
+bool AdcVoltageGet(Adc_HandleType *pHandle)
+{
+    uint16_t value;
+    uint8_t i = 0;
+
+
+    if(pHandle->adc_cfg->scan_mode == true)
+    {
+        return false;
+    }
+
+    if(pHandle->current_chl >= CHANNEL_NUM_PER_ADC)
+    {
+        return false;
+    }
+    for(i = 0; i < CHANNEL_NUM_PER_ADC; i++)
+    {
+        if(pHandle->adc_cfg->channel_config[i].enable == true && pHandle->adc_cfg->channel_config[i].chl_id == pHandle->current_chl)
+        {
+            break;
+        }
+    }
+
+    if(i == CHANNEL_NUM_PER_ADC)
+    {
+        return false;
+    }
+
+    if(_AdcValueGet(pHandle->adc_cfg->adc_peri, ADC_CHL(pHandle->current_chl), &value) == false)
+    {
+        return false;
+    }
+
+    *pHandle->pRValtage = value * 3.3 / 4096;
+    return true;
+
+}
+
+
+
+
+
+

@@ -1,0 +1,481 @@
+<html>
+<body>
+<pre>
+<h1>�Vision Build Log</h1>
+<h2>Tool Versions:</h2>
+IDE-Version: ��Vision V5.31.0.0
+Copyright (C) 2020 ARM Ltd and ARM Germany GmbH. All rights reserved.
+License Information: 123456 Nova006352, 123456, LIC=BUURY-I65AA-HLJCL-0YZS7-ZUPXW-2I423
+ 
+Tool Versions:
+Toolchain:       MDK-ARM Plus  Version: 5.31.0.0
+Toolchain Path:  D:\Keil_v5\ARM\ARMCLANG\Bin
+C Compiler:      ArmClang.exe V6.14
+Assembler:       Armasm.exe V6.14
+Linker/Locator:  ArmLink.exe V6.14
+Library Manager: ArmAr.exe V6.14
+Hex Converter:   FromElf.exe V6.14
+CPU DLL:         SARMCM3.DLL V5.31.0.0
+Dialog DLL:      DCM.DLL V1.17.3.0
+Target DLL:      CMSIS_AGDI.dll V1.32.6.0
+Dialog DLL:      TCM.DLL V1.46.0.0
+ 
+<h2>Project:</h2>
+C:\Users\Nova006352\Desktop\SVNcode\ARC_RES_boot\project\MDK-ARM\Project.uvprojx
+Project File Date:  01/02/2024
+
+<h2>Output:</h2>
+*** Using Compiler 'V6.14', folder: 'D:\Keil_v5\ARM\ARMCLANG\Bin'
+Rebuild target 'N32G4FR'
+assembling startup_n32g4fr.s...
+compiling n32g4fr_dma.c...
+compiling system_n32g4fr.c...
+compiling n32g4fr_crc.c...
+compiling n32g4fr_pwr.c...
+compiling n32g4fr_usart.c...
+compiling n32g4fr_i2c.c...
+compiling n32g4fr_iwdg.c...
+compiling n32g4fr_exti.c...
+compiling n32g4fr_gpio.c...
+compiling n32g4fr_flash.c...
+compiling misc.c...
+compiling n32g4fr_can.c...
+compiling n32g4fr_rcc.c...
+compiling n32g4fr_adc.c...
+compiling n32g4fr_qspi.c...
+compiling n32g4fr_sdio.c...
+compiling n32g4fr_spi.c...
+compiling queue.c...
+compiling n32g4fr_rtc.c...
+compiling n32g4fr_wwdg.c...
+../sys/main.c(37): warning: In file included from...
+../sys/bsp.h(128): error: unknown type name 'Adc_HandleType'; did you mean 'Spi_HandleType'?
+extern Adc_HandleType Adc1ArcCurHandle;
+       ^~~~~~~~~~~~~~
+       Spi_HandleType
+../driver\spi.h(98): note: 'Spi_HandleType' declared here
+}Spi_HandleType;
+ ^
+../sys/main.c(37): warning: In file included from...
+../sys/bsp.h(129): error: unknown type name 'Adc_HandleType'; did you mean 'Spi_HandleType'?
+extern Adc_HandleType Adc2ArcCurHandle;
+       ^~~~~~~~~~~~~~
+       Spi_HandleType
+../driver\spi.h(98): note: 'Spi_HandleType' declared here
+}Spi_HandleType;
+ ^
+../sys/main.c(67): warning: implicit declaration of function 'SampleRes_Main' is invalid in C99 [-Wimplicit-function-declaration]
+                        Power_on_test = SampleRes_Main();   //<C9>ϵ<E7><BC><EC><B2><E2>һ<B4><CE>
+                                        ^
+../sys/main.c(71): warning: implicit declaration of function 'Res_Detect_Alarm' is invalid in C99 [-Wimplicit-function-declaration]
+                        Res_Detect_Alarm();               //<BE><F8>Ե<D7>迹<B1><A8><BE><AF><B4><A6><C0><ED>
+                        ^
+../sys/main.c(73): warning: implicit declaration of function 'ModbusCmdProcess' is invalid in C99 [-Wimplicit-function-declaration]
+                        ModbusCmdProcess();                   //modbusͨ<D0><C5><C2><D6>ѯ
+                        ^
+../sys/main.c(74): warning: implicit declaration of function 'ArcDectectProcess' is invalid in C99 [-Wimplicit-function-declaration]
+                        ArcDectectProcess();              //<B5>绡<BC><EC><B2><E2><B9><FD><B3><CC>
+                        ^
+../sys/main.c(75): warning: implicit declaration of function 'Arc_Alarm' is invalid in C99 [-Wimplicit-function-declaration]
+                        Arc_Alarm();                      //<B5>绡<BC><EC><B2>ⱨ<BE><AF><B4><A6><C0><ED>
+                        ^
+5 warnings and 2 errors generated.
+compiling main.c...
+compiling systick.c...
+compiling n32g4fr_tim.c...
+../sys/n32g4fr_it.c(36): warning: In file included from...
+../sys/bsp.h(128): error: unknown type name 'Adc_HandleType'; did you mean 'Spi_HandleType'?
+extern Adc_HandleType Adc1ArcCurHandle;
+       ^~~~~~~~~~~~~~
+       Spi_HandleType
+../driver\spi.h(98): note: 'Spi_HandleType' declared here
+}Spi_HandleType;
+ ^
+../sys/n32g4fr_it.c(36): warning: In file included from...
+../sys/bsp.h(129): error: unknown type name 'Adc_HandleType'; did you mean 'Spi_HandleType'?
+extern Adc_HandleType Adc2ArcCurHandle;
+       ^~~~~~~~~~~~~~
+       Spi_HandleType
+../driver\spi.h(98): note: 'Spi_HandleType' declared here
+}Spi_HandleType;
+ ^
+../sys/n32g4fr_it.c(134): error: use of undeclared identifier 'ModbusHostUartHandle'
+    UartDMATxIrqProcess(&ModbusHostUartHandle);
+                         ^
+../sys/n32g4fr_it.c(141): error: use of undeclared identifier 'Uart2Handle'
+    UartIrqProcess(&Uart2Handle);
+                    ^
+../sys/n32g4fr_it.c(155): error: use of undeclared identifier 'WirelessUartHandle'
+    UartIrqProcess(&WirelessUartHandle);
+                    ^
+5 errors generated.
+compiling n32g4fr_it.c...
+../sys/bsp.c(20): warning: In file included from...
+../sys/bsp.h(128): error: unknown type name 'Adc_HandleType'; did you mean 'Spi_HandleType'?
+extern Adc_HandleType Adc1ArcCurHandle;
+       ^~~~~~~~~~~~~~
+       Spi_HandleType
+../driver\spi.h(98): note: 'Spi_HandleType' declared here
+}Spi_HandleType;
+ ^
+../sys/bsp.c(20): warning: In file included from...
+../sys/bsp.h(129): error: unknown type name 'Adc_HandleType'; did you mean 'Spi_HandleType'?
+extern Adc_HandleType Adc2ArcCurHandle;
+       ^~~~~~~~~~~~~~
+       Spi_HandleType
+../driver\spi.h(98): note: 'Spi_HandleType' declared here
+}Spi_HandleType;
+ ^
+2 errors generated.
+compiling bsp.c...
+compiling uart.c...
+compiling dma.c...
+compiling gpio.c...
+compiling spi.c...
+compiling timer.c...
+compiling flash.c...
+../dev/dev_led.c(2): warning: In file included from...
+../dev/dev_led.h(6): warning: In file included from...
+../sys\bsp.h(128): error: unknown type name 'Adc_HandleType'; did you mean 'Spi_HandleType'?
+extern Adc_HandleType Adc1ArcCurHandle;
+       ^~~~~~~~~~~~~~
+       Spi_HandleType
+../driver\spi.h(98): note: 'Spi_HandleType' declared here
+}Spi_HandleType;
+ ^
+../dev/dev_led.c(2): warning: In file included from...
+../dev/dev_led.h(6): warning: In file included from...
+../sys\bsp.h(129): error: unknown type name 'Adc_HandleType'; did you mean 'Spi_HandleType'?
+extern Adc_HandleType Adc2ArcCurHandle;
+       ^~~~~~~~~~~~~~
+       Spi_HandleType
+../driver\spi.h(98): note: 'Spi_HandleType' declared here
+}Spi_HandleType;
+ ^
+2 errors generated.
+compiling dev_led.c...
+../dev/dev_spiflash.c(2): warning: In file included from...
+../dev/dev_spiflash.h(5): warning: In file included from...
+../sys\bsp.h(128): error: unknown type name 'Adc_HandleType'; did you mean 'Spi_HandleType'?
+extern Adc_HandleType Adc1ArcCurHandle;
+       ^~~~~~~~~~~~~~
+       Spi_HandleType
+../driver\spi.h(98): note: 'Spi_HandleType' declared here
+}Spi_HandleType;
+ ^
+../dev/dev_spiflash.c(2): warning: In file included from...
+../dev/dev_spiflash.h(5): warning: In file included from...
+../sys\bsp.h(129): error: unknown type name 'Adc_HandleType'; did you mean 'Spi_HandleType'?
+extern Adc_HandleType Adc2ArcCurHandle;
+       ^~~~~~~~~~~~~~
+       Spi_HandleType
+../driver\spi.h(98): note: 'Spi_HandleType' declared here
+}Spi_HandleType;
+ ^
+2 errors generated.
+compiling dev_spiflash.c...
+../dev/dev_key.c(2): warning: In file included from...
+../dev/dev_key.h(6): warning: In file included from...
+../sys\bsp.h(128): error: unknown type name 'Adc_HandleType'; did you mean 'Spi_HandleType'?
+extern Adc_HandleType Adc1ArcCurHandle;
+       ^~~~~~~~~~~~~~
+       Spi_HandleType
+../driver\spi.h(98): note: 'Spi_HandleType' declared here
+}Spi_HandleType;
+ ^
+../dev/dev_key.c(2): warning: In file included from...
+../dev/dev_key.h(6): warning: In file included from...
+../sys\bsp.h(129): error: unknown type name 'Adc_HandleType'; did you mean 'Spi_HandleType'?
+extern Adc_HandleType Adc2ArcCurHandle;
+       ^~~~~~~~~~~~~~
+       Spi_HandleType
+../driver\spi.h(98): note: 'Spi_HandleType' declared here
+}Spi_HandleType;
+ ^
+../dev/dev_key.c(56): error: use of undeclared identifier 'KeyRstHandle'
+    _pHandle[0] = &KeyRstHandle;
+                   ^
+../dev/dev_key.c(59): warning: implicit declaration of function 'KeyBspInit' is invalid in C99 [-Wimplicit-function-declaration]
+    KeyBspInit();
+    ^
+1 warning and 3 errors generated.
+compiling dev_key.c...
+../dev/dev_rs485.c(2): warning: In file included from...
+../dev/dev_rs485.h(6): warning: In file included from...
+../sys\bsp.h(128): error: unknown type name 'Adc_HandleType'; did you mean 'Spi_HandleType'?
+extern Adc_HandleType Adc1ArcCurHandle;
+       ^~~~~~~~~~~~~~
+       Spi_HandleType
+../driver\spi.h(98): note: 'Spi_HandleType' declared here
+}Spi_HandleType;
+ ^
+../dev/dev_rs485.c(2): warning: In file included from...
+../dev/dev_rs485.h(6): warning: In file included from...
+../sys\bsp.h(129): error: unknown type name 'Adc_HandleType'; did you mean 'Spi_HandleType'?
+extern Adc_HandleType Adc2ArcCurHandle;
+       ^~~~~~~~~~~~~~
+       Spi_HandleType
+../driver\spi.h(98): note: 'Spi_HandleType' declared here
+}Spi_HandleType;
+ ^
+../dev/dev_rs485.c(46): error: use of undeclared identifier 'ModbusHostUartHandle'
+        UartDMARxDisable(&ModbusHostUartHandle);
+                          ^
+../dev/dev_rs485.c(47): error: use of undeclared identifier 'ModbusHostUartHandle'
+        rev_size = UartDMARxDataLength(&ModbusHostUartHandle);  
+                                        ^
+../dev/dev_rs485.c(48): error: use of undeclared identifier 'ModbusHostUartHandle'
+    _RevDataAnalysis(ModbusHostUartHandle.pRxBuf, rev_size);      
+                     ^
+../dev/dev_rs485.c(49): error: use of undeclared identifier 'ModbusHostUartHandle'
+        UartDMARxEnable(&ModbusHostUartHandle);
+                         ^
+../dev/dev_rs485.c(62): error: use of undeclared identifier 'ModbusHostUartHandle'
+    ModbusHostUartHandle.pTxBuf = p_data;
+    ^
+../dev/dev_rs485.c(63): error: use of undeclared identifier 'ModbusHostUartHandle'
+    ModbusHostUartHandle.tx_size = len;
+    ^
+../dev/dev_rs485.c(64): error: use of undeclared identifier 'ModbusHostUartHandle'
+    gDevComm485.send(&ModbusHostUartHandle);
+                      ^
+../dev/dev_rs485.c(77): error: use of undeclared identifier 'ModbusHostUartHandle'
+    ModbusHostUartHandle.pRxBuf = _Comm485RxBuf;
+    ^
+../dev/dev_rs485.c(78): error: use of undeclared identifier 'ModbusHostUartHandle'
+    ModbusHostUartHandle.rx_size =COMM485_RX_SIZE;
+    ^
+../dev/dev_rs485.c(79): error: use of undeclared identifier 'ModbusHostUartHandle'
+    ModbusHostUartHandle.irq_rx_process = _IrqRxProcess;
+    ^
+../dev/dev_rs485.c(83): warning: implicit declaration of function 'ModbusHostBspInit' is invalid in C99 [-Wimplicit-function-declaration]
+    ModbusHostBspInit();
+    ^
+1 warning and 12 errors generated.
+compiling dev_rs485.c...
+../dev/dev_modbus_s.c(22): warning: In file included from...
+../dev/dev_modbus_s.h(6): warning: In file included from...
+../sys\bsp.h(128): error: unknown type name 'Adc_HandleType'; did you mean 'Spi_HandleType'?
+extern Adc_HandleType Adc1ArcCurHandle;
+       ^~~~~~~~~~~~~~
+       Spi_HandleType
+../driver\spi.h(98): note: 'Spi_HandleType' declared here
+}Spi_HandleType;
+ ^
+../dev/dev_modbus_s.c(22): warning: In file included from...
+../dev/dev_modbus_s.h(6): warning: In file included from...
+../sys\bsp.h(129): error: unknown type name 'Adc_HandleType'; did you mean 'Spi_HandleType'?
+extern Adc_HandleType Adc2ArcCurHandle;
+       ^~~~~~~~~~~~~~
+       Spi_HandleType
+../driver\spi.h(98): note: 'Spi_HandleType' declared here
+}Spi_HandleType;
+ ^
+2 errors generated.
+compiling dev_modbus_s.c...
+../app/peri_process.c(2): warning: In file included from...
+../app/peri_process.h(5): warning: In file included from...
+../dev\dev_led.h(6): warning: In file included from...
+../sys\bsp.h(128): error: unknown type name 'Adc_HandleType'; did you mean 'Spi_HandleType'?
+extern Adc_HandleType Adc1ArcCurHandle;
+       ^~~~~~~~~~~~~~
+       Spi_HandleType
+../driver\spi.h(98): note: 'Spi_HandleType' declared here
+}Spi_HandleType;
+ ^
+../app/peri_process.c(2): warning: In file included from...
+../app/peri_process.h(5): warning: In file included from...
+../dev\dev_led.h(6): warning: In file included from...
+../sys\bsp.h(129): error: unknown type name 'Adc_HandleType'; did you mean 'Spi_HandleType'?
+extern Adc_HandleType Adc2ArcCurHandle;
+       ^~~~~~~~~~~~~~
+       Spi_HandleType
+../driver\spi.h(98): note: 'Spi_HandleType' declared here
+}Spi_HandleType;
+ ^
+2 errors generated.
+compiling peri_process.c...
+../app/proto_uniform.c(2): warning: In file included from...
+../app/proto_uniform.h(5): warning: In file included from...
+../dev\dev_rs485.h(6): warning: In file included from...
+../sys\bsp.h(128): error: unknown type name 'Adc_HandleType'; did you mean 'Spi_HandleType'?
+extern Adc_HandleType Adc1ArcCurHandle;
+       ^~~~~~~~~~~~~~
+       Spi_HandleType
+../driver\spi.h(98): note: 'Spi_HandleType' declared here
+}Spi_HandleType;
+ ^
+../app/proto_uniform.c(2): warning: In file included from...
+../app/proto_uniform.h(5): warning: In file included from...
+../dev\dev_rs485.h(6): warning: In file included from...
+../sys\bsp.h(129): error: unknown type name 'Adc_HandleType'; did you mean 'Spi_HandleType'?
+extern Adc_HandleType Adc2ArcCurHandle;
+       ^~~~~~~~~~~~~~
+       Spi_HandleType
+../driver\spi.h(98): note: 'Spi_HandleType' declared here
+}Spi_HandleType;
+ ^
+../app/proto_uniform.c(242): warning: implicit declaration of function 'InternalFlashWrite' is invalid in C99 [-Wimplicit-function-declaration]
+                        InternalFlashWrite(arc_firmware_addr, p_request_packet->data_field, p_request_packet->data_field_len);
+                        ^
+../app/proto_uniform.c(243): warning: implicit declaration of function 'InternalFlashRead' is invalid in C99 [-Wimplicit-function-declaration]
+                        InternalFlashRead(arc_firmware_addr, _ProtocolBuf, p_request_packet->data_field_len);   
+                        ^
+../app/proto_uniform.c(269): warning: implicit declaration of function 'InternalFlashWrite' is invalid in C99 [-Wimplicit-function-declaration]
+                                InternalFlashWrite(ARC_UPGRADE_FLAG_ADDR, (uint32_t)firmware_upgrade, 256);
+                                ^
+../app/proto_uniform.c(409): error: use of undeclared identifier 'Uart2Handle'
+        Uart2Handle.pTxBuf = (uint8_t*)&garrComTxBuf;
+        ^
+../app/proto_uniform.c(410): error: use of undeclared identifier 'Uart2Handle'
+        Uart2Handle.tx_size = gstReadResponsePacketData.data_field_len + sizeof(ProtocalReadResponsePacket_t) + sizeof(check_sum);
+        ^
+../app/proto_uniform.c(411): error: use of undeclared identifier 'Uart2Handle'
+        ModbusRTUSend(Uart2Handle.pTxBuf, Uart2Handle.tx_size);
+                      ^
+../app/proto_uniform.c(411): error: use of undeclared identifier 'Uart2Handle'
+        ModbusRTUSend(Uart2Handle.pTxBuf, Uart2Handle.tx_size);
+                                          ^
+../app/proto_uniform.c(416): error: use of undeclared identifier 'Uart2Handle'
+                Uart2Handle.pTxBuf = (uint8_t*)&_ResponsePacketData;
+                ^
+../app/proto_uniform.c(417): error: use of undeclared identifier 'Uart2Handle'
+                Uart2Handle.tx_size = sizeof(protocal_response_packet_t);
+                ^
+../app/proto_uniform.c(418): error: use of undeclared identifier 'Uart2Handle'
+        ModbusRTUSend(Uart2Handle.pTxBuf, Uart2Handle.tx_size);
+                      ^
+../app/proto_uniform.c(418): error: use of undeclared identifier 'Uart2Handle'
+        ModbusRTUSend(Uart2Handle.pTxBuf, Uart2Handle.tx_size);
+                                          ^
+3 warnings and 10 errors generated.
+compiling proto_uniform.c...
+../app/para_process.c(2): warning: In file included from...
+../app/para_process.h(6): warning: In file included from...
+../dev\dev_spiflash.h(5): warning: In file included from...
+../sys\bsp.h(128): error: unknown type name 'Adc_HandleType'; did you mean 'Spi_HandleType'?
+extern Adc_HandleType Adc1ArcCurHandle;
+       ^~~~~~~~~~~~~~
+       Spi_HandleType
+../driver\spi.h(98): note: 'Spi_HandleType' declared here
+}Spi_HandleType;
+ ^
+../app/para_process.c(2): warning: In file included from...
+../app/para_process.h(6): warning: In file included from...
+../dev\dev_spiflash.h(5): warning: In file included from...
+../sys\bsp.h(129): error: unknown type name 'Adc_HandleType'; did you mean 'Spi_HandleType'?
+extern Adc_HandleType Adc2ArcCurHandle;
+       ^~~~~~~~~~~~~~
+       Spi_HandleType
+../driver\spi.h(98): note: 'Spi_HandleType' declared here
+}Spi_HandleType;
+ ^
+2 errors generated.
+compiling para_process.c...
+../boot/boot.c(2): warning: In file included from...
+../boot/boot.h(5): warning: In file included from...
+../dev\dev_spiflash.h(5): warning: In file included from...
+../sys\bsp.h(128): error: unknown type name 'Adc_HandleType'; did you mean 'Spi_HandleType'?
+extern Adc_HandleType Adc1ArcCurHandle;
+       ^~~~~~~~~~~~~~
+       Spi_HandleType
+../driver\spi.h(98): note: 'Spi_HandleType' declared here
+}Spi_HandleType;
+ ^
+../boot/boot.c(2): warning: In file included from...
+../boot/boot.h(5): warning: In file included from...
+../dev\dev_spiflash.h(5): warning: In file included from...
+../sys\bsp.h(129): error: unknown type name 'Adc_HandleType'; did you mean 'Spi_HandleType'?
+extern Adc_HandleType Adc2ArcCurHandle;
+       ^~~~~~~~~~~~~~
+       Spi_HandleType
+../driver\spi.h(98): note: 'Spi_HandleType' declared here
+}Spi_HandleType;
+ ^
+../boot/boot.c(26): error: use of undeclared identifier 'FMC_START_ADDR'
+    jump2app = (iapfun)*(uint32_t*)(FMC_START_ADDR + APP_FIRMWARE_INTERNAL_ADDR1 + 4);
+                                    ^
+../boot/boot.c(27): error: use of undeclared identifier 'FMC_START_ADDR'
+    __set_PSP(*(__IO uint32_t *)FMC_START_ADDR + APP_FIRMWARE_INTERNAL_ADDR1);
+                                ^
+../boot/boot.c(29): error: use of undeclared identifier 'FMC_START_ADDR'
+    __set_MSP(*(__IO uint32_t *)FMC_START_ADDR + APP_FIRMWARE_INTERNAL_ADDR1);
+                                ^
+../boot/boot.c(48): warning: implicit declaration of function 'InternalFlashRead' is invalid in C99 [-Wimplicit-function-declaration]
+        InternalFlashRead(FIRMWARE_EXTERNAL_FLASH_FLAG_ADDR, _data_temp, 256);   
+        ^
+../boot/boot.c(144): warning: implicit declaration of function 'InternalFlashErasePage' is invalid in C99 [-Wimplicit-function-declaration]
+        InternalFlashErasePage(APP_FIRMWARE_HEAD_INTERNAL_ADDR);
+        ^
+../boot/boot.c(151): warning: implicit declaration of function 'InternalFlashRead' is invalid in C99 [-Wimplicit-function-declaration]
+                        InternalFlashRead(FIRMWARE_EXTERNAL_FLASH_ADDR + seek, _data_temp, 256);            
+                        ^
+../boot/boot.c(152): warning: implicit declaration of function 'InternalFlashWrite' is invalid in C99 [-Wimplicit-function-declaration]
+            InternalFlashWrite(APP_FIRMWARE_INTERNAL_ADDR+ seek, (uint32_t *)_data_temp, 256);  
+            ^
+../boot/boot.c(156): warning: implicit declaration of function 'InternalFlashRead' is invalid in C99 [-Wimplicit-function-declaration]
+                InternalFlashRead(FIRMWARE_EXTERNAL_FLASH_ADDR + seek , _data_temp, len);                
+                ^
+../boot/boot.c(157): warning: implicit declaration of function 'InternalFlashWrite' is invalid in C99 [-Wimplicit-function-declaration]
+        InternalFlashWrite(APP_FIRMWARE_INTERNAL_ADDR + seek, (uint32_t *)_data_temp, len);      
+        ^
+../boot/boot.c(162): warning: implicit declaration of function 'InternalFlashWriteWithoutErase' is invalid in C99 [-Wimplicit-function-declaration]
+        InternalFlashWriteWithoutErase(APP_FIRMWARE_HEAD_INTERNAL_ADDR, (uint32_t *)_data_temp, 256);
+        ^
+../boot/boot.c(179): warning: implicit declaration of function 'InternalFlashReadWord' is invalid in C99 [-Wimplicit-function-declaration]
+        InternalFlashReadWord(APP_FIRMWARE_HEAD_INTERNAL_ADDR, (uint32_t *)_data_temp, 256);
+        ^
+../boot/boot.c(207): warning: implicit declaration of function 'InternalFlashErasePage' is invalid in C99 [-Wimplicit-function-declaration]
+        InternalFlashErasePage(APP_FIRMWARE_HEAD_INTERNAL_ADDR);
+        ^
+../boot/boot.c(214): warning: implicit declaration of function 'InternalFlashWrite' is invalid in C99 [-Wimplicit-function-declaration]
+            InternalFlashWrite(APP_FIRMWARE_HEAD_INTERNAL_ADDR + seek, (uint32_t *)_data_temp, 256);
+            ^
+../boot/boot.c(219): warning: implicit declaration of function 'InternalFlashWrite' is invalid in C99 [-Wimplicit-function-declaration]
+        InternalFlashWrite(APP_FIRMWARE_HEAD_INTERNAL_ADDR + seek, (uint32_t *)_data_temp, len);
+        ^
+../boot/boot.c(224): warning: implicit declaration of function 'InternalFlashWriteWithoutErase' is invalid in C99 [-Wimplicit-function-declaration]
+        InternalFlashWriteWithoutErase(APP_FIRMWARE_HEAD_INTERNAL_ADDR, (uint32_t *)_data_temp, 256);
+        ^
+12 warnings and 5 errors generated.
+compiling boot.c...
+../app/modbus_analysis.c(25): warning: In file included from...
+../app/proto_uniform.h(5): warning: In file included from...
+../dev\dev_rs485.h(6): warning: In file included from...
+../sys\bsp.h(128): error: unknown type name 'Adc_HandleType'; did you mean 'Spi_HandleType'?
+extern Adc_HandleType Adc1ArcCurHandle;
+       ^~~~~~~~~~~~~~
+       Spi_HandleType
+../driver\spi.h(98): note: 'Spi_HandleType' declared here
+}Spi_HandleType;
+ ^
+../app/modbus_analysis.c(25): warning: In file included from...
+../app/proto_uniform.h(5): warning: In file included from...
+../dev\dev_rs485.h(6): warning: In file included from...
+../sys\bsp.h(129): error: unknown type name 'Adc_HandleType'; did you mean 'Spi_HandleType'?
+extern Adc_HandleType Adc2ArcCurHandle;
+       ^~~~~~~~~~~~~~
+       Spi_HandleType
+../driver\spi.h(98): note: 'Spi_HandleType' declared here
+}Spi_HandleType;
+ ^
+2 errors generated.
+compiling modbus_analysis.c...
+".\Objects\collector.axf" - 51 Error(s), 22 Warning(s).
+
+<h2>Software Packages used:</h2>
+
+Package Vendor: Nationstech
+                http://www.keil.com/pack/Nationstech.N32G4FR_DFP.1.0.4.pack
+                Nationstech.N32G4FR_DFP.1.0.4
+                Nationstech N32G4FR Series Device Support, Drivers and Examples
+
+<h2>Collection of Component include folders:</h2>
+  D:\Users\Nova006352\AppData\Local\Arm\Packs\Nationstech\N32G4FR_DFP\1.0.4\firmware\CMSIS\device
+
+<h2>Collection of Component Files used:</h2>
+Target not created.
+Build Time Elapsed:  00:00:02
+</pre>
+</body>
+</html>

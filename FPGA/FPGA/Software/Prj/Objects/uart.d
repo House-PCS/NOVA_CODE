@@ -1,0 +1,11 @@
+.\objects\uart.o: ..\Src\Peripheral\src\Uart.c
+.\objects\uart.o: ..\Src\Peripheral\inc\Uart.h
+.\objects\uart.o: ..\Src\System\inc\system_CMSDK_CM0.h
+.\objects\uart.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+.\objects\uart.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+.\objects\uart.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdbool.h
+.\objects\uart.o: ..\Src\Core\CMSDK_CM0.h
+.\objects\uart.o: ..\Src\Core\core_cm0.h
+.\objects\uart.o: ..\Src\Core\core_cmInstr.h
+.\objects\uart.o: ..\Src\Core\core_cmFunc.h
+.\objects\uart.o: ..\Src\System\inc\system_CMSDK_CM0.h

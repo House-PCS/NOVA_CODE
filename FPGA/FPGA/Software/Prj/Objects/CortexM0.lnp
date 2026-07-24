@@ -1,0 +1,17 @@
+--cpu Cortex-M0
+".\objects\startup_cmsdk_cm0.o"
+".\objects\system_cmsdk_cm0.o"
+".\objects\gpio.o"
+".\objects\timer.o"
+".\objects\uart.o"
+".\objects\bmscache.o"
+".\objects\ethudp.o"
+".\objects\dev_phy.o"
+".\objects\mdio.o"
+".\objects\ddrcache.o"
+".\objects\spi.o"
+".\objects\main.o"
+--strict --scatter ".\Objects\CortexM0.sct"
+--summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
+--info sizes --info totals --info unused --info veneers
+--list ".\Listings\CortexM0.map" -o .\Objects\CortexM0.axf

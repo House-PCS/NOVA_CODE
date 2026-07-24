@@ -1,0 +1,290 @@
+<mxfile host="Electron" modified="2026-06-23T01:12:57.527Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/21.6.8 Chrome/114.0.5735.289 Electron/25.5.0 Safari/537.36" etag="j207DNaDjEZMPJyuwTqd" version="21.6.8" type="device">
+  <diagram name="第 1 页" id="e31MKBFj2xDygypHIwA7">
+    <mxGraphModel dx="1182" dy="688" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="Yw_BcnyKlnCTDgupGlZs-3" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="Yw_BcnyKlnCTDgupGlZs-1" target="ZkSOpEzo_AGmhpGwL-Wf-8">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="Yw_BcnyKlnCTDgupGlZs-5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;startArrow=classic;startFill=1;" edge="1" parent="1" source="Yw_BcnyKlnCTDgupGlZs-1" target="ZkSOpEzo_AGmhpGwL-Wf-41">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="470" y="205" />
+              <mxPoint x="720" y="205" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Yw_BcnyKlnCTDgupGlZs-1" value="FailureRecovery" style="rounded=0;whiteSpace=wrap;html=1;fontSize=9;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="430" y="308.25" width="80" height="118.5" as="geometry" />
+        </mxCell>
+        <mxCell id="ZkSOpEzo_AGmhpGwL-Wf-41" value="FPGAParaCore" style="rounded=0;whiteSpace=wrap;html=1;fontSize=9;fontStyle=1" parent="1" vertex="1">
+          <mxGeometry x="670" y="225" width="100" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="ZkSOpEzo_AGmhpGwL-Wf-3" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontSize=9;fontStyle=1" parent="1" source="ZkSOpEzo_AGmhpGwL-Wf-1" target="ZkSOpEzo_AGmhpGwL-Wf-2" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ZkSOpEzo_AGmhpGwL-Wf-1" value="ADC采样" style="rounded=0;whiteSpace=wrap;html=1;fontSize=9;fontStyle=1" parent="1" vertex="1">
+          <mxGeometry x="279" y="304.5" width="59" height="125" as="geometry" />
+        </mxCell>
+        <mxCell id="Yw_BcnyKlnCTDgupGlZs-2" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="ZkSOpEzo_AGmhpGwL-Wf-2" target="Yw_BcnyKlnCTDgupGlZs-1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ZkSOpEzo_AGmhpGwL-Wf-2" value="滤波" style="rounded=0;whiteSpace=wrap;html=1;fontSize=9;fontStyle=1" parent="1" vertex="1">
+          <mxGeometry x="359" y="304.5" width="50" height="125" as="geometry" />
+        </mxCell>
+        <mxCell id="ZkSOpEzo_AGmhpGwL-Wf-10" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;startArrow=classic;startFill=1;fontSize=9;fontStyle=1" parent="1" source="ZkSOpEzo_AGmhpGwL-Wf-8" target="ZkSOpEzo_AGmhpGwL-Wf-9" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="595" y="310" />
+              <mxPoint x="595" y="310" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ZkSOpEzo_AGmhpGwL-Wf-8" value="DDRArbit" style="rounded=0;whiteSpace=wrap;html=1;fontSize=9;fontStyle=1" parent="1" vertex="1">
+          <mxGeometry x="555" y="322" width="100" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="ZkSOpEzo_AGmhpGwL-Wf-9" value="DDR 3" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=9;fontStyle=1" parent="1" vertex="1">
+          <mxGeometry x="555" y="247.5" width="80" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="ZkSOpEzo_AGmhpGwL-Wf-14" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontSize=9;fontStyle=1" parent="1" target="ZkSOpEzo_AGmhpGwL-Wf-13" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="845.0285714285715" y="407.5" as="sourcePoint" />
+            <Array as="points">
+              <mxPoint x="885" y="408" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ZkSOpEzo_AGmhpGwL-Wf-27" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=default;startArrow=classic;startFill=1;fontSize=9;fontStyle=1" parent="1" source="ZkSOpEzo_AGmhpGwL-Wf-11" target="ZkSOpEzo_AGmhpGwL-Wf-8" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="675" y="370" />
+              <mxPoint x="675" y="370" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ZkSOpEzo_AGmhpGwL-Wf-11" value="软核MCU" style="rounded=0;whiteSpace=wrap;html=1;fontSize=9;fontStyle=1" parent="1" vertex="1">
+          <mxGeometry x="785" y="330" width="135" height="81.25" as="geometry" />
+        </mxCell>
+        <mxCell id="ZkSOpEzo_AGmhpGwL-Wf-28" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#FF0000;fontSize=9;fontStyle=1" parent="1" source="ZkSOpEzo_AGmhpGwL-Wf-13" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="835" y="408" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="835" y="408" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ZkSOpEzo_AGmhpGwL-Wf-13" value="Flash" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=9;fontStyle=1" parent="1" vertex="1">
+          <mxGeometry x="805" y="440" width="100" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="ZkSOpEzo_AGmhpGwL-Wf-48" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;startArrow=classic;startFill=1;strokeColor=#FF0000;fontSize=9;fontStyle=1" parent="1" source="ZkSOpEzo_AGmhpGwL-Wf-15" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="855" y="330" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="855" y="330" />
+              <mxPoint x="855" y="330" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ZkSOpEzo_AGmhpGwL-Wf-15" value="Eth" style="rounded=0;whiteSpace=wrap;html=1;fontSize=9;fontStyle=1" parent="1" vertex="1">
+          <mxGeometry x="800" y="230" width="105" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="ZkSOpEzo_AGmhpGwL-Wf-49" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;startArrow=classic;startFill=1;strokeColor=#FF0000;fontSize=9;fontStyle=1" parent="1" source="ZkSOpEzo_AGmhpGwL-Wf-17" target="ZkSOpEzo_AGmhpGwL-Wf-15" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="945" y="240" />
+              <mxPoint x="945" y="240" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ZkSOpEzo_AGmhpGwL-Wf-17" value="VOFA+" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=9;fontStyle=1" parent="1" vertex="1">
+          <mxGeometry x="985" y="210" width="100" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="ZkSOpEzo_AGmhpGwL-Wf-22" value="RAM_A" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=9;fontStyle=1" parent="1" vertex="1">
+          <mxGeometry x="430" y="388.25" width="80" height="18.5" as="geometry" />
+        </mxCell>
+        <mxCell id="ZkSOpEzo_AGmhpGwL-Wf-23" value="RAM_B" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=9;fontStyle=1" parent="1" vertex="1">
+          <mxGeometry x="430" y="406.75" width="80" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="ZkSOpEzo_AGmhpGwL-Wf-31" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.75;entryDx=0;entryDy=0;fontSize=9;fontStyle=1" parent="1" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="520" y="500" />
+              <mxPoint x="715" y="500" />
+              <mxPoint x="715" y="393" />
+            </Array>
+            <mxPoint x="520" y="512" as="sourcePoint" />
+            <mxPoint x="785" y="392.9375000000001" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ZkSOpEzo_AGmhpGwL-Wf-53" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;fontSize=9;fontStyle=1" parent="1" source="ZkSOpEzo_AGmhpGwL-Wf-30" target="ZkSOpEzo_AGmhpGwL-Wf-23" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ZkSOpEzo_AGmhpGwL-Wf-30" value="ProtectCore" style="rounded=0;whiteSpace=wrap;html=1;fontSize=9;fontStyle=1" parent="1" vertex="1">
+          <mxGeometry x="420" y="480" width="100" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="ZkSOpEzo_AGmhpGwL-Wf-55" value="DcDcErr" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=9;fontStyle=1" parent="1" vertex="1">
+          <mxGeometry x="460" y="440" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="ZkSOpEzo_AGmhpGwL-Wf-59" value="录播数据" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=9;fontStyle=1" parent="1" vertex="1">
+          <mxGeometry x="855" y="411.25" width="110" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="ZkSOpEzo_AGmhpGwL-Wf-60" value="&lt;span style=&quot;color: rgb(0, 0, 0); font-family: Helvetica; font-size: 9px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; letter-spacing: normal; orphans: 2; text-align: center; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(251, 251, 251); text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; float: none; display: inline !important;&quot;&gt;录播数据&lt;/span&gt;" style="text;whiteSpace=wrap;html=1;fontSize=9;fontStyle=1" parent="1" vertex="1">
+          <mxGeometry x="450" y="372" width="80" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="ZkSOpEzo_AGmhpGwL-Wf-61" value="&lt;span style=&quot;color: rgb(0, 0, 0); font-family: Helvetica; font-size: 9px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; letter-spacing: normal; orphans: 2; text-align: center; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(251, 251, 251); text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; float: none; display: inline !important;&quot;&gt;录播数据&lt;/span&gt;" style="text;whiteSpace=wrap;html=1;fontSize=9;fontStyle=1" parent="1" vertex="1">
+          <mxGeometry x="572.5" y="267.5" width="45" height="22.5" as="geometry" />
+        </mxCell>
+        <mxCell id="ZkSOpEzo_AGmhpGwL-Wf-62" value="&lt;font style=&quot;font-size: 9px;&quot;&gt;&lt;span style=&quot;font-size: 9px;&quot;&gt;下发回读指令&lt;br style=&quot;font-size: 9px;&quot;&gt;上传录播数据&lt;/span&gt;&lt;/font&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=9;fontStyle=1" parent="1" vertex="1">
+          <mxGeometry x="900" y="210" width="90" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="ZkSOpEzo_AGmhpGwL-Wf-63" value="录播数据" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=9;fontStyle=1" parent="1" vertex="1">
+          <mxGeometry x="755" y="412" width="110" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="ZkSOpEzo_AGmhpGwL-Wf-66" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontSize=11;fontStyle=1" parent="1" source="ZkSOpEzo_AGmhpGwL-Wf-64" target="ZkSOpEzo_AGmhpGwL-Wf-65" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ZkSOpEzo_AGmhpGwL-Wf-78" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;startArrow=classic;startFill=1;endArrow=none;endFill=0;fontSize=11;fontStyle=1" parent="1" source="ZkSOpEzo_AGmhpGwL-Wf-64" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="420" y="730" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ZkSOpEzo_AGmhpGwL-Wf-64" value="ping-pang Ram实时缓存所需数据" style="rounded=0;whiteSpace=wrap;html=1;fontSize=11;fontStyle=1" parent="1" vertex="1">
+          <mxGeometry x="360" y="760" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="ZkSOpEzo_AGmhpGwL-Wf-74" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontSize=11;fontStyle=1" parent="1" source="ZkSOpEzo_AGmhpGwL-Wf-65" target="ZkSOpEzo_AGmhpGwL-Wf-69" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ZkSOpEzo_AGmhpGwL-Wf-65" value="从Ram中读出数据，环形缓存DDR中" style="rounded=0;whiteSpace=wrap;html=1;fontSize=11;fontStyle=1" parent="1" vertex="1">
+          <mxGeometry x="360" y="850" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="ZkSOpEzo_AGmhpGwL-Wf-75" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;fontSize=11;fontStyle=1" parent="1" source="ZkSOpEzo_AGmhpGwL-Wf-69" target="ZkSOpEzo_AGmhpGwL-Wf-64" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="530" y="980" />
+              <mxPoint x="530" y="790" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ZkSOpEzo_AGmhpGwL-Wf-76" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontSize=11;fontStyle=1" parent="1" source="ZkSOpEzo_AGmhpGwL-Wf-69" target="ZkSOpEzo_AGmhpGwL-Wf-71" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ZkSOpEzo_AGmhpGwL-Wf-69" value="DCDC故障" style="rhombus;whiteSpace=wrap;html=1;rounded=0;fontSize=11;fontStyle=1" parent="1" vertex="1">
+          <mxGeometry x="335" y="940" width="170" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="ZkSOpEzo_AGmhpGwL-Wf-82" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontSize=11;fontStyle=1" parent="1" source="ZkSOpEzo_AGmhpGwL-Wf-71" target="ZkSOpEzo_AGmhpGwL-Wf-81" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ZkSOpEzo_AGmhpGwL-Wf-71" value="将DDR中缓存的故障数据固化Flash" style="whiteSpace=wrap;html=1;rounded=0;fontSize=11;fontStyle=1" parent="1" vertex="1">
+          <mxGeometry x="300" y="1040" width="240" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="ZkSOpEzo_AGmhpGwL-Wf-81" value="结束" style="whiteSpace=wrap;html=1;rounded=0;fontSize=11;fontStyle=1" parent="1" vertex="1">
+          <mxGeometry x="360" y="1130" width="120" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="ZkSOpEzo_AGmhpGwL-Wf-85" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontSize=11;fontStyle=1" parent="1" source="ZkSOpEzo_AGmhpGwL-Wf-83" target="Yw_BcnyKlnCTDgupGlZs-9" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ZkSOpEzo_AGmhpGwL-Wf-83" value="通过上位机Vofa+下发读取故障信息指令" style="rounded=0;whiteSpace=wrap;html=1;fontSize=11;fontStyle=1" parent="1" vertex="1">
+          <mxGeometry x="630" y="750" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="Yw_BcnyKlnCTDgupGlZs-12" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="ZkSOpEzo_AGmhpGwL-Wf-84" target="Yw_BcnyKlnCTDgupGlZs-11">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ZkSOpEzo_AGmhpGwL-Wf-84" value="通过网口上传到上位机" style="rounded=0;whiteSpace=wrap;html=1;fontSize=11;fontStyle=1" parent="1" vertex="1">
+          <mxGeometry x="630" y="920" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="Yw_BcnyKlnCTDgupGlZs-16" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="ZkSOpEzo_AGmhpGwL-Wf-88" target="Yw_BcnyKlnCTDgupGlZs-15">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="Yw_BcnyKlnCTDgupGlZs-20" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="ZkSOpEzo_AGmhpGwL-Wf-88" target="ZkSOpEzo_AGmhpGwL-Wf-83">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="820" y="1120" />
+              <mxPoint x="820" y="780" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ZkSOpEzo_AGmhpGwL-Wf-88" value="故障数据回读完成" style="rhombus;whiteSpace=wrap;html=1;rounded=0;fontSize=11;fontStyle=1" parent="1" vertex="1">
+          <mxGeometry x="590" y="1095" width="200" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="ZkSOpEzo_AGmhpGwL-Wf-102" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontSize=11;fontStyle=1" parent="1" target="ZkSOpEzo_AGmhpGwL-Wf-83" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="690" y="726" as="sourcePoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ZkSOpEzo_AGmhpGwL-Wf-104" value="开始" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=11;fontStyle=1" parent="1" vertex="1">
+          <mxGeometry x="660" y="710" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="ZkSOpEzo_AGmhpGwL-Wf-105" value="开始" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=11;fontStyle=1" parent="1" vertex="1">
+          <mxGeometry x="390" y="710" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="ZkSOpEzo_AGmhpGwL-Wf-106" value="故障数据保存流程" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=14;fontStyle=1" parent="1" vertex="1">
+          <mxGeometry x="354" y="690" width="120" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="ZkSOpEzo_AGmhpGwL-Wf-107" value="故障数据回显流程" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=14;fontStyle=1" parent="1" vertex="1">
+          <mxGeometry x="625" y="690" width="120" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="ZkSOpEzo_AGmhpGwL-Wf-108" value="否" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="480" y="950" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="ZkSOpEzo_AGmhpGwL-Wf-109" value="否" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="770" y="1095" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="ZkSOpEzo_AGmhpGwL-Wf-110" value="是" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="409" y="1010" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="ZkSOpEzo_AGmhpGwL-Wf-111" value="是" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="670" y="1140" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="ZkSOpEzo_AGmhpGwL-Wf-112" value="" style="endArrow=none;html=1;rounded=0;endFill=0;strokeWidth=3;" parent="1" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="380" y="540" as="sourcePoint" />
+            <mxPoint x="456" y="540" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="430" y="540" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ZkSOpEzo_AGmhpGwL-Wf-113" value="故障数据保存数据流" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontStyle=1;fontSize=13;" parent="1" vertex="1">
+          <mxGeometry x="465" y="520" width="135" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="ZkSOpEzo_AGmhpGwL-Wf-115" value="" style="endArrow=none;html=1;rounded=0;endFill=0;strokeColor=#FF0000;strokeWidth=3;" parent="1" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="670" y="540" as="sourcePoint" />
+            <mxPoint x="746" y="540" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="720" y="540" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ZkSOpEzo_AGmhpGwL-Wf-116" value="故障数据回显数据流" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontStyle=1;fontSize=13;" parent="1" vertex="1">
+          <mxGeometry x="755" y="520" width="135" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="Yw_BcnyKlnCTDgupGlZs-4" value="录播数据" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=9;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="480" y="340" width="110" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="Yw_BcnyKlnCTDgupGlZs-7" value="开关机指令 -- BmsShutdown&lt;br&gt;MCU读取DDR的起始地址--McuRdStartAddr&lt;br&gt;MCU固化使能--McuFlashBurnEn&lt;br&gt;MCU固化完成--McuFaultBurnFinish" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="469" y="160" width="277.5" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="Yw_BcnyKlnCTDgupGlZs-8" value="录播数据" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=9;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="665" y="342" width="110" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="Yw_BcnyKlnCTDgupGlZs-10" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="Yw_BcnyKlnCTDgupGlZs-9" target="ZkSOpEzo_AGmhpGwL-Wf-84">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="Yw_BcnyKlnCTDgupGlZs-9" value="MCU解包，并从Flash中回读故障数据" style="rounded=0;whiteSpace=wrap;html=1;fontSize=11;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="630" y="830" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="Yw_BcnyKlnCTDgupGlZs-13" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="Yw_BcnyKlnCTDgupGlZs-11" target="ZkSOpEzo_AGmhpGwL-Wf-88">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="Yw_BcnyKlnCTDgupGlZs-11" value="上位机解析并显示故障数据" style="rounded=0;whiteSpace=wrap;html=1;fontSize=11;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="630" y="1010" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="Yw_BcnyKlnCTDgupGlZs-15" value="结束" style="whiteSpace=wrap;html=1;rounded=0;fontSize=11;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="630" y="1170" width="120" height="40" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

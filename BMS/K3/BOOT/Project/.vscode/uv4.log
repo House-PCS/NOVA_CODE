@@ -1,0 +1,472 @@
+*** Using Compiler 'V5.06 update 7 (build 960)', folder: 'C:\Keil_v5\ARM\ARM_Compiler_5.06u7\Bin'
+Rebuild target 'GD32F303'
+compiling i2c.c...
+compiling dev_led.c...
+.\driver\exti.h(34): warning:  #1295-D: Deprecated declaration ExtiClkInit - give arg types
+  void ExtiClkInit();
+.\driver\gpio.h(74): warning:  #1295-D: Deprecated declaration GpioClkInit - give arg types
+  void GpioClkInit();
+.\driver\adc.h(54): warning:  #1295-D: Deprecated declaration AdcClkInit - give arg types
+  void AdcClkInit();
+.\sys\bsp.h(67): warning:  #1295-D: Deprecated declaration BspInit - give arg types
+  void BspInit();
+.\sys\bsp.h(68): warning:  #1295-D: Deprecated declaration SpiAdbms6830BspInit - give arg types
+  void SpiAdbms6830BspInit();
+.\sys\bsp.h(69): warning:  #1295-D: Deprecated declaration SpiFlashBspInit - give arg types
+  void SpiFlashBspInit();
+.\sys\bsp.h(70): warning:  #1295-D: Deprecated declaration Uart0DebugBspInit - give arg types
+  void Uart0DebugBspInit();
+.\sys\bsp.h(71): warning:  #1295-D: Deprecated declaration Uart1ModsBspInit - give arg types
+  void Uart1ModsBspInit();
+.\sys\bsp.h(72): warning:  #1295-D: Deprecated declaration Uart3DebugBspInit - give arg types
+  void Uart3DebugBspInit();
+.\sys\bsp.h(73): warning:  #1295-D: Deprecated declaration ADCBspInit - give arg types
+  void ADCBspInit();
+.\sys\bsp.h(74): warning:  #1295-D: Deprecated declaration HC595GpioBspInit - give arg types
+  void HC595GpioBspInit();
+.\sys\bsp.h(75): warning:  #1295-D: Deprecated declaration BQ76200GpioBspInit - give arg types
+  void BQ76200GpioBspInit();
+.\sys\bsp.h(76): warning:  #1295-D: Deprecated declaration KeyBspInit - give arg types
+  void KeyBspInit();
+.\sys\bsp.h(77): warning:  #1295-D: Deprecated declaration AFETimerInit - give arg types
+  void AFETimerInit();
+.\sys\bsp.h(80): warning:  #1295-D: Deprecated declaration MainBoardPowerGpioBspInit - give arg types
+  void MainBoardPowerGpioBspInit();
+device\dev_led.c: 15 warnings, 0 errors
+compiling dma.c...
+compiling uart.c...
+compiling queue.c...
+sys\queue.h(26): warning:  #1295-D: Deprecated declaration QueueIsFull - give arg types
+  bool QueueIsFull();
+sys\queue.c: 1 warning, 0 errors
+compiling firmware_iap.c...
+.\driver\exti.h(34): warning:  #1295-D: Deprecated declaration ExtiClkInit - give arg types
+  void ExtiClkInit();
+.\driver\gpio.h(74): warning:  #1295-D: Deprecated declaration GpioClkInit - give arg types
+  void GpioClkInit();
+.\driver\adc.h(54): warning:  #1295-D: Deprecated declaration AdcClkInit - give arg types
+  void AdcClkInit();
+.\sys\bsp.h(67): warning:  #1295-D: Deprecated declaration BspInit - give arg types
+  void BspInit();
+.\sys\bsp.h(68): warning:  #1295-D: Deprecated declaration SpiAdbms6830BspInit - give arg types
+  void SpiAdbms6830BspInit();
+.\sys\bsp.h(69): warning:  #1295-D: Deprecated declaration SpiFlashBspInit - give arg types
+  void SpiFlashBspInit();
+.\sys\bsp.h(70): warning:  #1295-D: Deprecated declaration Uart0DebugBspInit - give arg types
+  void Uart0DebugBspInit();
+.\sys\bsp.h(71): warning:  #1295-D: Deprecated declaration Uart1ModsBspInit - give arg types
+  void Uart1ModsBspInit();
+.\sys\bsp.h(72): warning:  #1295-D: Deprecated declaration Uart3DebugBspInit - give arg types
+  void Uart3DebugBspInit();
+.\sys\bsp.h(73): warning:  #1295-D: Deprecated declaration ADCBspInit - give arg types
+  void ADCBspInit();
+.\sys\bsp.h(74): warning:  #1295-D: Deprecated declaration HC595GpioBspInit - give arg types
+  void HC595GpioBspInit();
+.\sys\bsp.h(75): warning:  #1295-D: Deprecated declaration BQ76200GpioBspInit - give arg types
+  void BQ76200GpioBspInit();
+.\sys\bsp.h(76): warning:  #1295-D: Deprecated declaration KeyBspInit - give arg types
+  void KeyBspInit();
+.\sys\bsp.h(77): warning:  #1295-D: Deprecated declaration AFETimerInit - give arg types
+  void AFETimerInit();
+.\sys\bsp.h(80): warning:  #1295-D: Deprecated declaration MainBoardPowerGpioBspInit - give arg types
+  void MainBoardPowerGpioBspInit();
+.\sys\queue.h(26): warning:  #1295-D: Deprecated declaration QueueIsFull - give arg types
+  bool QueueIsFull();
+.\device\dev_communication.h(74): warning:  #1295-D: Deprecated declaration CommunicationInit - give arg types
+  bool CommunicationInit();
+.\device\dev_communication.h(75): warning:  #1295-D: Deprecated declaration ComDataProcess - give arg types
+  void ComDataProcess();
+sys\firmware_iap.c(793): warning:  #111-D: statement is unreachable
+          break;
+sys\firmware_iap.c: 19 warnings, 0 errors
+compiling debug.c...
+.\driver\exti.h(34): warning:  #1295-D: Deprecated declaration ExtiClkInit - give arg types
+  void ExtiClkInit();
+.\driver\gpio.h(74): warning:  #1295-D: Deprecated declaration GpioClkInit - give arg types
+  void GpioClkInit();
+.\driver\adc.h(54): warning:  #1295-D: Deprecated declaration AdcClkInit - give arg types
+  void AdcClkInit();
+sys\bsp.h(67): warning:  #1295-D: Deprecated declaration BspInit - give arg types
+  void BspInit();
+sys\bsp.h(68): warning:  #1295-D: Deprecated declaration SpiAdbms6830BspInit - give arg types
+  void SpiAdbms6830BspInit();
+sys\bsp.h(69): warning:  #1295-D: Deprecated declaration SpiFlashBspInit - give arg types
+  void SpiFlashBspInit();
+sys\bsp.h(70): warning:  #1295-D: Deprecated declaration Uart0DebugBspInit - give arg types
+  void Uart0DebugBspInit();
+sys\bsp.h(71): warning:  #1295-D: Deprecated declaration Uart1ModsBspInit - give arg types
+  void Uart1ModsBspInit();
+sys\bsp.h(72): warning:  #1295-D: Deprecated declaration Uart3DebugBspInit - give arg types
+  void Uart3DebugBspInit();
+sys\bsp.h(73): warning:  #1295-D: Deprecated declaration ADCBspInit - give arg types
+  void ADCBspInit();
+sys\bsp.h(74): warning:  #1295-D: Deprecated declaration HC595GpioBspInit - give arg types
+  void HC595GpioBspInit();
+sys\bsp.h(75): warning:  #1295-D: Deprecated declaration BQ76200GpioBspInit - give arg types
+  void BQ76200GpioBspInit();
+sys\bsp.h(76): warning:  #1295-D: Deprecated declaration KeyBspInit - give arg types
+  void KeyBspInit();
+sys\bsp.h(77): warning:  #1295-D: Deprecated declaration AFETimerInit - give arg types
+  void AFETimerInit();
+sys\bsp.h(80): warning:  #1295-D: Deprecated declaration MainBoardPowerGpioBspInit - give arg types
+  void MainBoardPowerGpioBspInit();
+sys\debug.c: 15 warnings, 0 errors
+compiling mid_shell.c...
+.\driver\exti.h(34): warning:  #1295-D: Deprecated declaration ExtiClkInit - give arg types
+  void ExtiClkInit();
+.\driver\gpio.h(74): warning:  #1295-D: Deprecated declaration GpioClkInit - give arg types
+  void GpioClkInit();
+.\driver\adc.h(54): warning:  #1295-D: Deprecated declaration AdcClkInit - give arg types
+  void AdcClkInit();
+.\sys\bsp.h(67): warning:  #1295-D: Deprecated declaration BspInit - give arg types
+  void BspInit();
+.\sys\bsp.h(68): warning:  #1295-D: Deprecated declaration SpiAdbms6830BspInit - give arg types
+  void SpiAdbms6830BspInit();
+.\sys\bsp.h(69): warning:  #1295-D: Deprecated declaration SpiFlashBspInit - give arg types
+  void SpiFlashBspInit();
+.\sys\bsp.h(70): warning:  #1295-D: Deprecated declaration Uart0DebugBspInit - give arg types
+  void Uart0DebugBspInit();
+.\sys\bsp.h(71): warning:  #1295-D: Deprecated declaration Uart1ModsBspInit - give arg types
+  void Uart1ModsBspInit();
+.\sys\bsp.h(72): warning:  #1295-D: Deprecated declaration Uart3DebugBspInit - give arg types
+  void Uart3DebugBspInit();
+.\sys\bsp.h(73): warning:  #1295-D: Deprecated declaration ADCBspInit - give arg types
+  void ADCBspInit();
+.\sys\bsp.h(74): warning:  #1295-D: Deprecated declaration HC595GpioBspInit - give arg types
+  void HC595GpioBspInit();
+.\sys\bsp.h(75): warning:  #1295-D: Deprecated declaration BQ76200GpioBspInit - give arg types
+  void BQ76200GpioBspInit();
+.\sys\bsp.h(76): warning:  #1295-D: Deprecated declaration KeyBspInit - give arg types
+  void KeyBspInit();
+.\sys\bsp.h(77): warning:  #1295-D: Deprecated declaration AFETimerInit - give arg types
+  void AFETimerInit();
+.\sys\bsp.h(80): warning:  #1295-D: Deprecated declaration MainBoardPowerGpioBspInit - give arg types
+  void MainBoardPowerGpioBspInit();
+middleware\mid_shell.c(437): warning:  #550-D: variable "name_len"  was set but never used
+      uint32_t name_len = 0;
+middleware\mid_shell.c: 16 warnings, 0 errors
+compiling rtc.c...
+.\driver\exti.h(34): warning:  #1295-D: Deprecated declaration ExtiClkInit - give arg types
+  void ExtiClkInit();
+.\driver\gpio.h(74): warning:  #1295-D: Deprecated declaration GpioClkInit - give arg types
+  void GpioClkInit();
+.\driver\adc.h(54): warning:  #1295-D: Deprecated declaration AdcClkInit - give arg types
+  void AdcClkInit();
+.\sys\bsp.h(67): warning:  #1295-D: Deprecated declaration BspInit - give arg types
+  void BspInit();
+.\sys\bsp.h(68): warning:  #1295-D: Deprecated declaration SpiAdbms6830BspInit - give arg types
+  void SpiAdbms6830BspInit();
+.\sys\bsp.h(69): warning:  #1295-D: Deprecated declaration SpiFlashBspInit - give arg types
+  void SpiFlashBspInit();
+.\sys\bsp.h(70): warning:  #1295-D: Deprecated declaration Uart0DebugBspInit - give arg types
+  void Uart0DebugBspInit();
+.\sys\bsp.h(71): warning:  #1295-D: Deprecated declaration Uart1ModsBspInit - give arg types
+  void Uart1ModsBspInit();
+.\sys\bsp.h(72): warning:  #1295-D: Deprecated declaration Uart3DebugBspInit - give arg types
+  void Uart3DebugBspInit();
+.\sys\bsp.h(73): warning:  #1295-D: Deprecated declaration ADCBspInit - give arg types
+  void ADCBspInit();
+.\sys\bsp.h(74): warning:  #1295-D: Deprecated declaration HC595GpioBspInit - give arg types
+  void HC595GpioBspInit();
+.\sys\bsp.h(75): warning:  #1295-D: Deprecated declaration BQ76200GpioBspInit - give arg types
+  void BQ76200GpioBspInit();
+.\sys\bsp.h(76): warning:  #1295-D: Deprecated declaration KeyBspInit - give arg types
+  void KeyBspInit();
+.\sys\bsp.h(77): warning:  #1295-D: Deprecated declaration AFETimerInit - give arg types
+  void AFETimerInit();
+.\sys\bsp.h(80): warning:  #1295-D: Deprecated declaration MainBoardPowerGpioBspInit - give arg types
+  void MainBoardPowerGpioBspInit();
+driver\rtc.h(46): warning:  #1295-D: Deprecated declaration RtcNormalJudge - give arg types
+  bool RtcNormalJudge();
+driver\rtc.h(48): warning:  #1295-D: Deprecated declaration RtcGetTime - give arg types
+  uint32_t RtcGetTime();
+driver\rtc.c: 17 warnings, 0 errors
+compiling exti.c...
+driver\exti.h(34): warning:  #1295-D: Deprecated declaration ExtiClkInit - give arg types
+  void ExtiClkInit();
+driver\exti.c: 1 warning, 0 errors
+compiling dev_spiflash.c...
+.\driver\exti.h(34): warning:  #1295-D: Deprecated declaration ExtiClkInit - give arg types
+  void ExtiClkInit();
+.\driver\gpio.h(74): warning:  #1295-D: Deprecated declaration GpioClkInit - give arg types
+  void GpioClkInit();
+.\driver\adc.h(54): warning:  #1295-D: Deprecated declaration AdcClkInit - give arg types
+  void AdcClkInit();
+.\sys\bsp.h(67): warning:  #1295-D: Deprecated declaration BspInit - give arg types
+  void BspInit();
+.\sys\bsp.h(68): warning:  #1295-D: Deprecated declaration SpiAdbms6830BspInit - give arg types
+  void SpiAdbms6830BspInit();
+.\sys\bsp.h(69): warning:  #1295-D: Deprecated declaration SpiFlashBspInit - give arg types
+  void SpiFlashBspInit();
+.\sys\bsp.h(70): warning:  #1295-D: Deprecated declaration Uart0DebugBspInit - give arg types
+  void Uart0DebugBspInit();
+.\sys\bsp.h(71): warning:  #1295-D: Deprecated declaration Uart1ModsBspInit - give arg types
+  void Uart1ModsBspInit();
+.\sys\bsp.h(72): warning:  #1295-D: Deprecated declaration Uart3DebugBspInit - give arg types
+  void Uart3DebugBspInit();
+.\sys\bsp.h(73): warning:  #1295-D: Deprecated declaration ADCBspInit - give arg types
+  void ADCBspInit();
+.\sys\bsp.h(74): warning:  #1295-D: Deprecated declaration HC595GpioBspInit - give arg types
+  void HC595GpioBspInit();
+.\sys\bsp.h(75): warning:  #1295-D: Deprecated declaration BQ76200GpioBspInit - give arg types
+  void BQ76200GpioBspInit();
+.\sys\bsp.h(76): warning:  #1295-D: Deprecated declaration KeyBspInit - give arg types
+  void KeyBspInit();
+.\sys\bsp.h(77): warning:  #1295-D: Deprecated declaration AFETimerInit - give arg types
+  void AFETimerInit();
+.\sys\bsp.h(80): warning:  #1295-D: Deprecated declaration MainBoardPowerGpioBspInit - give arg types
+  void MainBoardPowerGpioBspInit();
+device\dev_spiflash.c: 15 warnings, 0 errors
+compiling timer.c...
+compiling systick.c...
+compiling adc.c...
+driver\adc.h(54): warning:  #1295-D: Deprecated declaration AdcClkInit - give arg types
+  void AdcClkInit();
+driver\adc.c: 1 warning, 0 errors
+compiling bsp.c...
+.\driver\exti.h(34): warning:  #1295-D: Deprecated declaration ExtiClkInit - give arg types
+  void ExtiClkInit();
+.\driver\gpio.h(74): warning:  #1295-D: Deprecated declaration GpioClkInit - give arg types
+  void GpioClkInit();
+.\driver\adc.h(54): warning:  #1295-D: Deprecated declaration AdcClkInit - give arg types
+  void AdcClkInit();
+sys\bsp.h(67): warning:  #1295-D: Deprecated declaration BspInit - give arg types
+  void BspInit();
+sys\bsp.h(68): warning:  #1295-D: Deprecated declaration SpiAdbms6830BspInit - give arg types
+  void SpiAdbms6830BspInit();
+sys\bsp.h(69): warning:  #1295-D: Deprecated declaration SpiFlashBspInit - give arg types
+  void SpiFlashBspInit();
+sys\bsp.h(70): warning:  #1295-D: Deprecated declaration Uart0DebugBspInit - give arg types
+  void Uart0DebugBspInit();
+sys\bsp.h(71): warning:  #1295-D: Deprecated declaration Uart1ModsBspInit - give arg types
+  void Uart1ModsBspInit();
+sys\bsp.h(72): warning:  #1295-D: Deprecated declaration Uart3DebugBspInit - give arg types
+  void Uart3DebugBspInit();
+sys\bsp.h(73): warning:  #1295-D: Deprecated declaration ADCBspInit - give arg types
+  void ADCBspInit();
+sys\bsp.h(74): warning:  #1295-D: Deprecated declaration HC595GpioBspInit - give arg types
+  void HC595GpioBspInit();
+sys\bsp.h(75): warning:  #1295-D: Deprecated declaration BQ76200GpioBspInit - give arg types
+  void BQ76200GpioBspInit();
+sys\bsp.h(76): warning:  #1295-D: Deprecated declaration KeyBspInit - give arg types
+  void KeyBspInit();
+sys\bsp.h(77): warning:  #1295-D: Deprecated declaration AFETimerInit - give arg types
+  void AFETimerInit();
+sys\bsp.h(80): warning:  #1295-D: Deprecated declaration MainBoardPowerGpioBspInit - give arg types
+  void MainBoardPowerGpioBspInit();
+sys\bsp.c: 15 warnings, 0 errors
+compiling dev_communication.c...
+.\sys\queue.h(26): warning:  #1295-D: Deprecated declaration QueueIsFull - give arg types
+  bool QueueIsFull();
+.\driver\exti.h(34): warning:  #1295-D: Deprecated declaration ExtiClkInit - give arg types
+  void ExtiClkInit();
+.\driver\gpio.h(74): warning:  #1295-D: Deprecated declaration GpioClkInit - give arg types
+  void GpioClkInit();
+.\driver\adc.h(54): warning:  #1295-D: Deprecated declaration AdcClkInit - give arg types
+  void AdcClkInit();
+.\sys\bsp.h(67): warning:  #1295-D: Deprecated declaration BspInit - give arg types
+  void BspInit();
+.\sys\bsp.h(68): warning:  #1295-D: Deprecated declaration SpiAdbms6830BspInit - give arg types
+  void SpiAdbms6830BspInit();
+.\sys\bsp.h(69): warning:  #1295-D: Deprecated declaration SpiFlashBspInit - give arg types
+  void SpiFlashBspInit();
+.\sys\bsp.h(70): warning:  #1295-D: Deprecated declaration Uart0DebugBspInit - give arg types
+  void Uart0DebugBspInit();
+.\sys\bsp.h(71): warning:  #1295-D: Deprecated declaration Uart1ModsBspInit - give arg types
+  void Uart1ModsBspInit();
+.\sys\bsp.h(72): warning:  #1295-D: Deprecated declaration Uart3DebugBspInit - give arg types
+  void Uart3DebugBspInit();
+.\sys\bsp.h(73): warning:  #1295-D: Deprecated declaration ADCBspInit - give arg types
+  void ADCBspInit();
+.\sys\bsp.h(74): warning:  #1295-D: Deprecated declaration HC595GpioBspInit - give arg types
+  void HC595GpioBspInit();
+.\sys\bsp.h(75): warning:  #1295-D: Deprecated declaration BQ76200GpioBspInit - give arg types
+  void BQ76200GpioBspInit();
+.\sys\bsp.h(76): warning:  #1295-D: Deprecated declaration KeyBspInit - give arg types
+  void KeyBspInit();
+.\sys\bsp.h(77): warning:  #1295-D: Deprecated declaration AFETimerInit - give arg types
+  void AFETimerInit();
+.\sys\bsp.h(80): warning:  #1295-D: Deprecated declaration MainBoardPowerGpioBspInit - give arg types
+  void MainBoardPowerGpioBspInit();
+device\dev_communication.h(74): warning:  #1295-D: Deprecated declaration CommunicationInit - give arg types
+  bool CommunicationInit();
+device\dev_communication.h(75): warning:  #1295-D: Deprecated declaration ComDataProcess - give arg types
+  void ComDataProcess();
+device\dev_communication.c(35): warning:  #1295-D: Deprecated declaration IrqRxProcess - give arg types
+  static void IrqRxProcess();
+device\dev_communication.c(186): warning:  #550-D: variable "bms_pack_id"  was set but never used
+  	static uint16_t bms_pack_id;
+device\dev_communication.c(26): warning:  #550-D: variable "gBMSFirmwareUpgradeEndTimes"  was set but never used
+  static uint32_t gBMSFirmwareUpgradeEndTimes = 0;
+device\dev_communication.c: 21 warnings, 0 errors
+compiling spi.c...
+compiling fwdgt.c...
+.\driver\exti.h(34): warning:  #1295-D: Deprecated declaration ExtiClkInit - give arg types
+  void ExtiClkInit();
+.\driver\gpio.h(74): warning:  #1295-D: Deprecated declaration GpioClkInit - give arg types
+  void GpioClkInit();
+.\driver\adc.h(54): warning:  #1295-D: Deprecated declaration AdcClkInit - give arg types
+  void AdcClkInit();
+.\sys\bsp.h(67): warning:  #1295-D: Deprecated declaration BspInit - give arg types
+  void BspInit();
+.\sys\bsp.h(68): warning:  #1295-D: Deprecated declaration SpiAdbms6830BspInit - give arg types
+  void SpiAdbms6830BspInit();
+.\sys\bsp.h(69): warning:  #1295-D: Deprecated declaration SpiFlashBspInit - give arg types
+  void SpiFlashBspInit();
+.\sys\bsp.h(70): warning:  #1295-D: Deprecated declaration Uart0DebugBspInit - give arg types
+  void Uart0DebugBspInit();
+.\sys\bsp.h(71): warning:  #1295-D: Deprecated declaration Uart1ModsBspInit - give arg types
+  void Uart1ModsBspInit();
+.\sys\bsp.h(72): warning:  #1295-D: Deprecated declaration Uart3DebugBspInit - give arg types
+  void Uart3DebugBspInit();
+.\sys\bsp.h(73): warning:  #1295-D: Deprecated declaration ADCBspInit - give arg types
+  void ADCBspInit();
+.\sys\bsp.h(74): warning:  #1295-D: Deprecated declaration HC595GpioBspInit - give arg types
+  void HC595GpioBspInit();
+.\sys\bsp.h(75): warning:  #1295-D: Deprecated declaration BQ76200GpioBspInit - give arg types
+  void BQ76200GpioBspInit();
+.\sys\bsp.h(76): warning:  #1295-D: Deprecated declaration KeyBspInit - give arg types
+  void KeyBspInit();
+.\sys\bsp.h(77): warning:  #1295-D: Deprecated declaration AFETimerInit - give arg types
+  void AFETimerInit();
+.\sys\bsp.h(80): warning:  #1295-D: Deprecated declaration MainBoardPowerGpioBspInit - give arg types
+  void MainBoardPowerGpioBspInit();
+driver\fwdgt.c: 15 warnings, 0 errors
+compiling gd32f30x_it.c...
+.\driver\exti.h(34): warning:  #1295-D: Deprecated declaration ExtiClkInit - give arg types
+  void ExtiClkInit();
+.\driver\gpio.h(74): warning:  #1295-D: Deprecated declaration GpioClkInit - give arg types
+  void GpioClkInit();
+.\driver\adc.h(54): warning:  #1295-D: Deprecated declaration AdcClkInit - give arg types
+  void AdcClkInit();
+sys\bsp.h(67): warning:  #1295-D: Deprecated declaration BspInit - give arg types
+  void BspInit();
+sys\bsp.h(68): warning:  #1295-D: Deprecated declaration SpiAdbms6830BspInit - give arg types
+  void SpiAdbms6830BspInit();
+sys\bsp.h(69): warning:  #1295-D: Deprecated declaration SpiFlashBspInit - give arg types
+  void SpiFlashBspInit();
+sys\bsp.h(70): warning:  #1295-D: Deprecated declaration Uart0DebugBspInit - give arg types
+  void Uart0DebugBspInit();
+sys\bsp.h(71): warning:  #1295-D: Deprecated declaration Uart1ModsBspInit - give arg types
+  void Uart1ModsBspInit();
+sys\bsp.h(72): warning:  #1295-D: Deprecated declaration Uart3DebugBspInit - give arg types
+  void Uart3DebugBspInit();
+sys\bsp.h(73): warning:  #1295-D: Deprecated declaration ADCBspInit - give arg types
+  void ADCBspInit();
+sys\bsp.h(74): warning:  #1295-D: Deprecated declaration HC595GpioBspInit - give arg types
+  void HC595GpioBspInit();
+sys\bsp.h(75): warning:  #1295-D: Deprecated declaration BQ76200GpioBspInit - give arg types
+  void BQ76200GpioBspInit();
+sys\bsp.h(76): warning:  #1295-D: Deprecated declaration KeyBspInit - give arg types
+  void KeyBspInit();
+sys\bsp.h(77): warning:  #1295-D: Deprecated declaration AFETimerInit - give arg types
+  void AFETimerInit();
+sys\bsp.h(80): warning:  #1295-D: Deprecated declaration MainBoardPowerGpioBspInit - give arg types
+  void MainBoardPowerGpioBspInit();
+.\driver\rtc.h(46): warning:  #1295-D: Deprecated declaration RtcNormalJudge - give arg types
+  bool RtcNormalJudge();
+.\driver\rtc.h(48): warning:  #1295-D: Deprecated declaration RtcGetTime - give arg types
+  uint32_t RtcGetTime();
+.\device\dev_key.h(110): warning:  #1295-D: Deprecated declaration KeyInit - give arg types
+  void KeyInit();
+.\device\dev_key.h(111): warning:  #1295-D: Deprecated declaration KeyDetectProcess - give arg types
+  void KeyDetectProcess();
+.\device\dev_key.h(112): warning:  #1295-D: Deprecated declaration GetKeyValueProcess - give arg types
+  void GetKeyValueProcess();
+.\sys\queue.h(26): warning:  #1295-D: Deprecated declaration QueueIsFull - give arg types
+  bool QueueIsFull();
+.\device\dev_communication.h(74): warning:  #1295-D: Deprecated declaration CommunicationInit - give arg types
+  bool CommunicationInit();
+.\device\dev_communication.h(75): warning:  #1295-D: Deprecated declaration ComDataProcess - give arg types
+  void ComDataProcess();
+.\app\wireless_protocol.h(71): warning:  #1295-D: Deprecated declaration WirelessDataProcess - give arg types
+  void WirelessDataProcess();
+sys\gd32f30x_it.c: 24 warnings, 0 errors
+compiling main.c...
+.\driver\exti.h(34): warning:  #1295-D: Deprecated declaration ExtiClkInit - give arg types
+  void ExtiClkInit();
+.\driver\gpio.h(74): warning:  #1295-D: Deprecated declaration GpioClkInit - give arg types
+  void GpioClkInit();
+.\driver\adc.h(54): warning:  #1295-D: Deprecated declaration AdcClkInit - give arg types
+  void AdcClkInit();
+sys\bsp.h(67): warning:  #1295-D: Deprecated declaration BspInit - give arg types
+  void BspInit();
+sys\bsp.h(68): warning:  #1295-D: Deprecated declaration SpiAdbms6830BspInit - give arg types
+  void SpiAdbms6830BspInit();
+sys\bsp.h(69): warning:  #1295-D: Deprecated declaration SpiFlashBspInit - give arg types
+  void SpiFlashBspInit();
+sys\bsp.h(70): warning:  #1295-D: Deprecated declaration Uart0DebugBspInit - give arg types
+  void Uart0DebugBspInit();
+sys\bsp.h(71): warning:  #1295-D: Deprecated declaration Uart1ModsBspInit - give arg types
+  void Uart1ModsBspInit();
+sys\bsp.h(72): warning:  #1295-D: Deprecated declaration Uart3DebugBspInit - give arg types
+  void Uart3DebugBspInit();
+sys\bsp.h(73): warning:  #1295-D: Deprecated declaration ADCBspInit - give arg types
+  void ADCBspInit();
+sys\bsp.h(74): warning:  #1295-D: Deprecated declaration HC595GpioBspInit - give arg types
+  void HC595GpioBspInit();
+sys\bsp.h(75): warning:  #1295-D: Deprecated declaration BQ76200GpioBspInit - give arg types
+  void BQ76200GpioBspInit();
+sys\bsp.h(76): warning:  #1295-D: Deprecated declaration KeyBspInit - give arg types
+  void KeyBspInit();
+sys\bsp.h(77): warning:  #1295-D: Deprecated declaration AFETimerInit - give arg types
+  void AFETimerInit();
+sys\bsp.h(80): warning:  #1295-D: Deprecated declaration MainBoardPowerGpioBspInit - give arg types
+  void MainBoardPowerGpioBspInit();
+.\driver\rtc.h(46): warning:  #1295-D: Deprecated declaration RtcNormalJudge - give arg types
+  bool RtcNormalJudge();
+.\driver\rtc.h(48): warning:  #1295-D: Deprecated declaration RtcGetTime - give arg types
+  uint32_t RtcGetTime();
+.\device\dev_key.h(110): warning:  #1295-D: Deprecated declaration KeyInit - give arg types
+  void KeyInit();
+.\device\dev_key.h(111): warning:  #1295-D: Deprecated declaration KeyDetectProcess - give arg types
+  void KeyDetectProcess();
+.\device\dev_key.h(112): warning:  #1295-D: Deprecated declaration GetKeyValueProcess - give arg types
+  void GetKeyValueProcess();
+.\sys\queue.h(26): warning:  #1295-D: Deprecated declaration QueueIsFull - give arg types
+  bool QueueIsFull();
+.\device\dev_communication.h(74): warning:  #1295-D: Deprecated declaration CommunicationInit - give arg types
+  bool CommunicationInit();
+.\device\dev_communication.h(75): warning:  #1295-D: Deprecated declaration ComDataProcess - give arg types
+  void ComDataProcess();
+.\app\wireless_protocol.h(71): warning:  #1295-D: Deprecated declaration WirelessDataProcess - give arg types
+  void WirelessDataProcess();
+sys\main.c: 24 warnings, 0 errors
+assembling startup_gd32f30x_hd.s...
+compiling gpio.c...
+driver\exti.h(34): warning:  #1295-D: Deprecated declaration ExtiClkInit - give arg types
+  void ExtiClkInit();
+driver\gpio.h(74): warning:  #1295-D: Deprecated declaration GpioClkInit - give arg types
+  void GpioClkInit();
+driver\gpio.c: 2 warnings, 0 errors
+compiling system_gd32f30x.c...
+compiling gd32f30x_adc.c...
+compiling gd32f30x_bkp.c...
+compiling gd32f30x_can.c...
+compiling gd32f30x_ctc.c...
+compiling gd32f30x_dac.c...
+compiling gd32f30x_crc.c...
+compiling gd32f30x_fwdgt.c...
+compiling gd32f30x_i2c.c...
+compiling gd32f30x_dbg.c...
+compiling gd32f30x_exmc.c...
+compiling gd32f30x_dma.c...
+compiling gd32f30x_fmc.c...
+compiling gd32f30x_gpio.c...
+compiling gd32f30x_enet.c...
+compiling gd32f30x_exti.c...
+compiling gd32f30x_pmu.c...
+compiling gd32f30x_rcu.c...
+compiling gd32f30x_misc.c...
+compiling gd32f30x_spi.c...
+compiling gd32f30x_rtc.c...
+compiling gd32f30x_sdio.c...
+compiling gd32f30x_timer.c...
+compiling gd32f30x_usart.c...
+compiling gd32f30x_wwdgt.c...
+linking...
+Program Size: Code=22360 RO-data=980 RW-data=816 ZI-data=11368  
+FromELF: creating hex file...
+After Build - User command #1: fromelf.exe --bin -o .\GD303_OUT\GD32F303.bin ".\GD303_OUT\GD32F303.axf"
+".\GD303_OUT\GD32F303.axf" - 0 Error(s), 201 Warning(s).
+Build Time Elapsed:  00:00:09
